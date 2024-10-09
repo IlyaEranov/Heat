@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heat - Вход</title>
+    <link rel="stylesheet" href="../css/login.css">
+    <script>
+        function showTab(tabName) {
+            document.getElementById('loginForm').style.display = (tabName === 'login') ? 'block' : 'none';
+            document.getElementById('registerChoice').style.display = (tabName === 'register') ? 'block' : 'none';
+            
+            if (tabName === 'login') {
+                document.getElementById('registerFormUser').style.display = 'none';
+                document.getElementById('registerFormDev').style.display = 'none';
+            }
+        }
+
+        function showRegisterForm(userType) {
+            document.getElementById('registerFormUser').style.display = (userType === 'user') ? 'block' : 'none';
+            document.getElementById('registerFormDev').style.display = (userType === 'dev') ? 'block' : 'none';
+        }
+
+        function validateForm(formId) {
+            const form = document.getElementById(formId);
+            const inputs = form.getElementsByTagName('input');
+            for (let input of inputs) {
+                if (input.value.trim() === '') {
+                    alert('Пожалуйста, заполните все поля.');
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function loginUser() {
+            if (validateForm('loginForm')) {
+                alert('Вы успешно вошли!');
+            }
+        }
+
+        async function registerUser(formId) {
+            if (validateForm(formId)) {
+                const form = document.getElementById(formId);
+                const formData = new FormData(form);
+                const response = await fetch(`/register/${formId === 'registerFormUser' ? 'user' : 'dev'}`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    const message = await response.text();
+                    alert(message);
+                } else {
+                    const errorMessage = await response.text();
+                    alert(errorMessage);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">Heat</div>
+        <nav>
+            <ul>
+                <li><a href="store.html">Магазин</a></li>
+                <li><a href="about.html">О нас</a></li>
+                <li><a href="login.html" class="active">Вход</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="auth">
+            <h1>Вход</h1>
+            <div class="tabs">
+                <button onclick="showTab('login')">Авторизация</button>
+                <button onclick="showTab('register')">Регистрация</button>
+            </div>
+
+            <div id="loginForm" style="display: block;">
+                <form action="login_action" method="POST" onsubmit="event.preventDefault(); loginUser();">
+                    <input type="text" id="login-username" name="username" placeholder="Логин" required>
+                    <input type="password" id="login-password" name="password" placeholder="Пароль" required>
+                    <button type="submit">Войти</button>
+                </form>
+            </div>
+
+            <div id="registerChoice" style="display: none;">
+                <h2>Выберите тип регистрации:</h2>
+                <button onclick="showRegisterForm('user')">Пользователь</button>
+                <button onclick="showRegisterForm('dev')">Разработчик</button>
+            </div>
+
+            <div id="registerFormUser" style="display: none;">
+                <h2>Регистрация пользователя</h2>
+                <form id="registerFormUser" onsubmit="event.preventDefault(); registerUser('registerFormUser');">
+                    <input type="text" id="register-user-name" name="name" placeholder="Имя" required>
+                    <input type="text" id="register-username" name="username" placeholder="Логин" required>
+                    <input type="email" id="register-email" name="email" placeholder="Email" required>
+                    <input type="password" id="register-password" name="password" placeholder="Пароль" required>
+                    <input type="date" id="register-dob" name="dob" placeholder="Дата рождения" required>
+                    <button type="submit">Зарегистрироваться</button>
+                </form>
+            </div>
+
+            <div id="registerFormDev" style="display: none;">
+                <h2>Регистрация разработчика</h2>
+                <form id="registerFormDev" onsubmit="event.preventDefault(); registerUser('registerFormDev');">
+                    <input type="text" id="register-dev-name" name="devName" placeholder="Имя разработчика" required>
+                    <input type="text" id="register-dev-username" name="devUsername" placeholder="Логин разработчика" required>
+                    <input type="email" id="register-dev-email" name="devEmail" placeholder="Email разработчика" required>
+                    <input type="password" id="register-dev-password" name="devPassword" placeholder="Пароль разработчика" required>
+                    <input type="date" id="register-dev-dob" name="devDob" placeholder="Дата рождения" required>
+                    <button type="submit">Зарегистрироваться как разработчик</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Heat. Все права защищены.</p>
+    </footer>
+</body>
+</html>

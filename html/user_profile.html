@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль Пользователя</title>
+    <link rel="stylesheet" href="../css/user_profile.css">
+    <script>
+        const user = {
+            type: 'user', 
+            username: 'user123',
+            avatar: 'path/to/avatar.jpg',
+            library: ['Game 1', 'Game 2', 'Game 3'],
+            cart: ['Game 4', 'Game 5'],
+        };
+
+        function loadProfile() {
+            document.getElementById('avatar').src = user.avatar;
+            document.getElementById('username').innerText = user.username;
+
+            if (user.type === 'user') {
+                document.getElementById('library').innerHTML = user.library.map(game => `<li>${game}</li>`).join('');
+                document.getElementById('cart').innerHTML = user.cart.map(game => `<li>${game}</li>`).join('');
+                document.getElementById('dev-info').style.display = 'none'; 
+            } else {
+                document.getElementById('library-section').style.display = 'none'; 
+                document.getElementById('cart-section').style.display = 'none'; 
+                document.getElementById('dev-games').innerHTML = user.releasedGames.map(game => `<li>${game}</li>`).join('');
+            }
+        }
+    </script>
+</head>
+<body onload="loadProfile()">
+    <header>
+        <div class="logo">Heat</div>
+        <nav>
+            <ul>
+                <li><a href="store.html">Магазин</a></li>
+                <li><a href="about.html">О нас</a></li>
+                <li><a href="user_profile.html" class="active">Профиль</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="profile">
+            <h1>Профиль пользователя</h1>
+            <div>
+                <img id="avatar" src="" alt="Аватар" width="100">
+                <h2 id="username"></h2>
+            </div>
+
+            <div id="library-section">
+                <h3>Библиотека</h3>
+                <ul id="library"></ul>
+            </div>
+
+            <div id="cart-section">
+                <h3>Корзина</h3>
+                <ul id="cart"></ul>
+            </div>
+            
+            <div id="dev-info" style="display: none;">
+                <h3>Выпущенные игры</h3>
+                <ul id="dev-games"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Heat. Все права защищены.</p>
+    </footer>
+</body>
+</html>
