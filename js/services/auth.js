@@ -5,7 +5,7 @@ const users = [
 const loginUser = (user) => {
     const state = users.find(e => e.userName == user.userName && e.password == user.password)
     if (state == undefined) {
-        return "Неккоректно введена почта или пароль"
+        return "Пользователя с такой почтой или паролем не существует"
     } else {
         return state
     }
