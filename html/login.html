@@ -6,6 +6,7 @@
     <title>Heat - Вход</title>
     <link rel="stylesheet" href="../css/login.css">
     <script src="../js/services/auth.js"></script>
+    <script src="../js/utils/validator.js"></script>
     <script>
         function showTab(tabName) {
             document.getElementById('loginForm').style.display = (tabName === 'login') ? 'block' : 'none';
@@ -13,13 +14,13 @@
             
             if (tabName === 'login') {
                 document.getElementById('registerFormUser').style.display = 'none';
-                document.getElementById('registerFormDev').style.display = 'none';
+                document.getElementById('registerFormDeveloper').style.display = 'none';
             }
         }
 
         function showRegisterForm(userType) {
             document.getElementById('registerFormUser').style.display = (userType === 'user') ? 'block' : 'none';
-            document.getElementById('registerFormDev').style.display = (userType === 'dev') ? 'block' : 'none';
+            document.getElementById('registerFormDeveloper').style.display = (userType === 'dev') ? 'block' : 'none';
         }
 
         const getData = (formId) => {
@@ -33,14 +34,43 @@
         }
 
         const handlerSubmitLogin = () => {
-            const state = loginUser(getData("loginForm"))
-            if(typeof state == "string"){
-                alert(state)
-            } else {
+            const response = loginUser(getData("loginForm"))
+            if(typeof response != "string"){
                 window.location.href = "store.html"
+            } else {
+                alert(response)
             }
         }
 
+        const handlerSubmitRegisterUser = () => {
+            const data = {...getData("registerFormUser"), "type": "user"}
+            const stateValidate = validateForm(data)
+            if(Object.keys(stateValidate).length == 0){
+                const response = registerUser(data)
+                if(typeof response != "string"){
+                    alert(response)
+                } else {
+                    window.location.href = "store.html"
+                }
+            } else {
+                alert(`${stateValidate}`)
+            }
+        }
+
+        const handlerSubmitRegisterDeveloper = () => {
+            const data = {...getData("registerFormDeveloper"), "type": "developer"}
+            const stateValidate = validateForm(data)
+            if(Object.keys(stateValidate).length == 0){
+                const response = registerUser(data)
+                if(typeof response != "string"){
+                    alert(response)
+                } else {
+                    window.location.href = "store.html"
+                }
+            } else {
+                alert(`${stateValidate}`)
+            }
+        }
     </script>
 </head>
 <body>
@@ -79,7 +109,7 @@
 
             <div id="registerFormUser" style="display: none;">
                 <h2>Регистрация пользователя</h2>
-                <form id="registerFormUser" onsubmit="event.preventDefault(); registerUser('registerFormUser');">
+                <form id="registerFormUser" onsubmit="event.preventDefault();handlerSubmitRegisterUser()">
                     <input type="text" id="register-user-name" name="name" placeholder="Имя" required>
                     <input type="text" id="register-username" name="userName" placeholder="Логин" required>
                     <input type="email" id="register-email" name="email" placeholder="Email" required>
@@ -89,9 +119,9 @@
                 </form>
             </div>
 
-            <div id="registerFormDev" style="display: none;">
+            <div id="registerFormDeveloper" style="display: none;">
                 <h2>Регистрация разработчика</h2>
-                <form id="registerFormDev" onsubmit="event.preventDefault(); registerUser('registerFormDev');">
+                <form id="registerFormDeveloper" onsubmit="event.preventDefault();handlerSubmitRegisterDeveloper()">
                     <input type="text" id="register-dev-name" name="devName" placeholder="Имя разработчика" required>
                     <input type="text" id="register-dev-username" name="devUsername" placeholder="Логин разработчика" required>
                     <input type="email" id="register-dev-email" name="devEmail" placeholder="Email разработчика" required>
