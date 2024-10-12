@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heat - Вход</title>
     <link rel="stylesheet" href="../css/login.css">
+    <script src="../js/services/auth.js"></script>
     <script>
         function showTab(tabName) {
             document.getElementById('loginForm').style.display = (tabName === 'login') ? 'block' : 'none';
@@ -21,40 +22,22 @@
             document.getElementById('registerFormDev').style.display = (userType === 'dev') ? 'block' : 'none';
         }
 
-        function validateForm(formId) {
-            const form = document.getElementById(formId);
-            const inputs = form.getElementsByTagName('input');
-            for (let input of inputs) {
-                if (input.value.trim() === '') {
-                    alert('Пожалуйста, заполните все поля.');
-                    return false;
-                }
+        const getData = (formId) => {
+            const form = document.getElementById(formId)
+            const inputs = form.getElementsByTagName("input")
+            const data = {}
+            for(let input of inputs){
+                data[input.name] = input.value
             }
-            return true;
+            return data
         }
 
-        function loginUser() {
-            if (validateForm('loginForm')) {
-                alert('Вы успешно вошли!');
-            }
-        }
-
-        async function registerUser(formId) {
-            if (validateForm(formId)) {
-                const form = document.getElementById(formId);
-                const formData = new FormData(form);
-                const response = await fetch(`/register/${formId === 'registerFormUser' ? 'user' : 'dev'}`, {
-                    method: 'POST',
-                    body: formData
-                });
-
-                if (response.ok) {
-                    const message = await response.text();
-                    alert(message);
-                } else {
-                    const errorMessage = await response.text();
-                    alert(errorMessage);
-                }
+        const handlerSubmitLogin = () => {
+            const state = loginUser(getData("loginForm"))
+            if(typeof state == "string"){
+                alert(state)
+            } else {
+                window.location.href = "store.html"
             }
         }
     </script>
@@ -80,8 +63,8 @@
             </div>
 
             <div id="loginForm" style="display: block;">
-                <form action="login_action" method="POST" onsubmit="event.preventDefault(); loginUser();">
-                    <input type="text" id="login-username" name="username" placeholder="Логин" required>
+                <form onsubmit=" event.preventDefault();handlerSubmitLogin()">
+                    <input type="text" id="login-username" name="userName" placeholder="Логин" required>
                     <input type="password" id="login-password" name="password" placeholder="Пароль" required>
                     <button type="submit">Войти</button>
                 </form>
@@ -97,7 +80,7 @@
                 <h2>Регистрация пользователя</h2>
                 <form id="registerFormUser" onsubmit="event.preventDefault(); registerUser('registerFormUser');">
                     <input type="text" id="register-user-name" name="name" placeholder="Имя" required>
-                    <input type="text" id="register-username" name="username" placeholder="Логин" required>
+                    <input type="text" id="register-username" name="userName" placeholder="Логин" required>
                     <input type="email" id="register-email" name="email" placeholder="Email" required>
                     <input type="password" id="register-password" name="password" placeholder="Пароль" required>
                     <input type="date" id="register-dob" name="dob" placeholder="Дата рождения" required>
