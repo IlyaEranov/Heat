@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="../css/profile.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Heat</div>
+        <nav>
+            <ul>
+                <li><a href="store.html">Магазин</a></li>
+                <li><a href="about.html">О нас</a></li>
+                <li><a href="profile.html" class="active">Профиль</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="profile">
+            <div class="profile-info">
+                <img src="avatar.png" alt="Avatar" class="avatar">
+                <div class="username">
+                    <h1>Username</h1>
+                </div>
+                <div class="balance-section">
+                    <p class="balance-text">Баланс: 1000 руб.</p>
+                    <button id="top-up">Пополнить</button>
+                </div>
+            </div>
+
+            <!-- Блок с кнопками -->
+            <div class="profile-actions">
+                <button id="show-library">Библиотека</button>
+                <button id="show-cart">Корзина</button>
+                <button id="publish-game">Выпустить игру</button>
+            </div>
+
+            <!-- Контент, который будет меняться -->
+            <div class="content" id="content">
+                <h2>Ваша библиотека</h2>
+                <div class="game">
+                    <img src="game1.jpg" alt="Game 1">
+                    <p>Game Name 1</p>
+                </div>
+                <div class="game">
+                    <img src="game2.jpg" alt="Game 2">
+                    <p>Game Name 2</p>
+                </div>
+                <div class="game">
+                    <img src="game3.jpg" alt="Game 3">
+                    <p>Game Name 3</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Heat. Все права защищены.</p>
+    </footer>
+
+    <script>
+        // Кнопки для переключения контента
+        const libraryBtn = document.getElementById('show-library');
+        const cartBtn = document.getElementById('show-cart');
+        const publishGameBtn = document.getElementById('publish-game');
+        const contentDiv = document.getElementById('content');
+
+        // События для показа библиотеки и корзины
+        libraryBtn.addEventListener('click', function() {
+            contentDiv.innerHTML = `
+                <h2>Ваша библиотека</h2>
+                <div class="game">
+                    <img src="game1.jpg" alt="Game 1">
+                    <p>Game Name 1</p>
+                </div>
+                <div class="game">
+                    <img src="game2.jpg" alt="Game 2">
+                    <p>Game Name 2</p>
+                </div>
+                <div class="game">
+                    <img src="game3.jpg" alt="Game 3">
+                    <p>Game Name 3</p>
+                </div>`;
+        });
+
+        cartBtn.addEventListener('click', function() {
+            contentDiv.innerHTML = `
+                <h2>Корзина</h2>
+                <div class="cart-item">
+                    <img src="game1.jpg" alt="Game 1">
+                    <div>
+                        <p>Game Name 1</p>
+                        <p>Цена: 500 руб.</p>
+                    </div>
+                </div>
+                <div class="cart-item">
+                    <img src="game2.jpg" alt="Game 2">
+                    <div>
+                        <p>Game Name 2</p>
+                        <p>Цена: 700 руб.</p>
+                    </div>
+                </div>`;
+        });
+
+        // Окно для выпуска игры
+        publishGameBtn.addEventListener('click', function() {
+            contentDiv.innerHTML = `
+                <h2>Выпустить игру</h2>
+                <form id="publish-form">
+                    <label for="game-title">Название игры</label>
+                    <input type="text" id="game-title" name="game-title" required>
+
+                    <label for="game-trailer">Видео-трейлер</label>
+                    <input type="file" id="game-trailer" name="game-trailer" accept="video/*" required>
+
+                    <label for="game-images">Картинки (до 5)</label>
+                    <input type="file" id="game-images" name="game-images" accept="image/*" multiple required>
+
+                    <label for="game-description">Описание</label>
+                    <textarea id="game-description" name="game-description" rows="4" required></textarea>
+
+                    <label for="game-price">Цена</label>
+                    <input type="number" id="game-price" name="game-price" required>
+
+                    <button type="submit">Выпустить</button>
+                </form>`;
+        });
+    </script>
+</body>
+</html>
