@@ -28,7 +28,7 @@ const validate = (key, value) => {
                 return null
             }
         case "userName":
-            const userNameRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z]){3,12}$/g
+            const userNameRegExp = /^[a-zA-Z][\sa-zA-Z]{3,12}$/g
             if(userNameRegExp.test(value)){
                 return null
             } else {

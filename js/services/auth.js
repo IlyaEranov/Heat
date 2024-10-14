@@ -1,5 +1,5 @@
 const users = [
-    {"id": 1, "name": "John", "userName": "John", "email": "enau@mail.ru", "password": "qwezxc123", "type": "developer"}
+    {"id": 1, "name": "John", "userName": "John", "email": "enau@mail.ru", "password": "qwezxc123"}
 ]
 
 const loginUser = (user) => {
