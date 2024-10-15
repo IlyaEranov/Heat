@@ -76,7 +76,7 @@ footer {
 .profile-info {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start; /* Выровнять по верху */
     margin-bottom: 20px;
 }
 
@@ -90,6 +90,13 @@ footer {
     flex: 1;
     text-align: left;
     padding-left: 20px;
+    display: flex;
+    align-items: flex-start; /* Выровнять содержимое блока по верху */
+}
+
+.username h1 {
+    margin: 0;
+    font-size: 24px; /* Размер шрифта для никнейма */
 }
 
 .balance-section {
@@ -112,6 +119,8 @@ footer {
 /* Кнопки профиля */
 .profile-actions {
     margin-bottom: 20px;
+    display: flex;
+    justify-content: center; /* Центрируем кнопки */
 }
 
 .profile-actions button {
@@ -123,10 +132,15 @@ footer {
     cursor: pointer;
 }
 
-/* Стили для контента (библиотеки, корзины и формы) */
+/* Стили для контента */
 .content {
     margin-top: 20px;
-    width: 80%; /* Для лучшего отображения контента */
+    width: 60%; /* Оптимальная ширина для центрации */
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Стили для библиотеки и корзины */
@@ -162,6 +176,7 @@ form {
     flex-direction: column;
     gap: 10px;
     margin-top: 20px; /* Отступ сверху для формы */
+    width: 100%; /* Ширина формы */
 }
 
 form input, form textarea {
