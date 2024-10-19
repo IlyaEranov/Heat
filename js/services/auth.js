@@ -1,24 +1,32 @@
-const users = [
-    {"id": 1, "name": "John", "userName": "John", "email": "enau@mail.ru", "password": "qwezxc123"}
-]
+const url = "http://localhost:5000/users/"
 
-const loginUser = (user) => {
-    const state = users.find(e => e.userName == user.userName && e.password == user.password)
-    if (state == undefined) {
-        return "Пользователя с такой почтой или паролем не существует"
-    } else {
+const loginUser = async (user) => {
+    const response = await fetch(url)
+    const data = await response.json()
+    const state = data.find(e => e.userName == user.userName && e.password == user.password)
+    if (state != undefined) {
         return state
-    }
-}
-const registerUser = (user) => {
-    if (users.find(e => e.email == user.email) != undefined) {
-        return "Пользователь с такой почтой уже существует"
-    } else if (users.find(e => e.name == user.name) != undefined) {
-        return "Пользователь с таким именем уже существует"
-    } else if (users.find(e => e.userName == user.userName) != undefined) {
-        return "Пользователь с таким логином уже существует"
     } else {
-        users.push(user)
+        return "Пользователь с таким логином или паролем не найден"
+    }
+
+}
+
+const registerUser = async (user) => {
+    const response = await fetch(url)
+    const data = await response.json()
+    if (data.find(e => user.userName == e.userName)) {
+        return "Пользователь с таким логином уже зарегестрирован"
+    } else if (data.find(e => user.email == e.email)) {
+        return "Пользователь с такой почтой уже зарегестрирован"
+    } else {
+        await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(user)
+        })
         return user
     }
-}
+} 
