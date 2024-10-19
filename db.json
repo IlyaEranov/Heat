@@ -1,0 +1,36 @@
+{
+  "users": [
+    {
+      "id": "e23",
+      "userName": "John",
+      "name": "John",
+      "email": "a@a.a",
+      "password": "qwezxc123Er_",
+      "dob": "1111-11-11"
+    },
+    {
+      "id": "2100",
+      "name": "asdf",
+      "userName": "asdf",
+      "email": "asdf@a.ru",
+      "password": "123123QAWEQ_1_Aa",
+      "dob": "1111-11-11"
+    },
+    {
+      "id": "0512",
+      "name": "qweswW",
+      "userName": "sadf",
+      "email": "asdf1@a.a",
+      "password": "123qwe_asd_zxcZXC",
+      "dob": "1111-11-11"
+    },
+    {
+      "id": "783a",
+      "name": "Ilya",
+      "userName": "Ilya",
+      "email": "Ila@a.a",
+      "password": "donlivlogali50_A",
+      "dob": "1111-11-11"
+    }
+  ]
+}
