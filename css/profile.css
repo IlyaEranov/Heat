@@ -132,6 +132,12 @@ footer {
     cursor: pointer;
 }
 
+
+
+.age-restrictions label {
+    margin-right: 10px;
+}
+
 /* Стили для контента */
 .content {
     margin-top: 20px;
@@ -169,6 +175,21 @@ footer {
     display: flex;
     flex-direction: column;
 }
+
+.buy-btn {
+    padding: 10px 20px;
+    background-color: #f0a500;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.buy-btn:hover {
+    background-color: #e69500;
+}
+
 
 /* Стили для формы выпуска игры */
 form {
