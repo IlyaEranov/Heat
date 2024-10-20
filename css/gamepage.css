@@ -95,6 +95,8 @@ nav ul li a.active {
     flex-direction: column;
 }
 
+
+
 /* Большое окно для выбранного изображения или видео */
 .selected-media {
     width: 100%;

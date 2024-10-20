@@ -13,7 +13,7 @@
             <ul>
                 <li><a href="store.html" class="active">Магазин</a></li> 
                 <li><a href="about.html">О нас</a></li> 
-                <li><a href="login.html">Вход</a></li> 
+                <li><a id="auth-link" href="login.html">Вход</a></li>
             </ul>
         </nav>
     </header>
@@ -37,5 +37,21 @@
     <footer>
         <p>&copy; 2024 Heat. Все права защищены.</p>
     </footer>
+
+    <script>
+        const authLink = document.getElementById('auth-link');
+        const user = localStorage.getItem('user');  // Проверяем, есть ли данные пользователя
+
+        if (user) {
+            // Если пользователь авторизован, меняем ссылку на "Профиль"
+            authLink.textContent = "Профиль";
+            authLink.href = "profile.html";
+        } else {
+            // Если пользователь не авторизован, ссылка остается на "Вход"
+            authLink.textContent = "Вход";
+            authLink.href = "login.html";
+        }
+    </script>
+    
 </body>
 </html>

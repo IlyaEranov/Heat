@@ -13,7 +13,7 @@
             <ul>
                 <li><a href="store.html" class="active">Магазин</a></li>
                 <li><a href="about.html">О нас</a></li>
-                <li><a href="profile.html">Профиль</a></li>
+                <li><a id="auth-link" href="login.html">Вход</a></li>
             </ul>
         </nav>
     </header>
@@ -51,7 +51,8 @@
                     <strong>Разработчик:</strong> Имя разработчика <br>
                     <strong>Дата релиза:</strong> 01.11.2024 <br>
                     <strong>Метки:</strong> Экшен, Приключения, Стратегия <br>
-                    <strong>Цена:</strong> 1500 руб.
+                    <strong>Цена:</strong> 1500 руб.<br>
+                    <strong>Отзывы:</strong> 4.6
                 </p>
                 <button class="add-to-cart">Добавить в корзину</button>
             </div>
@@ -117,6 +118,21 @@
             submitButton.disabled = true;  // Деактивация кнопки после отправки
             highlightStars(0); // Сброс оценки
         });
+        
+        const authLink = document.getElementById('auth-link');
+        const user = localStorage.getItem('user');  // Проверяем, есть ли данные пользователя
+
+        if (user) {
+            // Если пользователь авторизован, меняем ссылку на "Профиль"
+            authLink.textContent = "Профиль";
+            authLink.href = "profile.html";
+        } else {
+            // Если пользователь не авторизован, ссылка остается на "Вход"
+            authLink.textContent = "Вход";
+            authLink.href = "login.html";
+        }
+    
+
     </script>
 </body>
 </html>

@@ -13,7 +13,7 @@
             <ul>
                 <li><a href="store.html">Магазин</a></li>
                 <li><a href="about.html">О нас</a></li>
-                <li><a href="profile.html" class="active">Профиль</a></li>
+                <li><a id="auth-link" href="profile.html" class="active">Профиль</a></li> <!-- Активная ссылка "Профиль" -->
             </ul>
         </nav>
     </header>
@@ -36,6 +36,7 @@
                 <button id="show-library">Библиотека</button>
                 <button id="show-cart">Корзина</button>
                 <button id="publish-game">Выпустить игру</button>
+                <button id="logout-btn">Выйти</button> <!-- Кнопка для выхода -->
             </div>
 
             <!-- Контент, который будет меняться -->
@@ -61,12 +62,14 @@
         <p>&copy; 2024 Heat. Все права защищены.</p>
     </footer>
 
+    <script src="../js/services/release.js"></script> <!-- Подключение release.js -->
     <script>
-        // Кнопки для переключения контента
+        // Логика для кнопок контента (библиотека, корзина, выпуск игры)
         const libraryBtn = document.getElementById('show-library');
         const cartBtn = document.getElementById('show-cart');
         const publishGameBtn = document.getElementById('publish-game');
         const contentDiv = document.getElementById('content');
+        const logoutBtn = document.getElementById('logout-btn'); // Кнопка выхода
 
         // События для показа библиотеки и корзины
         libraryBtn.addEventListener('click', function() {
@@ -133,7 +136,56 @@
 
                     <button type="submit">Выпустить</button>
                 </form>`;
+            
+            // Обработчик для отправки формы выпуска игры
+            document.getElementById('publish-form').addEventListener('submit', async function(event) {
+                event.preventDefault(); // Предотвращаем перезагрузку страницы
+
+                const gameTitle = document.getElementById('game-title').value;
+                const gameTrailer = document.getElementById('game-trailer').files[0]; // Получаем файл видео
+                const gameImages = document.getElementById('game-images').files; // Получаем массив изображений
+                const gameDescription = document.getElementById('game-description').value;
+                const gamePrice = document.getElementById('game-price').value;
+                const ageRestricted = document.getElementById('age-restricted').checked;
+
+                // Здесь создаем объект для отправки
+                const gameData = {
+                    title: gameTitle,
+                    trailer: gameTrailer.name, // Отправляем только имя файла
+                    images: Array.from(gameImages).map(file => file.name), // Преобразуем FileList в массив имен файлов
+                    description: gameDescription,
+                    price: gamePrice,
+                    ageRestricted: ageRestricted
+                };
+
+                try {
+                    const result = await publishGame(gameData); // Вызываем функцию для публикации игры
+                    alert("Игра успешно опубликована: " + JSON.stringify(result));
+                } catch (error) {
+                    console.error(error);
+                    alert("Не удалось опубликовать игру");
+                }
+            });
         });
+
+        // Функционал выхода
+        logoutBtn.addEventListener('click', function() {
+            localStorage.removeItem('user');  // Удаляем данные пользователя из localStorage
+            window.location.href = "login.html";  // Перенаправляем на страницу входа
+        });
+
+        // Проверка авторизации
+        const authLink = document.getElementById('auth-link');
+        const user = JSON.parse(localStorage.getItem('user'));  // Проверяем, есть ли данные пользователя
+
+        if (user) {
+            authLink.textContent = "Профиль";
+            authLink.href = "profile.html";
+            document.querySelector('.username h1').textContent = user.userName;
+        } else {
+            authLink.textContent = "Вход";
+            authLink.href = "login.html";
+        }
     </script>
 </body>
 </html>
