@@ -32,5 +32,33 @@
       "password": "donlivlogali50_A",
       "dob": "1111-11-11"
     }
+  ],
+  "games": [
+    {
+      "id": "d354",
+      "title": "Permafrost",
+      "trailer": "a343de01f146a7fd4c2228e69f93b5dad_125358_w.mp4",
+      "images": [
+        "photo_2024-10-21_10-55-48 (2).jpg",
+        "photo_2024-10-21_10-55-48 (3).jpg",
+        "photo_2024-10-21_10-55-48.jpg"
+      ],
+      "description": "В Permafrost Земля погружена в вечную зиму. Игрокам предстоит исследовать открытый мир после апокалипсиса, строить базы, добывать ресурсы, охотиться и бороться с холодом.",
+      "price": "1200",
+      "ageRestricted": true
+    },
+    {
+      "id": "7ffd",
+      "title": "Holstin",
+      "trailer": "a83131b1cd7d129b1002a08604e90a75a_4795_w.mp4",
+      "images": [
+        "photo_2024-10-21_21-16-34.jpg",
+        "photo_2024-10-21_21-16-37.jpg",
+        "photo_2024-10-21_21-16-41.jpg"
+      ],
+      "description": "Holstin возвращает дух survival horror 90-х: ограниченные ресурсы, напряжённые бои и необходимость тщательно планировать действия.",
+      "price": "2000",
+      "ageRestricted": true
+    }
   ]
 }

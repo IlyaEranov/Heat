@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="stylesheet" href="../css/profile.css">
 </head>
+
 <body>
     <header>
         <div class="logo">Heat</div>
@@ -13,7 +15,8 @@
             <ul>
                 <li><a href="store.html">Магазин</a></li>
                 <li><a href="about.html">О нас</a></li>
-                <li><a id="auth-link" href="profile.html" class="active">Профиль</a></li> <!-- Активная ссылка "Профиль" -->
+                <li><a id="auth-link" href="profile.html" class="active">Профиль</a></li>
+                <!-- Активная ссылка "Профиль" -->
             </ul>
         </nav>
     </header>
@@ -40,21 +43,7 @@
             </div>
 
             <!-- Контент, который будет меняться -->
-            <div class="content" id="content">
-                <h2>Ваша библиотека</h2>
-                <div class="game">
-                    <img src="game1.jpg" alt="Game 1">
-                    <p>Game Name 1</p>
-                </div>
-                <div class="game">
-                    <img src="game2.jpg" alt="Game 2">
-                    <p>Game Name 2</p>
-                </div>
-                <div class="game">
-                    <img src="game3.jpg" alt="Game 3">
-                    <p>Game Name 3</p>
-                </div>
-            </div>
+            <div class="content" id="content"></div>
         </div>
     </main>
 
@@ -62,7 +51,7 @@
         <p>&copy; 2024 Heat. Все права защищены.</p>
     </footer>
 
-    <script src="../js/services/release.js"></script> <!-- Подключение release.js -->
+    <script src="../js/services/games.js"></script> <!-- Подключение release.js -->
     <script>
         // Логика для кнопок контента (библиотека, корзина, выпуск игры)
         const libraryBtn = document.getElementById('show-library');
@@ -70,26 +59,22 @@
         const publishGameBtn = document.getElementById('publish-game');
         const contentDiv = document.getElementById('content');
         const logoutBtn = document.getElementById('logout-btn'); // Кнопка выхода
-
+        const redirect = (e) => {
+            window.location.href = "gamepage.html"
+            localStorage.setItem("game", JSON.stringify(e))
+        }
         // События для показа библиотеки и корзины
-        libraryBtn.addEventListener('click', function() {
-            contentDiv.innerHTML = `
-                <h2>Ваша библиотека</h2>
-                <div class="game">
-                    <img src="game1.jpg" alt="Game 1">
-                    <p>Game Name 1</p>
-                </div>
-                <div class="game">
-                    <img src="game2.jpg" alt="Game 2">
-                    <p>Game Name 2</p>
-                </div>
-                <div class="game">
-                    <img src="game3.jpg" alt="Game 3">
-                    <p>Game Name 3</p>
-                </div>`;
+        libraryBtn.addEventListener('click', async function () {
+            const games = await getGames()
+            contentDiv.innerHTML =
+            `<h2>Ваша библиотека</h2>
+            ${games.map(e => `<div class="game" onclick="${redirect(e)}">
+                <img src="../assets/${e.images[0]}">
+                <p>${e.title}</p>
+            </div>`)}`;
         });
 
-        cartBtn.addEventListener('click', function() {
+        cartBtn.addEventListener('click', function () {
             contentDiv.innerHTML = `
                 <h2>Корзина</h2>
                 <div class="cart-item">
@@ -111,7 +96,7 @@
         });
 
         // Окно для выпуска игры
-        publishGameBtn.addEventListener('click', function() {
+        publishGameBtn.addEventListener('click', function () {
             contentDiv.innerHTML = `
                 <h2>Выпустить игру</h2>
                 <form id="publish-form">
@@ -128,7 +113,7 @@
                     <textarea id="game-description" name="game-description" rows="4" required></textarea>
 
                     <label for="game-price">Цена</label>
-                    <input type="number" id="game-price" name="game-price" required>
+                    <input type="text" id="game-price" name="game-price" required>
                     <div class="age-restrictions">
                         <label for="age-restricted">Имеет возрастные ограничения:</label>
                         <input type="checkbox" id="age-restricted" name="age-restricted">
@@ -136,9 +121,9 @@
 
                     <button type="submit">Выпустить</button>
                 </form>`;
-            
+
             // Обработчик для отправки формы выпуска игры
-            document.getElementById('publish-form').addEventListener('submit', async function(event) {
+            document.getElementById('publish-form').addEventListener('submit', async function (event) {
                 event.preventDefault(); // Предотвращаем перезагрузку страницы
 
                 const gameTitle = document.getElementById('game-title').value;
@@ -169,7 +154,7 @@
         });
 
         // Функционал выхода
-        logoutBtn.addEventListener('click', function() {
+        logoutBtn.addEventListener('click', function () {
             localStorage.removeItem('user');  // Удаляем данные пользователя из localStorage
             window.location.href = "login.html";  // Перенаправляем на страницу входа
         });
@@ -188,4 +173,5 @@
         }
     </script>
 </body>
+
 </html>

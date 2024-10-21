@@ -9,7 +9,6 @@ const loginUser = async (user) => {
     } else {
         return "Пользователь с таким логином или паролем не найден"
     }
-
 }
 
 const registerUser = async (user) => {
