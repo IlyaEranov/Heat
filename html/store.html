@@ -1,18 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heat - Магазин</title>
     <link rel="stylesheet" href="../css/store.css">
+    <script src="../js/services/games.js"></script>
+    <script type="module">
+        const authLink = document.getElementById('auth-link');
+        const user = localStorage.getItem('user'); // Проверяем, есть ли данные пользователя
+
+        if (user) {
+            // Если пользователь авторизован, меняем ссылку на "Профиль"
+            authLink.textContent = "Профиль";
+            authLink.href = "profile.html";
+        } else {
+            // Если пользователь не авторизован, меняем ссылку на "Вход"
+            authLink.textContent = "Вход";
+            authLink.href = "login.html";
+        }
+
+        // Получение игр из базы данных
+        const games = await getGames()
+        
+        document.getElementById("games").innerHTML = `
+            ${games.map(e => `
+                <img src="../assets/${e.images[0]}">
+                <div>
+                    ${e.title}
+                </div>
+            `)}`
+    </script>
 </head>
+
 <body>
     <header>
         <div class="logo">Heat</div>
         <nav>
             <ul>
-                <li><a href="store.html" class="active">Магазин</a></li> 
-                <li><a href="about.html">О нас</a></li> 
+                <li><a href="store.html" class="active">Магазин</a></li>
+                <li><a href="about.html">О нас</a></li>
                 <li><a id="auth-link" href="login.html">Вход</a></li>
             </ul>
         </nav>
@@ -32,26 +60,13 @@
                 <div class="category-item">Стратегии</div>
             </div>
         </section>
+        <section id="games"></section>
     </main>
 
     <footer>
         <p>&copy; 2024 Heat. Все права защищены.</p>
     </footer>
 
-    <script>
-        const authLink = document.getElementById('auth-link');
-        const user = localStorage.getItem('user');  // Проверяем, есть ли данные пользователя
-
-        if (user) {
-            // Если пользователь авторизован, меняем ссылку на "Профиль"
-            authLink.textContent = "Профиль";
-            authLink.href = "profile.html";
-        } else {
-            // Если пользователь не авторизован, ссылка остается на "Вход"
-            authLink.textContent = "Вход";
-            authLink.href = "login.html";
-        }
-    </script>
-    
 </body>
+
 </html>
