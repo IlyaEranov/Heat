@@ -6,15 +6,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="stylesheet" href="../css/profile.css">
+    <script src="../js/services/users.js"></script>
     <script src="../js/services/games.js"></script>
-    <script>
+    <script src="../js/utils/generateKey.js"></script>
+</head>
 
+<body>
+    <header>
+        <div class="logo">Heat</div>
+        <nav>
+            <ul>
+                <li><a href="store.html">Магазин</a></li>
+                <li><a href="about.html">О нас</a></li>
+                <li><a id="auth-link" href="profile.html" class="active">Профиль</a></li>
+                <!-- Активная ссылка "Профиль" -->
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="profile">
+            <div class="profile-info">
+                <img src="avatar.png" alt="Avatar" class="avatar">
+                <div class="username">
+                    <h1>Username</h1>
+                </div>
+                <div class="balance-section">
+                    <p class="balance-text">Баланс: 1000 руб.</p>
+                    <button id="top-up">Пополнить</button>
+                </div>
+            </div>
+
+            <!-- Блок с кнопками -->
+            <div class="profile-actions">
+                <button id="show-library">Библиотека</button>
+                <button id="show-cart">Корзина</button>
+                <button id="publish-game">Выпустить игру</button>
+                <button id="logout-btn">Выйти</button> <!-- Кнопка для выхода -->
+            </div>
+
+            <!-- Контент, который будет меняться -->
+            <div class="content" id="content"></div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Heat. Все права защищены.</p>
+    </footer>
+    <script>
         // Проверка авторизации
         const authLink = document.getElementById('auth-link');
         const user = JSON.parse(localStorage.getItem('user'));  // Проверяем, есть ли данные пользователя
-
-        console.log(user)
-
         if (user) {
             authLink.textContent = "Профиль";
             authLink.href = "profile.html";
@@ -107,6 +149,7 @@
                 const gamePrice = document.getElementById('game-price').value;
                 const ageRestricted = document.getElementById('age-restricted').checked;
 
+                const gameKey = generateKey()
                 // Здесь создаем объект для отправки
                 const gameData = {
                     developer: user.userName,
@@ -115,12 +158,18 @@
                     images: Array.from(gameImages).map(file => file.name), // Преобразуем FileList в массив имен файлов
                     description: gameDescription,
                     price: gamePrice,
-                    ageRestricted: ageRestricted
+                    ageRestricted: ageRestricted,
+                    keys: [gameKey]
                 };
+                try{
+                    await addGameKeyUser(user, gameKey)
+                } catch(e){
+                    alert("Не получилось добавить ключ")
+                }
 
                 try {
-                    const result = await publishGame(gameData); // Вызываем функцию для публикации игры
-                    alert("Игра успешно опубликована: " + JSON.stringify(result));
+                    await publishGame(gameData); // Вызываем функцию для публикации игры
+                    alert("Игра успешно опубликована");
                 } catch (error) {
                     console.error(error);
                     alert("Не удалось опубликовать игру");
@@ -128,56 +177,7 @@
             });
         });
 
-        
-
-
     </script>
-</head>
-
-<body>
-    <header>
-        <div class="logo">Heat</div>
-        <nav>
-            <ul>
-                <li><a href="store.html">Магазин</a></li>
-                <li><a href="about.html">О нас</a></li>
-                <li><a id="auth-link" href="profile.html" class="active">Профиль</a></li>
-                <!-- Активная ссылка "Профиль" -->
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <div class="profile">
-            <div class="profile-info">
-                <img src="avatar.png" alt="Avatar" class="avatar">
-                <div class="username">
-                    <h1>Username</h1>
-                </div>
-                <div class="balance-section">
-                    <p class="balance-text">Баланс: 1000 руб.</p>
-                    <button id="top-up">Пополнить</button>
-                </div>
-            </div>
-
-            <!-- Блок с кнопками -->
-            <div class="profile-actions">
-                <button id="show-library">Библиотека</button>
-                <button id="show-cart">Корзина</button>
-                <button id="publish-game">Выпустить игру</button>
-                <button id="logout-btn">Выйти</button> <!-- Кнопка для выхода -->
-            </div>
-
-            <!-- Контент, который будет меняться -->
-            <div class="content" id="content"></div>
-        </div>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 Heat. Все права защищены.</p>
-    </footer>
-
-
 </body>
 
 </html>

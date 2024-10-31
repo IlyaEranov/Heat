@@ -20,3 +20,18 @@ const publishGame = async (gameData) => {
         body: JSON.stringify(gameData)
     });
 };
+
+const addGameKey = async (game, gameKey) => {
+    const newGame = {...game, keys: [...game.keys, ...[gameKey]]}
+    try{
+        await fetch(url + game.id, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newGame)
+        })
+    } catch (e){
+        console.log(e.message)
+    }
+}

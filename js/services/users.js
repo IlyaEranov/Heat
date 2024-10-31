@@ -24,8 +24,23 @@ const registerUser = async (user) => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(user)
+            body: JSON.stringify({...user, keys: []})
         })
         return user
     }
-} 
+}
+
+const addGameKeyUser = async (user, gameKey) => {
+    const newUser = { ...user, keys: [...user.keys, ...[gameKey]] }
+    try {
+        await fetch(url + user.id, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newUser)
+        })
+    } catch(e){
+        console.log(e.message)
+    }
+}

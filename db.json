@@ -1,41 +1,21 @@
 {
   "users": [
     {
-      "id": "e23",
-      "userName": "John",
-      "name": "John",
-      "email": "a@a.a",
-      "password": "qwezxc123Er_",
-      "dob": "1111-11-11"
-    },
-    {
-      "id": "2100",
-      "name": "asdf",
-      "userName": "asdf",
-      "email": "asdf@a.ru",
-      "password": "123123QAWEQ_1_Aa",
-      "dob": "1111-11-11"
-    },
-    {
-      "id": "0512",
-      "name": "qweswW",
-      "userName": "sadf",
-      "email": "asdf1@a.a",
-      "password": "123qwe_asd_zxcZXC",
-      "dob": "1111-11-11"
-    },
-    {
       "id": "783a",
       "name": "Ilya",
       "userName": "Ilya",
       "email": "Ila@a.a",
       "password": "donlivlogali50_A",
-      "dob": "1111-11-11"
+      "dob": "1111-11-11",
+      "keys": [
+        "SGBJ9-HF5HK-OO3FZ"
+      ]
     }
   ],
   "games": [
     {
-      "id": "d354",
+      "id": "2467",
+      "developer": "Ilya",
       "title": "Permafrost",
       "trailer": "a343de01f146a7fd4c2228e69f93b5dad_125358_w.mp4",
       "images": [
@@ -43,22 +23,12 @@
         "photo_2024-10-21_10-55-48 (3).jpg",
         "photo_2024-10-21_10-55-48.jpg"
       ],
-      "description": "В Permafrost Земля погружена в вечную зиму. Игрокам предстоит исследовать открытый мир после апокалипсиса, строить базы, добывать ресурсы, охотиться и бороться с холодом.",
-      "price": "1200",
-      "ageRestricted": true
-    },
-    {
-      "id": "7ffd",
-      "title": "Holstin",
-      "trailer": "a83131b1cd7d129b1002a08604e90a75a_4795_w.mp4",
-      "images": [
-        "photo_2024-10-21_21-16-34.jpg",
-        "photo_2024-10-21_21-16-37.jpg",
-        "photo_2024-10-21_21-16-41.jpg"
-      ],
-      "description": "Holstin возвращает дух survival horror 90-х: ограниченные ресурсы, напряжённые бои и необходимость тщательно планировать действия.",
-      "price": "2000",
-      "ageRestricted": true
+      "description": "asdf",
+      "price": "123",
+      "ageRestricted": true,
+      "keys": [
+        "SGBJ9-HF5HK-OO3FZ"
+      ]
     }
   ]
 }
