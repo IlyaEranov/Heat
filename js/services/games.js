@@ -1,10 +1,18 @@
 const gameUrl = "http://localhost:5000/games/";
 
-const getGames = async () => {
+const getGames = async (gamesId) => {
     try{
         const response = await fetch(gameUrl)
         const data = await response.json()
-        return data
+        console.log(gamesId)
+        if(gamesId != undefined){
+            for(let i = 0; i < gamesId.length; i++){
+                data.filter(e => e.id == gamesId[i])
+            }
+            return data
+        } else {
+            return data
+        }
     } catch (e) {
         alert("Ошибка получения игр")
     }

@@ -7,31 +7,7 @@
     <title>Heat - Магазин</title>
     <link rel="stylesheet" href="../css/store.css">
     <script src="../js/services/games.js"></script>
-    <script type="module">
-        const authLink = document.getElementById('auth-link');
-        const user = localStorage.getItem('user'); // Проверяем, есть ли данные пользователя
-
-        if (user) {
-            // Если пользователь авторизован, меняем ссылку на "Профиль"
-            authLink.textContent = "Профиль";
-            authLink.href = "profile.html";
-        } else {
-            // Если пользователь не авторизован, меняем ссылку на "Вход"
-            authLink.textContent = "Вход";
-            authLink.href = "login.html";
-        }
-
-        // Получение игр из базы данных
-        const games = await getGames()
-        
-        document.getElementById("games").innerHTML = `
-            ${games.map(e => `
-                <img src="../assets/${e.images[0]}">
-                <div>
-                    ${e.title}
-                </div>
-            `)}`
-    </script>
+    <script src="../js/services/users.js"></script>
 </head>
 
 <body>
@@ -66,7 +42,19 @@
     <footer>
         <p>&copy; 2024 Heat. Все права защищены.</p>
     </footer>
-
+    <script type="module">
+        userIsAuth()
+        // Получение игр из базы данных
+        const games = await getGames()
+        
+        document.getElementById("games").innerHTML = `
+            ${games.map(e => `
+                <img src="../static/games/${e.title}/${e.images[0]}">
+                <div>
+                    ${e.title}
+                </div>
+            `)}`
+    </script>
 </body>
 
 </html>

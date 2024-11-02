@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Название игры</title>
     <link rel="stylesheet" href="../css/gamepage.css">
+    <script src="../js/services/users.js"></script>
 </head>
+
 <body>
     <header>
         <div class="logo">Heat</div>
@@ -35,18 +38,24 @@
                     <video class="carousel-item" controls onclick="selectMedia('game_trailer.mp4')">
                         <source src="game_trailer.mp4" type="video/mp4">
                     </video>
-                    <img src="game_image1.jpg" alt="Image 1" class="carousel-item" onclick="selectMedia('game_image1.jpg')">
-                    <img src="game_image2.jpg" alt="Image 2" class="carousel-item" onclick="selectMedia('game_image2.jpg')">
-                    <img src="game_image3.jpg" alt="Image 3" class="carousel-item" onclick="selectMedia('game_image3.jpg')">
-                    <img src="game_image4.jpg" alt="Image 4" class="carousel-item" onclick="selectMedia('game_image4.jpg')">
-                    <img src="game_image5.jpg" alt="Image 5" class="carousel-item" onclick="selectMedia('game_image5.jpg')">
+                    <img src="game_image1.jpg" alt="Image 1" class="carousel-item"
+                        onclick="selectMedia('game_image1.jpg')">
+                    <img src="game_image2.jpg" alt="Image 2" class="carousel-item"
+                        onclick="selectMedia('game_image2.jpg')">
+                    <img src="game_image3.jpg" alt="Image 3" class="carousel-item"
+                        onclick="selectMedia('game_image3.jpg')">
+                    <img src="game_image4.jpg" alt="Image 4" class="carousel-item"
+                        onclick="selectMedia('game_image4.jpg')">
+                    <img src="game_image5.jpg" alt="Image 5" class="carousel-item"
+                        onclick="selectMedia('game_image5.jpg')">
                 </div>
             </div>
 
             <!-- Справа от карусели -->
             <div class="game-details">
                 <img src="game_avatar.jpg" alt="Game Avatar" class="game-avatar">
-                <p class="game-description">Описание игры. Здесь будет информация о геймплее, сюжете и особенностях игры.</p>
+                <p class="game-description">Описание игры. Здесь будет информация о геймплее, сюжете и особенностях
+                    игры.</p>
                 <p class="game-info">
                     <strong>Разработчик:</strong> Имя разработчика <br>
                     <strong>Дата релиза:</strong> 01.11.2024 <br>
@@ -75,8 +84,8 @@
     <footer>
         <p>&copy; 2024 Heat. Все права защищены.</p>
     </footer>
-
-    <script>
+    <script type="module">
+        userIsAuth()
         // Функция для выбора медиа (изображение или видео)
         function selectMedia(src) {
             const selectedMedia = document.querySelector('.selected-media');
@@ -95,7 +104,7 @@
         let rating = 0;
 
         stars.forEach(star => {
-            star.addEventListener('click', function() {
+            star.addEventListener('click', function () {
                 rating = this.getAttribute('data-value');
                 highlightStars(rating);
                 submitButton.disabled = false;
@@ -113,26 +122,12 @@
         }
 
         // Обработка отправки отзыва
-        submitButton.addEventListener('click', function() {
+        submitButton.addEventListener('click', function () {
             alert('Спасибо за ваш отзыв! Вы поставили ' + rating + ' звезд.');
             submitButton.disabled = true;  // Деактивация кнопки после отправки
             highlightStars(0); // Сброс оценки
         });
-        
-        const authLink = document.getElementById('auth-link');
-        const user = localStorage.getItem('user');  // Проверяем, есть ли данные пользователя
-
-        if (user) {
-            // Если пользователь авторизован, меняем ссылку на "Профиль"
-            authLink.textContent = "Профиль";
-            authLink.href = "profile.html";
-        } else {
-            // Если пользователь не авторизован, ссылка остается на "Вход"
-            authLink.textContent = "Вход";
-            authLink.href = "login.html";
-        }
-    
-
     </script>
 </body>
+
 </html>

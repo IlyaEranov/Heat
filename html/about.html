@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heat - О нас</title>
     <link rel="stylesheet" href="../css/about.css">
+    <script src="../js/services/users.js"></script>
+   
 </head>
 <body>
     <header>
@@ -27,21 +29,10 @@
 
     <footer>
         <p>&copy; 2024 Heat. Все права защищены.</p>
-    </footer>
-
-    <script>
-        const authLink = document.getElementById('auth-link');
-        const user = localStorage.getItem('user');  // Проверяем, есть ли данные пользователя
-
-        if (user) {
-            // Если пользователь авторизован, меняем ссылку на "Профиль"
-            authLink.textContent = "Профиль";
-            authLink.href = "profile.html";
-        } else {
-            // Если пользователь не авторизован, ссылка остается на "Вход"
-            authLink.textContent = "Вход";
-            authLink.href = "login.html";
-        }
+    </footer> 
+    <script type="module">
+        // Проверка авторизации
+        userIsAuth()
     </script>
 </body>
 </html>

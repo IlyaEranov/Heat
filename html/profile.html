@@ -26,7 +26,7 @@
     <main>
         <div class="profile">
             <div class="profile-info">
-                <img src="avatar.png" alt="Avatar" class="avatar">
+                <img src="../assets/icons/unknownuser.png" alt="Avatar" class="avatar">
                 <div class="username">
                     <h1>Username</h1>
                 </div>
@@ -52,14 +52,14 @@
     <footer>
         <p>&copy; 2024 Heat. Все права защищены.</p>
     </footer>
-    <script>
+    <script type="module">
         // Проверка авторизации
-        const authLink = document.getElementById('auth-link');
-        const user = JSON.parse(localStorage.getItem('user'));  // Проверяем, есть ли данные пользователя
-        if (user) {
-            authLink.textContent = "Профиль";
-            authLink.href = "profile.html";
-            document.querySelector('.username h1').textContent = user.userName;
+        userIsAuth()
+        const userAuth = JSON.parse(localStorage.getItem('user'));
+        if (userAuth) {
+            document.querySelector('.username h1').textContent = userAuth.userName;
+            const avatar = document.querySelector(".avatar")
+            userAuth.avatar == null ? avatar.src = "../assets/icons/unknownuser.png" : avatar.src = `../static/users/${userAuth.userName}/avatar/${userAuth.avatar}`
         } else {
             window.location.href = "login.html"
         }
@@ -79,11 +79,14 @@
 
         // Слушатель события для показа библиотеки
         libraryBtn.addEventListener('click', async function () {
-            const games = await getGames()
+            const user = JSON.parse(localStorage.getItem("user"))
+            console.log(user)
+            console.log(user.gamesId)
+            const games = await getGames(user.gamesId)
             contentDiv.innerHTML =
                 `<h2>Ваша библиотека</h2>
             ${games.map(e => `<div class="game">
-                <img src="../assets/${e.images[0]}">
+                <img src="../static/games/${e.title}/${e.images[0]}">
                 <p>${e.title}</p>
             </div>`)}`;
         });
@@ -140,14 +143,13 @@
             // Обработчик для отправки формы выпуска игры
             document.getElementById('publish-form').addEventListener('submit', async function (event) {
                 event.preventDefault(); // Предотвращаем перезагрузку страницы
-
+                const user = JSON.parse(localStorage.getItem("user"))
                 const gameTitle = document.getElementById('game-title').value;
                 const gameTrailer = document.getElementById('game-trailer').files[0]; // Получаем файл видео
                 const gameImages = document.getElementById('game-images').files; // Получаем массив изображений
                 const gameDescription = document.getElementById('game-description').value;
                 const gamePrice = document.getElementById('game-price').value;
                 const ageRestricted = document.getElementById('age-restricted').checked;
-
                 // Здесь создаем объект для отправки
                 const gameData = {
                     developer: user.userName,
@@ -162,16 +164,17 @@
                 // Публикация игры
                 try {
                     await publishGame(gameData)
-                } catch(e){
+                } catch (e) {
                     alert('Не удалось выпустить игру')
                 }
-                
+
                 // Присваивание id игры к разработчику
-                try{
+                try {
                     const games = await getGames()
                     const game = games.find(e => e.developer == user.userName)
+                    console.log(user)
                     await addGameId(user, game.id)
-                } catch(e){
+                } catch (e) {
                     alert("Не удалось добавить id к игре")
                 }
             });

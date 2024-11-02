@@ -8,87 +8,6 @@
     <link rel="stylesheet" href="../css/login.css">
     <script src="../js/services/users.js"></script>
     <script src="../js/utils/validator.js"></script>
-    <script>
-        function showTab(tabName) {
-            document.getElementById('loginForm').style.display = (tabName === 'login') ? 'block' : 'none';
-            document.getElementById('registerForm').style.display = (tabName === 'register') ? 'block' : 'none';
-        }
-
-        const getData = (formId) => {
-            const form = document.getElementById(formId)
-            const inputs = form.getElementsByTagName("input")
-            const data = {}
-            for (let input of inputs) {
-                data[input.name] = input.value
-            }
-            return data
-        }
-
-        const handlerSubmitLogin = async () => {
-        const data = getData("loginForm");
-        const stateValidate = validateForm(data);
-        if (Object.keys(stateValidate).length == 0) {
-            const response = await loginUser(data);
-            if (typeof response != "string") {
-                // Сохраняем данные пользователя в localStorage
-                localStorage.setItem('user', JSON.stringify(response));
-                window.location.href = "profile.html";  // Перенаправляем на страницу профиля
-            } else {
-                alert(response);
-            }
-        } else {
-            for (let key in stateValidate) {
-                switch (key) {
-                    case "userName":
-                        document.getElementById("error__userName").innerHTML = stateValidate[key];
-                        break;
-                    case "password":
-                        document.getElementById("error__password").innerHTML = stateValidate[key];
-                        break;
-                    default:
-                        throw new Error("Ошибка валидации");
-                        break;
-                }
-            }
-        }
-    };
-
-    const handlerSubmitRegister = async () => {
-    const data = getData("registerForm");
-    const stateValidate = validateForm(data);
-    if (Object.keys(stateValidate).length == 0) {
-        const response = await registerUser(data);
-        if (typeof response != "string") {
-            // Сохраняем данные пользователя в localStorage
-            localStorage.setItem('user', JSON.stringify(response));
-            window.location.href = "profile.html";  // Перенаправляем на страницу профиля
-        } else {
-            alert(response);
-        }
-    } else {
-        for (let key in stateValidate) {
-            switch (key) {
-                case "name":
-                    document.getElementById("error__name").innerHTML = stateValidate[key];
-                    break;
-                case "userName":
-                    document.getElementById("error__userName").innerHTML = stateValidate[key];
-                    break;
-                case "email":
-                    document.getElementById("error__email").innerHTML = stateValidate[key];
-                    break;
-                case "password":
-                    document.getElementById("error__password").innerHTML = stateValidate[key];
-                    break;
-                default:
-                    throw new Error("Ошибка валидации");
-                    break;
-            }
-        }
-    }
-};
-
-    </script>
 </head>
 
 <body>
@@ -143,18 +62,77 @@
         <p>&copy; 2024 Heat. Все права защищены.</p>
     </footer>
     <script>
-        const authLink = document.getElementById('auth-link');
-        const user = localStorage.getItem('user');
-
-        if (user) {
-            // Если пользователь авторизован, меняем ссылку на "Профиль"
-            authLink.textContent = "Профиль";
-            authLink.href = "profile.html";
-        } else {
-            // Если пользователь не авторизован, ссылка остается на "Вход"
-            authLink.textContent = "Вход";
-            authLink.href = "login.html";
+        // Проверка авторизации
+        userIsAuth()
+        const authUser = localStorage.getItem("user")
+        if(authUser){
+            window.location.href = "profile.html"
         }
+
+        function showTab(tabName) {
+            document.getElementById('loginForm').style.display = (tabName === 'login') ? 'block' : 'none';
+            document.getElementById('registerForm').style.display = (tabName === 'register') ? 'block' : 'none';
+        }
+
+        const getData = (formId) => {
+            const form = document.getElementById(formId)
+            const inputs = form.getElementsByTagName("input")
+            const data = {}
+            for (let input of inputs) {
+                data[input.name] = input.value
+            }
+            return data
+        }
+
+        const handlerSubmitLogin = async () => {
+            const data = getData("loginForm");
+            const stateValidate = validateForm(data);
+            if (Object.keys(stateValidate).length == 0) {
+                await loginUser(data);
+            } else {
+                for (let key in stateValidate) {
+                    switch (key) {
+                        case "userName":
+                            document.getElementById("error__userName").innerHTML = stateValidate[key];
+                            break;
+                        case "password":
+                            document.getElementById("error__password").innerHTML = stateValidate[key];
+                            break;
+                        default:
+                            throw new Error("Ошибка валидации");
+                            break;
+                    }
+                }
+            }
+        };
+
+        const handlerSubmitRegister = async () => {
+            const data = getData("registerForm");
+            const stateValidate = validateForm(data);
+            if (Object.keys(stateValidate).length == 0) {
+                await registerUser(data);
+            } else {
+                for (let key in stateValidate) {
+                    switch (key) {
+                        case "name":
+                            document.getElementById("error__name").innerHTML = stateValidate[key];
+                            break;
+                        case "userName":
+                            document.getElementById("error__userName").innerHTML = stateValidate[key];
+                            break;
+                        case "email":
+                            document.getElementById("error__email").innerHTML = stateValidate[key];
+                            break;
+                        case "password":
+                            document.getElementById("error__password").innerHTML = stateValidate[key];
+                            break;
+                        default:
+                            throw new Error("Ошибка валидации");
+                            break;
+                    }
+                }
+            }
+        };
     </script>
 
 

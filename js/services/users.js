@@ -6,7 +6,10 @@ const loginUser = async (user) => {
         const data = await response.json()
         const state = data.find(e => e.userName == user.userName && e.password == user.password)
         if (state != undefined) {
-            return state
+            // Сохраняем данные пользователя в localStorage
+            localStorage.setItem('user', JSON.stringify(state));
+            // Перенаправляем на страницу профиля
+            window.location.href = "profile.html";  
         } else {
             return "Пользователь с таким логином или паролем не найден"
         }
@@ -24,14 +27,18 @@ const registerUser = async (user) => {
         } else if (data.find(e => user.email == e.email)) {
             return "Пользователь с такой почтой уже зарегестрирован"
         } else {
+            // Создаем пользователя в бд
             await fetch(url, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ ...user, gamesId: [] })
+                body: JSON.stringify({ ...user, gamesId: [], avatar: null })
             })
-            return user
+            // Сохраняем данные пользователя в localStorage
+            localStorage.setItem('user', JSON.stringify({ ...user, gamesId: [], avatar: null }));
+            // Перенаправляем на страницу профиля
+            window.location.href = "profile.html"; 
         }
     } catch (e) {
         alert(`Server Error. ${e.message}`)
@@ -39,8 +46,8 @@ const registerUser = async (user) => {
 }
 
 const addGameId = async (user, gameId) => {
-    const newUser = {...user, gamesId: [...user.gamesId, ...[gameId]]}
-    try{
+    const newUser = { ...user, gamesId: [...user.gamesId, ...[gameId]] }
+    try {
         await fetch(url + user.id, {
             method: "PUT",
             headers: {
@@ -50,5 +57,20 @@ const addGameId = async (user, gameId) => {
         })
     } catch (e) {
         alert(`Server Error. ${e.message}`)
+    }
+}
+
+const userIsAuth = () => { 
+    const authLink = document.getElementById('auth-link');
+    const user = JSON.parse(localStorage.getItem('user'));  // Проверяем, есть ли данные пользователя
+
+    if (user) {
+        // Если пользователь авторизован, меняем ссылку на "Профиль"
+        authLink.textContent = "Профиль";
+        authLink.href = "profile.html";
+    } else {
+        // Если пользователь не авторизован, ссылка остается на "Вход"
+        authLink.textContent = "Вход";
+        authLink.href = "login.html";
     }
 }
