@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="stylesheet" href="../css/profile.css">
-    <script src="../js/services/users.js"></script>
     <script src="../js/services/games.js"></script>
-    <script src="../js/utils/generateKey.js"></script>
+    <script src="../js/services/users.js"></script>
 </head>
 
 <body>
@@ -149,7 +148,6 @@
                 const gamePrice = document.getElementById('game-price').value;
                 const ageRestricted = document.getElementById('age-restricted').checked;
 
-                const gameKey = generateKey()
                 // Здесь создаем объект для отправки
                 const gameData = {
                     developer: user.userName,
@@ -159,20 +157,22 @@
                     description: gameDescription,
                     price: gamePrice,
                     ageRestricted: ageRestricted,
-                    keys: [gameKey]
                 };
-                try{
-                    await addGameKeyUser(user, gameKey)
-                } catch(e){
-                    alert("Не получилось добавить ключ")
-                }
 
+                // Публикация игры
                 try {
-                    await publishGame(gameData); // Вызываем функцию для публикации игры
-                    alert("Игра успешно опубликована");
-                } catch (error) {
-                    console.error(error);
-                    alert("Не удалось опубликовать игру");
+                    await publishGame(gameData)
+                } catch(e){
+                    alert('Не удалось выпустить игру')
+                }
+                
+                // Присваивание id игры к разработчику
+                try{
+                    const games = await getGames()
+                    const game = games.find(e => e.developer == user.userName)
+                    await addGameId(user, game.id)
+                } catch(e){
+                    alert("Не удалось добавить id к игре")
                 }
             });
         });

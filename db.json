@@ -7,28 +7,10 @@
       "email": "Ila@a.a",
       "password": "donlivlogali50_A",
       "dob": "1111-11-11",
-      "keys": [
-        "SGBJ9-HF5HK-OO3FZ"
+      "gamesId": [
       ]
     }
   ],
   "games": [
-    {
-      "id": "2467",
-      "developer": "Ilya",
-      "title": "Permafrost",
-      "trailer": "a343de01f146a7fd4c2228e69f93b5dad_125358_w.mp4",
-      "images": [
-        "photo_2024-10-21_10-55-48 (2).jpg",
-        "photo_2024-10-21_10-55-48 (3).jpg",
-        "photo_2024-10-21_10-55-48.jpg"
-      ],
-      "description": "asdf",
-      "price": "123",
-      "ageRestricted": true,
-      "keys": [
-        "SGBJ9-HF5HK-OO3FZ"
-      ]
-    }
   ]
 }
