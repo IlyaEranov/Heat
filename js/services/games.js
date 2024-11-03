@@ -4,7 +4,6 @@ const getGames = async (gamesId) => {
     try{
         const response = await fetch(gameUrl)
         const data = await response.json()
-        console.log(gamesId)
         if(gamesId != undefined){
             for(let i = 0; i < gamesId.length; i++){
                 data.filter(e => e.id == gamesId[i])
@@ -25,14 +24,28 @@ const publishGame = async (gameData) => {
     data.push(gameData)
     // Сохраняем обновленный массив обратно в db.json
     try {
-        await fetch(gameUrl, {
+        const response = await fetch(gameUrl, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(gameData)
         });
+        gameId = (await response.json()).id
+        localStorage.setItem("GAME_ID", gameId)
     } catch (e) {
         alert("Ошибка выпуска игры")
     }
 };
+
+const removeGame = async () => {
+    const game = JSON.parse(localStorage.getItem("game"))
+    try{
+        await fetch(gameUrl + game.id, {
+            method: "DELETE"
+        })
+        window.location.href = "profile.html"
+    } catch(e) {
+        alert(`Server Error. ${e.message}`)
+    }
+}

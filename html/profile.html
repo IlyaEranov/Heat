@@ -80,8 +80,6 @@
         // Слушатель события для показа библиотеки
         libraryBtn.addEventListener('click', async function () {
             const user = JSON.parse(localStorage.getItem("user"))
-            console.log(user)
-            console.log(user.gamesId)
             const games = await getGames(user.gamesId)
             contentDiv.innerHTML =
                 `<h2>Ваша библиотека</h2>
@@ -168,18 +166,16 @@
                     alert('Не удалось выпустить игру')
                 }
 
-                // Присваивание id игры к разработчику
-                try {
-                    const games = await getGames()
-                    const game = games.find(e => e.developer == user.userName)
-                    console.log(user)
-                    await addGameId(user, game.id)
-                } catch (e) {
-                    alert("Не удалось добавить id к игре")
+                try{
+                    const gameId = localStorage.getItem("GAME_ID")
+                    await addGameId(user, gameId)
+                    localStorage.removeItem("GAME_ID")
+                } catch(e) {
+                    alert("Не удалось добавить id")
                 }
+                
             });
         });
-
     </script>
 </body>
 

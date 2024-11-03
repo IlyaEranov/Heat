@@ -33,9 +33,9 @@
             <div id="loginForm" style="display: block;">
                 <form onsubmit=" event.preventDefault();handlerSubmitLogin()">
                     <input type="text" name="userName" placeholder="Логин" required>
-                    <div class="error" id="error__userName"></div>
+                    <div class="error" id="login__error__userName"></div>
                     <input type="password" name="password" placeholder="Пароль" required>
-                    <div class="error" id="error__password"></div>
+                    <div class="error" id="login__error__password"></div>
                     <button type="submit">Войти</button>
                 </form>
             </div>
@@ -44,13 +44,13 @@
                 <h2>Регистрация пользователя</h2>
                 <form onsubmit="event.preventDefault();handlerSubmitRegister()">
                     <input type="text" name="name" placeholder="Имя" required>
-                    <div class="error" id="error__name"></div>
+                    <div class="error" id="register__error__name"></div>
                     <input type="text" name="userName" placeholder="Логин" required>
-                    <div class="error" id="error__userName"></div>
+                    <div class="error" id="register__error__userName"></div>
                     <input type="email" name="email" placeholder="Email" required>
-                    <div class="error" id="error__email"></div>
+                    <div class="error" id="register__error__email"></div>
                     <input type="password" name="password" placeholder="Пароль" required>
-                    <div class="error" id="error__password"></div>
+                    <div class="error" id="register__error__password"></div>
                     <input type="date" name="dob" placeholder="Дата рождения" required>
                     <button type="submit">Зарегистрироваться</button>
                 </form>
@@ -93,10 +93,10 @@
                 for (let key in stateValidate) {
                     switch (key) {
                         case "userName":
-                            document.getElementById("error__userName").innerHTML = stateValidate[key];
+                            document.getElementById("login__error__userName").innerHTML = stateValidate[key];
                             break;
                         case "password":
-                            document.getElementById("error__password").innerHTML = stateValidate[key];
+                            document.getElementById("login__error__password").innerHTML = stateValidate[key];
                             break;
                         default:
                             throw new Error("Ошибка валидации");
@@ -115,16 +115,16 @@
                 for (let key in stateValidate) {
                     switch (key) {
                         case "name":
-                            document.getElementById("error__name").innerHTML = stateValidate[key];
+                            document.getElementById("register__error__name").innerHTML = stateValidate[key];
                             break;
                         case "userName":
-                            document.getElementById("error__userName").innerHTML = stateValidate[key];
+                            document.getElementById("register__error__userName").innerHTML = stateValidate[key];
                             break;
                         case "email":
-                            document.getElementById("error__email").innerHTML = stateValidate[key];
+                            document.getElementById("register__error__email").innerHTML = stateValidate[key];
                             break;
                         case "password":
-                            document.getElementById("error__password").innerHTML = stateValidate[key];
+                            document.getElementById("register__error__password").innerHTML = stateValidate[key];
                             break;
                         default:
                             throw new Error("Ошибка валидации");

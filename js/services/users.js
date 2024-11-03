@@ -45,6 +45,18 @@ const registerUser = async (user) => {
     }
 }
 
+const removeUser = async () => {
+    const user = JSON.parse(localStorage.getItem("user"))
+    try{
+        await fetch(url + user.id, {
+            method: "DELETE",
+        })
+        window.location.href = "login.html"
+    } catch(e){
+        alert(`Server Error. ${e.message}`)
+    }
+} 
+
 const addGameId = async (user, gameId) => {
     const newUser = { ...user, gamesId: [...user.gamesId, ...[gameId]] }
     try {
