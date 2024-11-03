@@ -77,7 +77,6 @@
         libraryBtn.addEventListener('click', async function () {
             const user = JSON.parse(localStorage.getItem("user"))
             const games = await getGames(user.gamesId)
-            console.log(games)
             games.length == 0 
             ? contentDiv.innerHTML = `<h2>Ваша библиотека</h2>
             <p>У вас пока нет игр в библиотеке.</p>`

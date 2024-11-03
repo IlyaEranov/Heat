@@ -45,15 +45,13 @@
 
     <script type="module">
         userIsAuth();
-        const userAuth = JSON.parse(localStorage.getItem('user'));
-        const isUserAuth = userAuth !== null;  // Проверка авторизации
+        const user = JSON.parse(localStorage.getItem('user'));
+        const isUserAuth = user !== null;  // Проверка авторизации
         let games = [];
-        let userLibrary = [];
 
         try {
             games = await getGames();
         } catch (error) {
-            console.error('Ошибка загрузки данных:', error);
             alert('Не удалось загрузить данные о играх. Попробуйте снова позже.');
         }
 
@@ -65,32 +63,30 @@
                 return;
             }
 
-            gamesContainer.innerHTML = `
-        <div class="game-grid">
-            ${gamesToDisplay.map(e => {
-                const inLibrary = userLibrary.map(title => title.toLowerCase()).includes(e.title.toLowerCase());
-                const isGameAuthor = e.developer === userAuth?.userName;
-                return `
+            gamesContainer.innerHTML = `<div class="game-grid">
+                ${gamesToDisplay.map(e => {
+                    const inLibrary = user.gamesId.find(i => i == e.id) != undefined
+                    const isGameAuthor = e.developer === user?.userName;
+                    return `
                     <div class="game-item" onclick="location.href='gamepage.html?title=${encodeURIComponent(e.title)}'">
-                        <div class="game-title">${e.title}</div>
-                        <img src="../static/games/${e.title}/${e.images[0]}" alt="${e.title}" class="game-image">
-                        ${inLibrary
-                        ? '<div class="in-library">В библиотеке</div>'
-                        : `<div class="game-price">${e.price} руб.</div>`
-                    }
-                        ${isUserAuth
-                        ? (inLibrary
-                            ? ''
-                            : (isGameAuthor
+                            <div class="game-title">${e.title}</div>
+                            <img src="../static/games/${e.title}/${e.images[0]}" alt="${e.title}" class="game-image">
+                            ${inLibrary
+                            ? '<div class="in-library">В библиотеке</div>'
+                            : `<div class="game-price">${e.price} руб.</div>`
+                        }
+                            ${isUserAuth
+                            ? (inLibrary
                                 ? ''
-                                : `<button class="add-to-cart" onclick="addToCart('${e.title}'); event.stopPropagation();">Добавить в корзину</button>`))
-                        : `<button class="add-to-cart" onclick="addToCart('${e.title}'); event.stopPropagation();">Добавить в корзину</button>`
-                    }
-                    </div>
-                `;
-            }).join('')}
-        </div>
-    `;
+                                : (isGameAuthor
+                                    ? ''
+                                    : `<button class="add-to-cart" onclick="addToCart('${e.title}'); event.stopPropagation();">Добавить в корзину</button>`))
+                            : `<button class="add-to-cart" onclick="addToCart('${e.title}'); event.stopPropagation();">Добавить в корзину</button>`
+                        }
+                        </div>
+                    `; 
+                }).join('')}
+            </div>`;
         }
 
         const defaultCategory = "Открытый мир";

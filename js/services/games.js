@@ -5,7 +5,6 @@ const getGames = async (gamesId) => {
         const response = await fetch(gameUrl)
         const data = await response.json()
         if(gamesId != undefined){
-            console.log(data.filter(e => e.id == gamesId.find(i => i == e.id)))
             return data.filter(e => e.id == gamesId.find(i => i == e.id))
         } else {
             return data
