@@ -7,24 +7,167 @@
       "email": "ilay.erannov@mail.ru",
       "password": "qwezxc123ASD_",
       "dob": "1111-11-11",
+      "gamesId": [
+        "0e42",
+        "b801"
+      ],
+      "avatar": null
+    },
+    {
+      "id": "6fe6",
+      "name": "emil",
+      "userName": "emil",
+      "email": "ivan@gmail.com",
+      "password": "Emilemil123/",
+      "dob": "2001-12-12",
+      "gamesId": [
+        "f53f",
+        "873f",
+        "5689",
+        "e6ae",
+        "d543"
+      ],
+      "avatar": null
+    },
+    {
+      "id": "81b0",
+      "name": "Ubisoft",
+      "userName": "Ubisoft",
+      "email": "ubisoft@gmail.com",
+      "password": "Ubisoft222/",
+      "dob": "1987-01-01",
       "gamesId": [],
       "avatar": null
     }
   ],
   "games": [
     {
-      "id": "a949",
-      "developer": "ilya",
-      "title": "Permafrost",
-      "trailer": "a343de01f146a7fd4c2228e69f93b5dad_125358_w.mp4",
+      "id": "f53f",
+      "developer": "emil",
+      "title": "Rust",
+      "category": "Выживание",
+      "trailer": "rustvid.webm",
       "images": [
-        "photo_2024-10-21_10-55-48 (2).jpg",
-        "photo_2024-10-21_10-55-48 (3).jpg",
-        "photo_2024-10-21_10-55-48.jpg"
+        "rust3.jpg",
+        "rust2.jpg",
+        "rust1.jpg"
       ],
-      "description": "asdf",
-      "price": "123",
-      "ageRestricted": false
+      "description": "The only aim in Rust is to survive. Everything wants you to die - the island’s wildlife and other inhabitants, the environment, other survivors. Do whatever it takes to last another night.",
+      "price": "1100",
+      "ageRestricted": true,
+      "releaseDate": "2024-11-03T06:42:33.196Z"
+    },
+    {
+      "id": "873f",
+      "developer": "emil",
+      "title": "Euro Truck Simulator 2",
+      "category": "Открытый мир",
+      "trailer": "etsvid.webm",
+      "images": [
+        "ets3.jpg",
+        "ets2.jpg",
+        "ets1.jpg"
+      ],
+      "description": "Станьте королем европейских дорог — водителем грузовика, который доставляет важные грузы на немалые расстояния! Вас ждут десятки городов Великобритании, Бельгии, Германии, Италии, Нидерландов, Польши и не только. Испытайте свои умения, выносливость и скорость.",
+      "price": "350",
+      "ageRestricted": false,
+      "releaseDate": "2024-11-03T06:45:34.237Z"
+    },
+    {
+      "id": "5689",
+      "developer": "emil",
+      "title": "Steep",
+      "category": "Спорт",
+      "trailer": "steepvid.webm",
+      "images": [
+        "steep3.jpg",
+        "steep2.avif",
+        "steep1.jpg"
+      ],
+      "description": "Катайтесь в огромном открытом мире альпийских склонов, где снег всегда свеж, а трассы бесконечны. Покоряйте горы в одиночку или в компании друзей - на лыжах, сноуборде, параплане или в вингсьюте. Поделитесь лучшими трюками в социальных сетях.",
+      "price": "500",
+      "ageRestricted": false,
+      "releaseDate": "2024-11-03T06:47:14.711Z"
+    },
+    {
+      "id": "e6ae",
+      "developer": "emil",
+      "title": "Monopoly",
+      "category": "Стратегия",
+      "trailer": "monopolyvid.webm",
+      "images": [
+        "monopoly3.jpg",
+        "monopoly2.jpg",
+        "monopoly1.jpg"
+      ],
+      "description": "MONOPOLY® возвращается с улучшениями и обновленным оформлением. Покупайте, продавайте и обменивайте имущество, увеличивая свою торговую империю, в полностью анимированном трехмерном городе, где сменяются дни и погода.",
+      "price": "500",
+      "ageRestricted": false,
+      "releaseDate": "2024-11-03T06:57:10.997Z"
+    },
+    {
+      "id": "0e42",
+      "developer": "ilya",
+      "title": "Cyberpunk 2077",
+      "category": "Открытый мир",
+      "trailer": "9007033.mp4",
+      "images": [
+        "channels4_profile.jpg",
+        "social-thumbnail-en-ddcf4d23.jpg",
+        "Обложка_компьютерной_игры_Cyberpunk_2077.jpg"
+      ],
+      "description": "Cyberpunk 2077 — приключенческая ролевая игра с открытым миром, действие которой происходит в футуристическом мегаполисе Найт-Сити, где выше всего ценятся власть, роскошь и модификации тела.",
+      "price": "2000",
+      "ageRestricted": true,
+      "releaseDate": "2024-11-03T07:36:22.901Z"
+    },
+    {
+      "id": "d543",
+      "developer": "emil",
+      "title": "eFootball",
+      "category": "Спорт",
+      "trailer": "football1.webm",
+      "images": [
+        "foot3.jpg",
+        "foot2.jpg",
+        "foot1.jpg"
+      ],
+      "description": "Вас ждет захватывающий футбольный симулятор, который уже скачали более чем 750 млн раз по всему миру! Играйте в eFootball™ с другими пользователями по всему миру!",
+      "price": "300",
+      "ageRestricted": false,
+      "releaseDate": "2024-11-03T07:45:29.584Z"
+    },
+    {
+      "id": "b801",
+      "developer": "ilya",
+      "title": "Raft",
+      "category": "Выживание",
+      "trailer": "raftvid.webm",
+      "images": [
+        "raft3.jpg",
+        "raft2.jpg",
+        "raft1.jpg"
+      ],
+      "description": "Raft™ throws you and your friends into an epic oceanic adventure! Alone or together, players battle to survive a perilous voyage across a vast sea! Gather debris, scavenge reefs and build your own floating home, but be wary of the man-eating sharks!",
+      "price": "400",
+      "ageRestricted": false,
+      "releaseDate": "2024-11-03T07:49:13.228Z"
+    },
+    {
+      "id": "8e2e",
+      "developer": "Ubisoft",
+      "title": "Star Wars Outlaws",
+      "category": "Открытый мир",
+      "trailer": "starvid.webm",
+      "images": [
+        "star3.jpg",
+        "star2.jpg",
+        "star1.jpg"
+      ],
+      "description": "Встречайте первую в истории Star Wars™ игру с открытым миром! Вас ждет путешествие по планетам – как известным, так и новым, – и знакомство с обаятельной авантюристкой Кей Весс, жаждущей свободы и шанса начать новую жизнь.",
+      "price": "1100",
+      "ageRestricted": false,
+      "releaseDate": "2024-11-03T07:53:58.307Z"
     }
   ]
 }
