@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +8,6 @@
     <script src="../js/services/games.js"></script>
     <script src="../js/services/users.js"></script>
 </head>
-
 <body>
     <header>
         <div class="logo">Heat</div>
@@ -30,10 +28,10 @@
         <section class="categories">
             <h2>Категории игр</h2>
             <div class="category-grid">
-                <div class="category-item">Экшен</div>
-                <div class="category-item">Приключения</div>
-                <div class="category-item">Спорт</div>
-                <div class="category-item">Стратегии</div>
+                <div class="category-item active" data-category="Открытый мир">Открытый мир</div>
+                <div class="category-item" data-category="Спорт">Спорт</div>
+                <div class="category-item" data-category="Стратегия">Стратегия</div>
+                <div class="category-item" data-category="Выживание">Выживание</div>
             </div>
         </section>
         <section id="games"></section>
@@ -42,19 +40,85 @@
     <footer>
         <p>&copy; 2024 Heat. Все права защищены.</p>
     </footer>
+
     <script type="module">
-        userIsAuth()
-        // Получение игр из базы данных
-        const games = await getGames()
+        userIsAuth();
+        const userAuth = JSON.parse(localStorage.getItem('user'));
+        const isUserAuth = userAuth !== null;  // Проверка авторизации
+        let games = [];
+        let userLibrary = [];
         
-        document.getElementById("games").innerHTML = `
-            ${games.map(e => `
-                <img src="../static/games/${e.title}/${e.images[0]}">
-                <div>
-                    ${e.title}
-                </div>
-            `)}`
+        try {
+            games = await getGames();
+            userLibrary = isUserAuth ? await getUserLibrary() : [];
+        } catch (error) {
+            console.error('Ошибка загрузки данных:', error);
+            alert('Не удалось загрузить данные о играх. Попробуйте снова позже.');
+        }
+    
+        // Функция для отображения игр
+        function displayGames(gamesToDisplay) {
+    const gamesContainer = document.getElementById("games");
+    if (gamesToDisplay.length === 0) {
+        gamesContainer.innerHTML = `<p>Нет доступных игр в этой категории.</p>`;
+        return;
+    }
+
+    gamesContainer.innerHTML = `
+        <div class="game-grid">
+            ${gamesToDisplay.map(e => {
+                const inLibrary = userLibrary.map(title => title.toLowerCase()).includes(e.title.toLowerCase());
+                const isGameAuthor = e.developer === userAuth?.userName;
+                return `
+                    <div class="game-item" onclick="location.href='gamepage.html?title=${encodeURIComponent(e.title)}'">
+                        <div class="game-title">${e.title}</div>
+                        <img src="../static/games/${e.title}/${e.images[0]}" alt="${e.title}" class="game-image">
+                        ${
+                            inLibrary 
+                                ? '<div class="in-library">В библиотеке</div>'
+                                : `<div class="game-price">${e.price} руб.</div>`
+                        }
+                        ${
+                            isUserAuth 
+                                ? (inLibrary
+                                    ? ''
+                                    : (isGameAuthor
+                                        ? ''
+                                        : `<button class="add-to-cart" onclick="addToCart('${e.title}'); event.stopPropagation();">Добавить в корзину</button>`))
+                                : `<button class="add-to-cart" onclick="addToCart('${e.title}'); event.stopPropagation();">Добавить в корзину</button>`
+                        }
+                    </div>
+                `;
+            }).join('')}
+        </div>
+    `;
+}
+    
+        const defaultCategory = "Открытый мир";
+        const defaultGames = games.filter(game => game.category === defaultCategory);
+        displayGames(defaultGames);
+    
+        const categoryItems = document.querySelectorAll('.category-item');
+        categoryItems.forEach(item => {
+            item.addEventListener('click', function () {
+                categoryItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+    
+                const selectedCategory = this.getAttribute('data-category');
+                const filteredGames = games.filter(game => game.category === selectedCategory);
+                displayGames(filteredGames);
+            });
+        });
+    
+        async function addToCart(gameTitle) {
+            try {
+                await addToCartService(gameTitle);
+                alert(`${gameTitle} добавлена в корзину`);
+            } catch (error) {
+                console.error('Ошибка добавления в корзину:', error);
+                alert('Не удалось добавить игру в корзину. Попробуйте снова позже.');
+            }
+        }
     </script>
 </body>
-
 </html>

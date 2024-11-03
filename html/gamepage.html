@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Название игры</title>
+    <title id="game-title">Название игры</title>
     <link rel="stylesheet" href="../css/gamepage.css">
     <script src="../js/services/users.js"></script>
+    <script src="../js/services/games.js"></script> <!-- Добавьте ваш файл с функциями для работы с играми -->
 </head>
 
 <body>
@@ -22,52 +23,27 @@
     </header>
 
     <main>
-        <!-- Название игры слева сверху -->
-        <h1 class="game-title">Название игры</h1>
+        <h1 class="game-title" id="game-title-display">Название игры</h1>
 
         <div class="game-container">
-            <!-- Окошко с видео и изображениями -->
             <div class="media-carousel">
                 <div class="selected-media">
                     <video id="selected-video" controls>
-                        <source src="game_trailer.mp4" type="video/mp4">
+                        <source src="" type="video/mp4">
                     </video>
                 </div>
-
                 <div class="carousel">
-                    <video class="carousel-item" controls onclick="selectMedia('game_trailer.mp4')">
-                        <source src="game_trailer.mp4" type="video/mp4">
-                    </video>
-                    <img src="game_image1.jpg" alt="Image 1" class="carousel-item"
-                        onclick="selectMedia('game_image1.jpg')">
-                    <img src="game_image2.jpg" alt="Image 2" class="carousel-item"
-                        onclick="selectMedia('game_image2.jpg')">
-                    <img src="game_image3.jpg" alt="Image 3" class="carousel-item"
-                        onclick="selectMedia('game_image3.jpg')">
-                    <img src="game_image4.jpg" alt="Image 4" class="carousel-item"
-                        onclick="selectMedia('game_image4.jpg')">
-                    <img src="game_image5.jpg" alt="Image 5" class="carousel-item"
-                        onclick="selectMedia('game_image5.jpg')">
+                    <!-- Здесь будут медиа элементы -->
                 </div>
             </div>
 
-            <!-- Справа от карусели -->
             <div class="game-details">
-                <img src="game_avatar.jpg" alt="Game Avatar" class="game-avatar">
-                <p class="game-description">Описание игры. Здесь будет информация о геймплее, сюжете и особенностях
-                    игры.</p>
-                <p class="game-info">
-                    <strong>Разработчик:</strong> Имя разработчика <br>
-                    <strong>Дата релиза:</strong> 01.11.2024 <br>
-                    <strong>Метки:</strong> Экшен, Приключения, Стратегия <br>
-                    <strong>Цена:</strong> 1500 руб.<br>
-                    <strong>Отзывы:</strong> 4.6
-                </p>
+                <p class="game-description" id="game-description"></p>
+                <p class="game-info" id="game-info"></p>
                 <button class="add-to-cart">Добавить в корзину</button>
             </div>
         </div>
 
-        <!-- Область с отзывами -->
         <div class="review-section">
             <h2>Оцените игру</h2>
             <div class="review-stars">
@@ -84,9 +60,64 @@
     <footer>
         <p>&copy; 2024 Heat. Все права защищены.</p>
     </footer>
+
     <script type="module">
-        userIsAuth()
-        // Функция для выбора медиа (изображение или видео)
+        userIsAuth();
+
+        // Функция для получения параметра из URL
+        function getParameterByName(name, url = window.location.href) {
+            name = name.replace(/[\[\]]/g, "\\$&");
+            const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        const gameTitle = getParameterByName('title');
+
+        // Функция для загрузки данных о игре
+        async function loadGameData(title) {
+            try {
+                const games = await getGames(); // Предполагается, что эта функция возвращает массив игр
+                const game = games.find(g => g.title === title);
+                
+                if (game) {
+                    document.getElementById('game-title').innerText = game.title;
+                    document.getElementById('game-title-display').innerText = game.title;
+                    document.getElementById('game-description').innerText = game.description;
+                    document.getElementById('game-info').innerHTML = `
+                        <strong>Разработчик:</strong> ${game.developer} <br>
+                        <strong>Дата релиза:</strong> ${new Date(game.releaseDate).toLocaleDateString()} <br>
+                        <strong>Цена:</strong> ${game.price} руб.<br>
+                    `;
+
+                    // Загрузка медиа
+                    const mediaCarousel = document.querySelector('.carousel');
+                    const selectedMedia = document.querySelector('.selected-media');
+
+                    // Загружаем трейлер
+                    selectedMedia.innerHTML = `<video id="selected-video" controls>
+                        <source src="${game.trailer}" type="video/mp4">
+                    </video>`;
+                    
+                    // Загружаем изображения
+                    game.images.forEach(image => {
+                        mediaCarousel.innerHTML += `<img src="../static/games/${game.title}/${image}" alt="${image}" class="carousel-item" onclick="selectMedia('${image}')">`;
+                    });
+                } else {
+                    alert('Игра не найдена.');
+                }
+            } catch (error) {
+                console.error('Ошибка загрузки данных о игре:', error);
+                alert('Не удалось загрузить данные о игре.');
+            }
+        }
+
+        // Вызов функции загрузки данных о игре
+        loadGameData(gameTitle);
+        
+        // Остальной код для выбора медиа и отзывов...
         function selectMedia(src) {
             const selectedMedia = document.querySelector('.selected-media');
             if (src.endsWith('.mp4')) {
@@ -97,36 +128,6 @@
                 selectedMedia.innerHTML = `<img src="${src}" alt="Selected media">`;
             }
         }
-
-        // Оценка игры с подсветкой звезд
-        const stars = document.querySelectorAll('.star');
-        const submitButton = document.querySelector('.submit-review');
-        let rating = 0;
-
-        stars.forEach(star => {
-            star.addEventListener('click', function () {
-                rating = this.getAttribute('data-value');
-                highlightStars(rating);
-                submitButton.disabled = false;
-            });
-        });
-
-        function highlightStars(rating) {
-            stars.forEach(star => {
-                if (star.getAttribute('data-value') <= rating) {
-                    star.style.color = 'gold';
-                } else {
-                    star.style.color = '#ccc';
-                }
-            });
-        }
-
-        // Обработка отправки отзыва
-        submitButton.addEventListener('click', function () {
-            alert('Спасибо за ваш отзыв! Вы поставили ' + rating + ' звезд.');
-            submitButton.disabled = true;  // Деактивация кнопки после отправки
-            highlightStars(0); // Сброс оценки
-        });
     </script>
 </body>
 
