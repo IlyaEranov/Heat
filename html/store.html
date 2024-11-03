@@ -61,11 +61,11 @@
             if (gamesToDisplay.length === 0) {
                 gamesContainer.innerHTML = `<p>Нет доступных игр в этой категории.</p>`;
                 return;
-            }
+            }f
 
             gamesContainer.innerHTML = `<div class="game-grid">
                 ${gamesToDisplay.map(e => {
-                    const inLibrary = user.gamesId.find(i => i == e.id) != undefined
+                    const inLibrary = user?.gamesId.find(i => i == e.id) != undefined
                     const isGameAuthor = e.developer === user?.userName;
                     return `
                     <div class="game-item" onclick="location.href='gamepage.html?title=${encodeURIComponent(e.title)}'">
