@@ -6,9 +6,7 @@ const loginUser = async (user) => {
         const data = await response.json()
         const state = data.find(e => e.userName == user.userName && e.password == user.password)
         if (state != undefined) {
-            // Сохраняем данные пользователя в localStorage
             localStorage.setItem('user', JSON.stringify(state));
-            // Перенаправляем на страницу профиля
             window.location.href = "profile.html";  
         } else {
             return "Пользователь с таким логином или паролем не найден"
@@ -27,7 +25,6 @@ const registerUser = async (user) => {
         } else if (data.find(e => user.email == e.email)) {
             return "Пользователь с такой почтой уже зарегестрирован"
         } else {
-            // Создаем пользователя в бд
             await fetch(url, {
                 method: "POST",
                 headers: {
@@ -35,9 +32,7 @@ const registerUser = async (user) => {
                 },
                 body: JSON.stringify({ ...user, gamesId: [], avatar: null })
             })
-            // Сохраняем данные пользователя в localStorage
             localStorage.setItem('user', JSON.stringify({ ...user, gamesId: [], avatar: null }));
-            // Перенаправляем на страницу профиля
             window.location.href = "profile.html"; 
         }
     } catch (e) {
@@ -74,14 +69,12 @@ const addGameId = async (user, gameId) => {
 
 const userIsAuth = () => { 
     const authLink = document.getElementById('auth-link');
-    const user = JSON.parse(localStorage.getItem('user'));  // Проверяем, есть ли данные пользователя
+    const user = JSON.parse(localStorage.getItem('user'));  
 
     if (user) {
-        // Если пользователь авторизован, меняем ссылку на "Профиль"
         authLink.textContent = "Профиль";
         authLink.href = "profile.html";
     } else {
-        // Если пользователь не авторизован, ссылка остается на "Вход"
         authLink.textContent = "Вход";
         authLink.href = "login.html";
     }

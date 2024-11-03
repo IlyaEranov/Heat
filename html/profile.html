@@ -18,7 +18,6 @@
                 <li><a href="store.html">Магазин</a></li>
                 <li><a href="about.html">О нас</a></li>
                 <li><a id="auth-link" href="profile.html" class="active">Профиль</a></li>
-                <!-- Активная ссылка "Профиль" -->
             </ul>
         </nav>
     </header>
@@ -36,15 +35,13 @@
                 </div>
             </div>
 
-            <!-- Блок с кнопками -->
             <div class="profile-actions">
                 <button id="show-library">Библиотека</button>
                 <button id="show-cart">Корзина</button>
                 <button id="publish-game">Выпустить игру</button>
-                <button id="logout-btn">Выйти</button> <!-- Кнопка для выхода -->
+                <button id="logout-btn">Выйти</button>
             </div>
 
-            <!-- Контент, который будет меняться -->
             <div class="content" id="content"></div>
         </div>
     </main>
@@ -53,43 +50,45 @@
         <p>&copy; 2024 Heat. Все права защищены.</p>
     </footer>
     <script type="module">
-        // Проверка авторизации
         userIsAuth()
         const userAuth = JSON.parse(localStorage.getItem('user'));
+
         if (userAuth) {
             document.querySelector('.username h1').textContent = userAuth.userName;
             const avatar = document.querySelector(".avatar")
-            userAuth.avatar == null ? avatar.src = "../assets/icons/unknownuser.png" : avatar.src = `../static/users/${userAuth.userName}/avatar/${userAuth.avatar}`
+            userAuth.avatar == null 
+            ? avatar.src = "../assets/icons/unknownuser.png" 
+            : avatar.src = `../static/users/${userAuth.userName}/avatar/${userAuth.avatar}`
         } else {
             window.location.href = "login.html"
         }
 
-        const logoutBtn = document.getElementById('logout-btn'); // Кнопка выхода
-        // Функционал выхода
+        const logoutBtn = document.getElementById('logout-btn');
         logoutBtn.addEventListener('click', function () {
-            localStorage.removeItem('user');  // Удаляем данные пользователя из localStorage
-            window.location.href = "login.html";  // Перенаправляем на страницу входа
+            localStorage.removeItem('user');
+            window.location.href = "login.html";
         });
 
-        // Логика для кнопок контента (библиотека, корзина, выпуск игры)
         const libraryBtn = document.getElementById('show-library');
         const cartBtn = document.getElementById('show-cart');
         const publishGameBtn = document.getElementById('publish-game');
         const contentDiv = document.getElementById('content');
 
-        // Слушатель события для показа библиотеки
         libraryBtn.addEventListener('click', async function () {
             const user = JSON.parse(localStorage.getItem("user"))
             const games = await getGames(user.gamesId)
-            contentDiv.innerHTML =
+            console.log(games)
+            games.length == 0 
+            ? contentDiv.innerHTML = `<h2>Ваша библиотека</h2>
+            <p>У вас пока нет игр в библиотеке.</p>`
+            : contentDiv.innerHTML =
                 `<h2>Ваша библиотека</h2>
-            ${games.map(e => `<div class="game">
-                <img src="../static/games/${e.title}/${e.images[0]}">
-                <p>${e.title}</p>
-            </div>`)}`;
+                ${games.map(e => `<div class="game">
+                    <img src="../static/games/${e.title}/${e.images[0]}">
+                    <p>${e.title}</p>
+                </div>`)}`;
         });
 
-        // Слушатель события для показа корзины
         cartBtn.addEventListener('click', function () {
             contentDiv.innerHTML = `
                 <h2>Корзина</h2>
@@ -111,13 +110,21 @@
                 </div>`;
         });
 
-        // Окно для выпуска игры
         publishGameBtn.addEventListener('click', function () {
             contentDiv.innerHTML = `
                 <h2>Выпустить игру</h2>
                 <form id="publish-form">
                     <label for="game-title">Название игры</label>
                     <input type="text" id="game-title" name="game-title" required>
+
+                    <label for="game-category">Категория</label>
+                    <select id="game-category" name="game-category" required>
+                        <option value="">Выберите категорию</option>
+                        <option value="Открытый мир">Открытый мир</option>
+                        <option value="Выживание">Выживание</option>
+                        <option value="Спорт">Спорт</option>
+                        <option value="Стратегия">Стратегия</option>
+                    </select>
 
                     <label for="game-trailer">Видео-трейлер</label>
                     <input type="file" id="game-trailer" name="game-trailer" accept="video/*" required>
@@ -138,28 +145,28 @@
                     <button type="submit">Выпустить</button>
                 </form>`;
 
-            // Обработчик для отправки формы выпуска игры
             document.getElementById('publish-form').addEventListener('submit', async function (event) {
-                event.preventDefault(); // Предотвращаем перезагрузку страницы
+                event.preventDefault();
                 const user = JSON.parse(localStorage.getItem("user"))
                 const gameTitle = document.getElementById('game-title').value;
-                const gameTrailer = document.getElementById('game-trailer').files[0]; // Получаем файл видео
-                const gameImages = document.getElementById('game-images').files; // Получаем массив изображений
+                const gameCategory = document.getElementById('game-category').value;
+                const gameTrailer = document.getElementById('game-trailer').files[0];
+                const gameImages = document.getElementById('game-images').files;
                 const gameDescription = document.getElementById('game-description').value;
                 const gamePrice = document.getElementById('game-price').value;
                 const ageRestricted = document.getElementById('age-restricted').checked;
-                // Здесь создаем объект для отправки
+
                 const gameData = {
                     developer: user.userName,
                     title: gameTitle,
-                    trailer: gameTrailer.name, // Отправляем только имя файла
-                    images: Array.from(gameImages).map(file => file.name), // Преобразуем FileList в массив имен файлов
+                    trailer: gameTrailer.name,
+                    images: Array.from(gameImages).map(file => file.name),
                     description: gameDescription,
                     price: gamePrice,
                     ageRestricted: ageRestricted,
+                    releaseDate: new Date().toISOString()
                 };
 
-                // Публикация игры
                 try {
                     await publishGame(gameData)
                 } catch (e) {

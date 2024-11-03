@@ -132,12 +132,6 @@ footer {
     cursor: pointer;
 }
 
-
-
-.age-restrictions label {
-    margin-right: 10px;
-}
-
 /* Стили для контента */
 .content {
     margin-top: 20px;
@@ -159,12 +153,20 @@ footer {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
+    padding: 10px; /* Отступы для карточек */
+    border: 1px solid #ddd; /* Рамка для карточек */
+    border-radius: 5px; /* Скругленные углы */
+    background-color: #fff; /* Фон карточек */
+    width: 80%; /* Ширина карточек */
+    max-width: 400px; /* Максимальная ширина карточек */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .game img, .cart-item img {
-    width: 80px;
-    height: 80px;
-    margin-right: 20px;
+    width: 60px; /* Уменьшенный размер изображения */
+    height: 60px; /* Уменьшенный размер изображения */
+    margin-right: 15px; /* Уменьшенный отступ между изображением и текстом */
 }
 
 .library p, .cart-item p {
@@ -189,7 +191,6 @@ footer {
 .buy-btn:hover {
     background-color: #e69500;
 }
-
 
 /* Стили для формы выпуска игры */
 form {
