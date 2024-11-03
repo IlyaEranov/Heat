@@ -7,7 +7,7 @@
     <title id="game-title">Название игры</title>
     <link rel="stylesheet" href="../css/gamepage.css">
     <script src="../js/services/users.js"></script>
-    <script src="../js/services/games.js"></script> <!-- Добавьте ваш файл с функциями для работы с играми -->
+    <script src="../js/services/games.js"></script>
 </head>
 
 <body>
@@ -28,13 +28,11 @@
         <div class="game-container">
             <div class="media-carousel">
                 <div class="selected-media">
-                    <video id="selected-video" controls>
+                    <video id="selected-video" controls="">
                         <source src="" type="video/mp4">
                     </video>
                 </div>
-                <div class="carousel">
-                    <!-- Здесь будут медиа элементы -->
-                </div>
+                <div class="carousel"></div>
             </div>
 
             <div class="game-details">
@@ -61,10 +59,13 @@
         <p>&copy; 2024 Heat. Все права защищены.</p>
     </footer>
 
-    <script type="module">
-        userIsAuth();
+    <script>
+        
+    </script>
 
-        // Функция для получения параметра из URL
+    <script>
+        userIsAuth();
+        
         function getParameterByName(name, url = window.location.href) {
             name = name.replace(/[\[\]]/g, "\\$&");
             const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
@@ -74,14 +75,26 @@
             return decodeURIComponent(results[2].replace(/\+/g, " "));
         }
 
-        const gameTitle = getParameterByName('title');
+        async function selectMedia(src) {
+            const games = await getGames()
+            const gameTitle = getParameterByName('title');
+            const game = games.find(g => g.title === gameTitle);
+            const selectedMedia = document.querySelector('.selected-media');
+            console.log(src)
+            if (src.endsWith('.mp4') || src.endsWith('.webm')) {
+                selectedMedia.innerHTML = `<video controls muted autoplay>
+                    <source src="../static/games/${game.title}/${src}" type="video/mp4">
+                </video>`;
+            } else {
+                selectedMedia.innerHTML = `<img src="../static/games/${game.title}/${src}" alt="Selected media">`;
+            }
+        }
 
-        // Функция для загрузки данных о игре
-        async function loadGameData(title) {
+        async function loadGameData() {
+            const games = await getGames()
+            const gameTitle = getParameterByName('title');
+            const game = games.find(g => g.title === gameTitle);
             try {
-                const games = await getGames(); // Предполагается, что эта функция возвращает массив игр
-                const game = games.find(g => g.title === title);
-                
                 if (game) {
                     document.getElementById('game-title').innerText = game.title;
                     document.getElementById('game-title-display').innerText = game.title;
@@ -92,16 +105,15 @@
                         <strong>Цена:</strong> ${game.price} руб.<br>
                     `;
 
-                    // Загрузка медиа
                     const mediaCarousel = document.querySelector('.carousel');
                     const selectedMedia = document.querySelector('.selected-media');
 
-                    // Загружаем трейлер
-                    selectedMedia.innerHTML = `<video id="selected-video" controls>
-                        <source src="${game.trailer}" type="video/mp4">
+                    selectedMedia.innerHTML = `<video id="selected-video" muted autoplay controls>
+                        <source src="../static/games/${game.title}/${game.trailer}" type="video/mp4">
                     </video>`;
-                    
-                    // Загружаем изображения
+
+                    mediaCarousel.innerHTML = `<img src="../assets/images/videoPreview.png" alt="${game.trailer}" class="carousel-item" onclick="selectMedia('${game.trailer}')">`
+
                     game.images.forEach(image => {
                         mediaCarousel.innerHTML += `<img src="../static/games/${game.title}/${image}" alt="${image}" class="carousel-item" onclick="selectMedia('${image}')">`;
                     });
@@ -114,20 +126,7 @@
             }
         }
 
-        // Вызов функции загрузки данных о игре
-        loadGameData(gameTitle);
-        
-        // Остальной код для выбора медиа и отзывов...
-        function selectMedia(src) {
-            const selectedMedia = document.querySelector('.selected-media');
-            if (src.endsWith('.mp4')) {
-                selectedMedia.innerHTML = `<video controls>
-                    <source src="${src}" type="video/mp4">
-                </video>`;
-            } else {
-                selectedMedia.innerHTML = `<img src="${src}" alt="Selected media">`;
-            }
-        }
+        loadGameData();
     </script>
 </body>
 
