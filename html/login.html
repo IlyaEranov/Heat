@@ -63,7 +63,7 @@
     </footer>
     <script>
         // Проверка авторизации
-        userIsAuth()
+        userIsAuthLink()
         const authUser = localStorage.getItem("user")
         if(authUser){
             window.location.href = "profile.html"
@@ -92,7 +92,7 @@
             } else {
                 for (let key in stateValidate) {
                     switch (key) {
-                        case "userName":
+                        case "userName":Link
                             document.getElementById("login__error__userName").innerHTML = stateValidate[key];
                             break;
                         case "password":
