@@ -62,14 +62,19 @@ nav ul li {
 }
 
 nav ul li a {
+    padding: 0.5rem;
     color: white;
     text-decoration: none;
 }
 
 /* Подсветка активной кнопки "Магазин" */
 nav ul li a.active {
-    border-bottom: 2px solid #fff; 
+    border-bottom: 2px solid #f0a500; /* Цвет выделения активной ссылки */
     color: #f0a500;
+}
+
+nav ul li a:hover {
+    color: #f0a500; /* Цвет при наведении */
 }
 
 /* Название игры слева сверху */
