@@ -68,7 +68,7 @@ const addGameId = async (user, gameId) => {
     }
 }
 
-const userIsAuth = () => { 
+const userIsAuthLink = () => { 
     const authLink = document.getElementById('auth-link');
     const user = JSON.parse(localStorage.getItem('user'));  
 

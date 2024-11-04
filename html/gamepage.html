@@ -38,11 +38,11 @@
             <div class="game-details">
                 <p class="game-description" id="game-description"></p>
                 <p class="game-info" id="game-info"></p>
-                <button class="add-to-cart">Добавить в корзину</button>
+                <button id="button-cart" class="add-to-cart">Добавить в корзину</button>
             </div>
         </div>
 
-        <div class="review-section">
+        <div id="review" class="review-section" style="display: none;">
             <h2>Оцените игру</h2>
             <div class="review-stars">
                 <span class="star" data-value="1">&#9733;</span>
@@ -64,8 +64,8 @@
     </script>
 
     <script>
-        userIsAuth();
-        
+        userIsAuthLink();
+
         function getParameterByName(name, url = window.location.href) {
             name = name.replace(/[\[\]]/g, "\\$&");
             const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
@@ -94,6 +94,13 @@
             const games = await getGames()
             const gameTitle = getParameterByName('title');
             const game = games.find(g => g.title === gameTitle);
+            const userAuth = JSON.parse(localStorage.getItem("user"))
+            const isUserAuth = userAuth !== null
+            const inLibrary = userAuth?.gamesId.find(e => e == game.id)
+            if(isUserAuth && inLibrary){
+                document.getElementById("review").style.display = "block"
+                document.getElementById("button-cart").innerText = "В библиотеке"
+            }
             try {
                 if (game) {
                     document.getElementById('game-title').innerText = game.title;
