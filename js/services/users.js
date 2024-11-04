@@ -62,6 +62,7 @@ const addGameId = async (user, gameId) => {
             },
             body: JSON.stringify(newUser)
         })
+        localStorage.setItem("user", JSON.stringify(newUser))
     } catch (e) {
         alert(`Server Error. ${e.message}`)
     }

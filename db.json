@@ -38,6 +38,16 @@
       "dob": "1987-01-01",
       "gamesId": [],
       "avatar": null
+    },
+    {
+      "id": "0daa",
+      "name": "IronGate",
+      "userName": "IronGate",
+      "email": "IronGate@mail.ru",
+      "password": "IronGate123_",
+      "dob": "1111-11-11",
+      "gamesId": [],
+      "avatar": null
     }
   ],
   "games": [
@@ -168,6 +178,22 @@
       "price": "1100",
       "ageRestricted": false,
       "releaseDate": "2024-11-03T07:53:58.307Z"
+    },
+    {
+      "id": "1a99",
+      "developer": "IronGate",
+      "title": "Valheim",
+      "category": "Выживание",
+      "trailer": "Valheimvid.webm",
+      "images": [
+        "Valheim1.jpg",
+        "Valheim2.jpg",
+        "Valheim3.jpg"
+      ],
+      "description": "Valheim — компьютерная игра в жанре симулятора выживания с видом от третьего лица в открытом мире. Разрабатывается шведской компанией Iron Gate и издается компанией Coffee Stain.",
+      "price": "435",
+      "ageRestricted": false,
+      "releaseDate": "2024-11-04T11:19:28.156Z"
     }
   ]
 }

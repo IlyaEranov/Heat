@@ -158,6 +158,7 @@
                 const gameData = {
                     developer: user.userName,
                     title: gameTitle,
+                    category: gameCategory,
                     trailer: gameTrailer.name,
                     images: Array.from(gameImages).map(file => file.name),
                     description: gameDescription,
@@ -166,20 +167,11 @@
                     releaseDate: new Date().toISOString()
                 };
 
-                try {
-                    await publishGame(gameData)
-                } catch (e) {
-                    alert('Не удалось выпустить игру')
-                }
+                await publishGame(gameData)
+                const gameId = localStorage.getItem("GAME_ID")
+                await addGameId(user, gameId)
+                localStorage.removeItem("GAME_ID")
 
-                try{
-                    const gameId = localStorage.getItem("GAME_ID")
-                    await addGameId(user, gameId)
-                    localStorage.removeItem("GAME_ID")
-                } catch(e) {
-                    alert("Не удалось добавить id")
-                }
-                
             });
         });
     </script>
