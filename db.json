@@ -1,67 +1,20 @@
 {
   "users": [
     {
-      "id": "eb98",
-      "name": "ilya",
-      "userName": "ilya",
-      "email": "ilay.erannov@mail.ru",
-      "password": "qwezxc123ASD_",
-      "dob": "1111-11-11",
-      "gamesId": [
-        "0e42",
-        "b801",
-        "YoxCbaQ",
-        "m5X4Ljm"
-      ],
-      "avatar": null
-    },
-    {
-      "id": "6fe6",
-      "name": "emil",
-      "userName": "emil",
-      "email": "ivan@gmail.com",
-      "password": "Emilemil123/",
-      "dob": "2001-12-12",
-      "gamesId": [
-        "f53f",
-        "873f",
-        "5689",
-        "e6ae",
-        "d543"
-      ],
-      "avatar": null
-    },
-    {
-      "id": "81b0",
-      "name": "Ubisoft",
-      "userName": "Ubisoft",
-      "email": "ubisoft@gmail.com",
-      "password": "Ubisoft222/",
-      "dob": "1987-01-01",
-      "gamesId": [],
-      "avatar": null
-    },
-    {
-      "id": "0daa",
-      "name": "IronGate",
-      "userName": "IronGate",
-      "email": "IronGate@mail.ru",
-      "password": "IronGate123_",
-      "dob": "1111-11-11",
-      "gamesId": [],
-      "avatar": null
-    },
-    {
       "name": "LudeonStudio",
       "userName": "LudeonStudio",
       "email": "LudeonStudio@mail.ru",
       "password": "LudeonStudio123_",
       "dob": "1111-11-11",
-      "gamesId": [
-        "leI8PqY"
-      ],
+      "gamesId": [],
       "avatar": null,
-      "id": "l9Dg79b"
+      "cartId": [
+        "8e2e",
+        "0e42",
+        "873f"
+      ],
+      "balance": 0,
+      "id": 1
     }
   ],
   "games": [

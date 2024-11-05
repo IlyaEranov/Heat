@@ -85,28 +85,25 @@
                 ${games.map(e => `<div class="game">
                     <img src="../static/games/${e.title}/${e.images[0]}">
                     <p>${e.title}</p>
-                </div>`)}`;
+                </div>`).join("")}`;
         });
 
-        cartBtn.addEventListener('click', function () {
-            contentDiv.innerHTML = `
-                <h2>Корзина</h2>
-                <div class="cart-item">
-                    <img src="game1.jpg" alt="Game 1">
+        cartBtn.addEventListener('click', async function () {
+            const user = JSON.parse(localStorage.getItem("user"))
+            const games = await getGames(user.cartId)
+            games.length == 0 
+            ? contentDiv.innerHTML = `<h2>Корзина</h2>
+            <p>Вы пока не добавили игру в корзину</p>`
+            : contentDiv.innerHTML = `<h2>корзина</h2>
+                ${games.map(game => `<div class="cart-item">
+                    <img src="../static/games/${game.title}/${game.images[0]}" alt="${game.title}">
                     <div>
-                        <p>Game Name 1</p>
-                        <p>Цена: 500 руб.</p>
+                        <p>${game.title}</p>
+                        <p>${game.price}</p>
                         <button class="buy-btn">Купить</button>
                     </div>
-                </div>
-                <div class="cart-item">
-                    <img src="game2.jpg" alt="Game 2">
-                    <div>
-                        <p>Game Name 2</p>
-                        <p>Цена: 700 руб.</p>
-                        <button class="buy-btn">Купить</button>
                     </div>
-                </div>`;
+                `).join("")}`
         });
 
         publishGameBtn.addEventListener('click', function () {

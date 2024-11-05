@@ -7,7 +7,7 @@ const loginUser = async (user) => {
         const state = data.find(e => e.userName == user.userName && e.password == user.password)
         if (state != undefined) {
             localStorage.setItem('user', JSON.stringify(state));
-            window.location.href = "profile.html";  
+            window.location.href = "profile.html";
         } else {
             return "Пользователь с таким логином или паролем не найден"
         }
@@ -30,13 +30,10 @@ const registerUser = async (user) => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ ...user, gamesId: [], avatar: null })
+                body: JSON.stringify({ ...user, gamesId: [], avatar: null, cartId: [], balance: 0 })
             })
-            if(!response.ok) {
-                alert(`Server Error. ${response.statusText}`)
-            }
-            localStorage.setItem('user', JSON.stringify({ ...response.json(), gamesId: [], avatar: null }));
-            window.location.href = "profile.html"; 
+            localStorage.setItem('user', JSON.stringify(await response.json()));
+            window.location.href = "profile.html";
         }
     } catch (e) {
         alert(`Server Error. ${e.message}`)
@@ -45,15 +42,15 @@ const registerUser = async (user) => {
 
 const removeUser = async () => {
     const user = JSON.parse(localStorage.getItem("user"))
-    try{
+    try {
         await fetch(url + user.id, {
             method: "DELETE",
         })
         window.location.href = "login.html"
-    } catch(e){
+    } catch (e) {
         alert(`Server Error. ${e.message}`)
     }
-} 
+}
 
 const addGameId = async (user, gameId) => {
     const newUser = { ...user, gamesId: [...user.gamesId, ...[gameId]] }
@@ -71,9 +68,30 @@ const addGameId = async (user, gameId) => {
     }
 }
 
-const userIsAuthLink = () => { 
+const addGameInCart = async (user, gameId) => {
+    try {
+        console.log(user.gamesId.find(e => e == gameId))
+        if (user.gamesId.find(e => e == gameId) == undefined) {
+            const response = await fetch(url + user.id, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ ...user, cartId: [...user.cartId, ...[gameId]] })
+            })
+            localStorage.setItem("user", JSON.stringify(await response.json()))
+            window.location.href = "profile.html"
+        } else {
+            alert("Игра уже добавлена в корзину")
+        }
+    } catch (e) {
+        alert(`Server Error. ${e.message}`)
+    }
+}
+
+const userIsAuthLink = () => {
     const authLink = document.getElementById('auth-link');
-    const user = JSON.parse(localStorage.getItem('user'));  
+    const user = JSON.parse(localStorage.getItem('user'));
 
     if (user) {
         authLink.textContent = "Профиль";

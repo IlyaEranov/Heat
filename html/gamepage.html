@@ -94,12 +94,23 @@
             const games = await getGames()
             const gameTitle = getParameterByName('title');
             const game = games.find(g => g.title === gameTitle);
-            const userAuth = JSON.parse(localStorage.getItem("user"))
-            const isUserAuth = userAuth !== null
-            const inLibrary = userAuth?.gamesId.find(e => e == game.id)
-            if(isUserAuth && inLibrary){
+            const user = JSON.parse(localStorage.getItem("user"))
+            const isAuth = user !== null
+            const inLibrary = user?.gamesId.find(e => e == game.id)
+            const buttonCart = document.getElementById("button-cart")
+            if(isAuth && inLibrary){
                 document.getElementById("review").style.display = "block"
-                document.getElementById("button-cart").innerText = "В библиотеке"
+                buttonCart.innerText = "В библиотеке"
+            } else if(isAuth){
+                buttonCart.addEventListener("click", async (e) => {
+                    e.preventDefault()
+                    await addGameInCart(user, game.id)
+                })
+            } else {
+                buttonCart.addEventListener("click", (e) => {
+                    e.preventDefault()
+                    window.location.href = "login.html"
+                })
             }
             try {
                 if (game) {
