@@ -25,14 +25,17 @@ const registerUser = async (user) => {
         } else if (data.find(e => user.email == e.email)) {
             return "Пользователь с такой почтой уже зарегестрирован"
         } else {
-            await fetch(url, {
+            const response = await fetch(url, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({ ...user, gamesId: [], avatar: null })
             })
-            localStorage.setItem('user', JSON.stringify({ ...user, gamesId: [], avatar: null }));
+            if(!response.ok) {
+                alert(`Server Error. ${response.statusText}`)
+            }
+            localStorage.setItem('user', JSON.stringify({ ...response.json(), gamesId: [], avatar: null }));
             window.location.href = "profile.html"; 
         }
     } catch (e) {

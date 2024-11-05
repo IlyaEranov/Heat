@@ -9,7 +9,9 @@
       "dob": "1111-11-11",
       "gamesId": [
         "0e42",
-        "b801"
+        "b801",
+        "YoxCbaQ",
+        "m5X4Ljm"
       ],
       "avatar": null
     },
@@ -48,6 +50,18 @@
       "dob": "1111-11-11",
       "gamesId": [],
       "avatar": null
+    },
+    {
+      "name": "LudeonStudio",
+      "userName": "LudeonStudio",
+      "email": "LudeonStudio@mail.ru",
+      "password": "LudeonStudio123_",
+      "dob": "1111-11-11",
+      "gamesId": [
+        "leI8PqY"
+      ],
+      "avatar": null,
+      "id": "l9Dg79b"
     }
   ],
   "games": [
@@ -194,6 +208,54 @@
       "price": "435",
       "ageRestricted": false,
       "releaseDate": "2024-11-04T11:19:28.156Z"
+    },
+    {
+      "developer": "ilya",
+      "title": "RimWorld",
+      "category": "Стратегия",
+      "trailer": "RimWorldvid.webm",
+      "images": [
+        "RimWorld1.jpg",
+        "RimWorld2.jpg",
+        "RimWorld3.jpg"
+      ],
+      "description": "RimWorld",
+      "price": "500",
+      "ageRestricted": false,
+      "releaseDate": "2024-11-05T04:41:30.247Z",
+      "id": "YoxCbaQ"
+    },
+    {
+      "developer": "ilya",
+      "title": "Frostpunk 2",
+      "category": "Стратегия",
+      "trailer": "Frostpunk 2vid.webm",
+      "images": [
+        "Frostpunk 21.jpg",
+        "Frostpunk 22.jpg",
+        "Frostpunk 23.jpg"
+      ],
+      "description": "frost",
+      "price": "400",
+      "ageRestricted": false,
+      "releaseDate": "2024-11-05T04:51:00.103Z",
+      "id": "m5X4Ljm"
+    },
+    {
+      "developer": "LudeonStudio",
+      "title": "No Man's Sky",
+      "category": "Открытый мир",
+      "trailer": "No Man's Skyvid.webm",
+      "images": [
+        "No Man's Sky1.jpg",
+        "No Man's Sky2.jpg",
+        "No Man's Sky3.jpg"
+      ],
+      "description": "No man sky",
+      "price": "1000",
+      "ageRestricted": false,
+      "releaseDate": "2024-11-05T05:01:35.051Z",
+      "id": "leI8PqY"
     }
   ]
 }
