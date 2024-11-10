@@ -70,24 +70,53 @@ const addGameId = async (user, gameId) => {
 
 const addGameInCart = async (user, gameId) => {
     try {
-        console.log(user.gamesId.find(e => e == gameId))
-        if (user.gamesId.find(e => e == gameId) == undefined) {
-            const response = await fetch(url + user.id, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ ...user, cartId: [...user.cartId, ...[gameId]] })
-            })
-            localStorage.setItem("user", JSON.stringify(await response.json()))
-            window.location.href = "profile.html"
-        } else {
-            alert("Игра уже добавлена в корзину")
+        // Проверяем, если игра уже в корзине
+        if (user.cartId.includes(gameId)) {
+            alert("Игра уже добавлена в корзину");
+            return;
         }
+
+        // Создаем обновленный объект пользователя с новой игрой в корзине
+        const updatedUser = { ...user, cartId: [...user.cartId, gameId] };
+
+        // Логируем данные перед отправкой запроса
+        console.log('Отправляем запрос на обновление пользователя: ', updatedUser);
+
+        // Отправляем запрос на обновление данных пользователя
+        const response = await fetch(url + user.id, {
+            method: "PATCH", // Используем PATCH для частичного обновления данных
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(updatedUser)
+        });
+
+        // Проверяем, успешен ли ответ
+        if (!response.ok) {
+            alert("Ошибка при обновлении данных пользователя");
+            console.error(`Ошибка при обновлении пользователя: ${response.statusText}`);
+            return;
+        }
+
+        // Получаем обновленные данные пользователя
+        const updatedUserData = await response.json();
+        
+        // Логируем полученные данные
+        console.log('Обновленные данные пользователя:', updatedUserData);
+
+        // Сохраняем обновленные данные в localStorage
+        localStorage.setItem("user", JSON.stringify(updatedUserData));
+
+        // Перенаправляем на страницу профиля
+        window.location.href = "profile.html";
     } catch (e) {
-        alert(`Server Error. ${e.message}`)
+        alert(`Ошибка при добавлении игры в корзину: ${e.message}`);
+        console.error(`Ошибка при добавлении игры в корзину: ${e.message}`);
     }
 }
+
+
+
 
 const userIsAuthLink = () => {
     const authLink = document.getElementById('auth-link');
@@ -99,5 +128,24 @@ const userIsAuthLink = () => {
     } else {
         authLink.textContent = "Вход";
         authLink.href = "login.html";
+    }
+}
+
+const topUpBalance = async (user) => {
+    const newBalance = user.balance + 500; // увеличиваем баланс на 500 рублей
+    const updatedUser = { ...user, balance: newBalance };
+    try {
+        const response = await fetch(url + user.id, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(updatedUser)
+        });
+        const updatedUserData = await response.json();
+        localStorage.setItem('user', JSON.stringify(updatedUserData)); // сохраняем обновленного пользователя в localStorage
+        return updatedUserData; // возвращаем обновленного пользователя
+    } catch (e) {
+        alert(`Ошибка при пополнении баланса: ${e.message}`);
     }
 }
