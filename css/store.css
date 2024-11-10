@@ -182,14 +182,30 @@ main {
     background-color: #f0a500;
 }
 
-.in-library {
+/* Общие стили для "в корзине" и "в библиотеке" */
+.in-library, .in-cart {
     margin-top: 1rem;
     padding: 0.5rem 1rem;
-    background-color: #f0a500; /* Цвет фона */
-    color: #fff;
     border-radius: 5px;
-    font-weight: bold; /* Жирный текст для выделения */
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
 }
+
+/* Стили для "в библиотеке" */
+.in-library {
+    background-color: #4caf50; /* Зеленый цвет для библиотеки */
+    color: #fff;
+}
+
+/* Стили для "в корзине" */
+.in-cart {
+    background-color: #ff9800; /* Оранжевый цвет для корзины */
+    color: #fff;
+}
+
+/* Другие стили для секций и контента остаются такими же */
+
 
 /* Сетка игр */
 .game-grid {

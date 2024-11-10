@@ -65,26 +65,29 @@
 
             gamesContainer.innerHTML = `<div class="game-grid">
                 ${gamesToDisplay.map(e => {
-                    const inLibrary = user?.gamesId.find(i => i == e.id) != undefined
+                    const inLibrary = user?.gamesId.find(i => i == e.id) != undefined;
+                    const inCart = user?.cartId.find(i => i == e.id) != undefined;
                     const isGameAuthor = e.developer === user?.userName;
                     return `
-                    <div class="game-item" onclick="location.href='gamepage.html?title=${encodeURIComponent(e.title)}'">
-                            <div class="game-title">${e.title}</div>
-                            <img src="../static/games/${e.title}/${e.images[0]}" alt="${e.title}" class="game-image">
-                            ${inLibrary
-                            ? '<div class="in-library">В библиотеке</div>'
-                            : `<div class="game-price">${e.price} руб.</div>`
-                        }
-                            ${isUserAuth
-                            ? (inLibrary
+                    <div class="game-item">
+                        <div class="game-title">${e.title}</div>
+                        <img src="../static/games/${e.title}/${e.images[0]}" alt="${e.title}" class="game-image">
+                        ${inLibrary
+                        ? '<div class="in-library">В библиотеке</div>'
+                        : `<div class="game-price">${e.price} руб.</div>`
+                    }
+                        ${isUserAuth
+                        ? (inLibrary
+                            ? ''
+                            : (isGameAuthor
                                 ? ''
-                                : (isGameAuthor
-                                    ? ''
-                                    : `<button class="add-to-cart" onclick="addToCart('${e.title}'); event.stopPropagation();">Добавить в корзину</button>`))
-                            : `<button class="add-to-cart" onclick="addToCart('${e.title}'); event.stopPropagation();">Добавить в корзину</button>`
-                        }
-                        </div>
-                    `; 
+                                : (inCart
+                                    ? '<div class="in-cart">В корзине</div>'
+                                    : `<button class="add-to-cart" onclick="addToCart(${e.id}); event.stopPropagation();">Добавить в корзину</button>`)))
+                        : `<button class="add-to-cart" onclick="addToCart(${e.id}); event.stopPropagation();">Добавить в корзину</button>`
+                    }
+                    </div>
+                `; 
                 }).join('')}
             </div>`;
         }
@@ -105,10 +108,17 @@
             });
         });
 
-        async function addToCart(gameTitle) {
+        // Функция добавления игры в корзину
+        async function addToCart(gameId) {
             try {
-                await addToCartService(gameTitle);
-                alert(`${gameTitle} добавлена в корзину`);
+                await addToCartService(gameId); // Сервис для добавления игры в корзину
+                // Обновляем данные пользователя с добавленной игрой в корзину
+                user.cartId.push(gameId);
+                localStorage.setItem('user', JSON.stringify(user));
+                alert(`Игра добавлена в корзину`);
+
+                // Перенаправляем пользователя на страницу профиля
+                window.location.href = 'profile.html';
             } catch (error) {
                 console.error('Ошибка добавления в корзину:', error);
                 alert('Не удалось добавить игру в корзину. Попробуйте снова позже.');
