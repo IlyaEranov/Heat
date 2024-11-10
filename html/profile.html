@@ -51,68 +51,120 @@
     </footer>
     <script type="module">
         userIsAuthLink()
+    
+        // Убираем дублирующийся код
+        async function removeGameFromCart(user, gameId) {
+            const updatedCart = user.cartId.filter(id => id !== gameId);  // Удаляем игру из корзины
+            user.cartId = updatedCart;
+    
+            // Обновляем данные пользователя на сервере (или в базе данных)
+            await updateUser(user);  // Эта функция должна отправлять данные на сервер
+        }
+    
+        async function addGameToLibrary(user, gameId) {
+            user.gamesId.push(gameId);  // Добавляем игру в библиотеку
+    
+            // Обновляем данные пользователя на сервере (или в базе данных)
+            await updateUser(user);  // Эта функция должна отправлять данные на сервер
+        }
+    
+        async function updateUser(user) {
+            // Здесь должна быть логика для обновления данных пользователя на сервере
+            // Например, отправка запроса PUT или PATCH
+            const response = await fetch(`/api/users/${user.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(user)
+            });
+    
+            if (!response.ok) {
+                alert('Ошибка обновления данных пользователя');
+            }
+        }
+    
         const userAuth = JSON.parse(localStorage.getItem('user'));
-
+    
         if (userAuth) {
             document.querySelector('.username h1').textContent = userAuth.userName;
             const avatar = document.querySelector(".avatar")
             userAuth.avatar == null 
-            ? avatar.src = "../assets/icons/unknownuser.png" 
-            : avatar.src = `../static/users/${userAuth.userName}/avatar/${userAuth.avatar}`
+                ? avatar.src = "../assets/icons/unknownuser.png" 
+                : avatar.src = `../static/users/${userAuth.userName}/avatar/${userAuth.avatar}`;
+            document.querySelector('.balance-text').textContent = `Баланс: ${userAuth.balance} руб.`; // добавление отображения баланса
         } else {
-            window.location.href = "login.html"
+            window.location.href = "login.html";
         }
-
+    
         const logoutBtn = document.getElementById('logout-btn');
         logoutBtn.addEventListener('click', function () {
             localStorage.removeItem('user');
             window.location.href = "login.html";
         });
-
+    
         const libraryBtn = document.getElementById('show-library');
         const cartBtn = document.getElementById('show-cart');
         const publishGameBtn = document.getElementById('publish-game');
         const contentDiv = document.getElementById('content');
-
+    
         libraryBtn.addEventListener('click', async function () {
             const user = JSON.parse(localStorage.getItem("user"))
             const games = await getGames(user.gamesId)
             games.length == 0 
-            ? contentDiv.innerHTML = `<h2>Ваша библиотека</h2>
-            <p>У вас пока нет игр в библиотеке.</p>`
-            : contentDiv.innerHTML =
-                `<h2>Ваша библиотека</h2>
-                ${games.map(e => `<div class="game">
-                    <img src="../static/games/${e.title}/${e.images[0]}">
-                    <p>${e.title}</p>
-                </div>`).join("")}`;
+                ? contentDiv.innerHTML = `<h2>Ваша библиотека</h2>
+                <p>У вас пока нет игр в библиотеке.</p>`
+                : contentDiv.innerHTML =
+                    `<h2>Ваша библиотека</h2>
+                    ${games.map(e => `<div class="game">
+                        <img src="../static/games/${e.title}/${e.images[0]}">
+                        <p>${e.title}</p>
+                    </div>`).join("")}`;
         });
-
+    
         cartBtn.addEventListener('click', async function () {
-            const user = JSON.parse(localStorage.getItem("user"))
-            const games = await getGames(user.cartId)
-            games.length == 0 
-            ? contentDiv.innerHTML = `<h2>Корзина</h2>
-            <p>Вы пока не добавили игру в корзину</p>`
-            : contentDiv.innerHTML = `<h2>корзина</h2>
-                ${games.map(game => `<div class="cart-item">
-                    <img src="../static/games/${game.title}/${game.images[0]}" alt="${game.title}">
-                    <div>
-                        <p>${game.title}</p>
-                        <p>${game.price}</p>
-                        <button class="buy-btn">Купить</button>
-                    </div>
-                    </div>
-                `).join("")}`
+            const user = JSON.parse(localStorage.getItem("user"));
+            const games = await getGames(user.cartId);  // Получаем игры из корзины
+            games.length == 0
+                ? contentDiv.innerHTML = `<h2>Корзина</h2><p>Вы пока не добавили игру в корзину</p>`
+                : contentDiv.innerHTML = `<h2>Корзина</h2>
+                    ${games.map(game => `<div class="cart-item">
+                        <img src="../static/games/${game.title}/${game.images[0]}" alt="${game.title}">
+                        <div>
+                            <p>${game.title}</p>
+                            <p>${game.price}</p>
+                            <button class="buy-btn" data-game-id="${game.id}">Купить</button>
+                        </div>
+                        </div>
+                    `).join("")}`;
+    
+            // Добавляем обработчик на каждую кнопку "Купить"
+            document.querySelectorAll('.buy-btn').forEach(btn => {
+                btn.addEventListener('click', async function () {
+                    const gameId = btn.getAttribute('data-game-id');  // Получаем ID игры
+                    const user = JSON.parse(localStorage.getItem("user"));
+    
+                    // Удаляем игру из корзины
+                    await removeGameFromCart(user, gameId);
+    
+                    // Добавляем игру в библиотеку
+                    await addGameToLibrary(user, gameId);
+    
+                    // Обновляем корзину и библиотеку на странице
+                    alert("Игра добавлена в вашу библиотеку!");
+                    cartBtn.click();  // Перезагружаем корзину
+                    libraryBtn.click();  // Перезагружаем библиотеку
+                });
+            });
         });
-
+    
         publishGameBtn.addEventListener('click', function () {
             contentDiv.innerHTML = `
                 <h2>Выпустить игру</h2>
                 <form id="publish-form">
                     <label for="game-title">Название игры</label>
                     <input type="text" id="game-title" name="game-title" required>
-
+    
                     <label for="game-category">Категория</label>
                     <select id="game-category" name="game-category" required>
                         <option value="">Выберите категорию</option>
@@ -121,26 +173,26 @@
                         <option value="Спорт">Спорт</option>
                         <option value="Стратегия">Стратегия</option>
                     </select>
-
+    
                     <label for="game-trailer">Видео-трейлер</label>
                     <input type="file" id="game-trailer" name="game-trailer" accept="video/*" required>
-
+    
                     <label for="game-images">Картинки (до 5)</label>
                     <input type="file" id="game-images" name="game-images" accept="image/*" multiple required>
-
+    
                     <label for="game-description">Описание</label>
                     <textarea id="game-description" name="game-description" rows="4" required></textarea>
-
+    
                     <label for="game-price">Цена</label>
                     <input type="text" id="game-price" name="game-price" required>
                     <div class="age-restrictions">
                         <label for="age-restricted">Имеет возрастные ограничения:</label>
                         <input type="checkbox" id="age-restricted" name="age-restricted">
                     </div>
-
+    
                     <button type="submit">Выпустить</button>
                 </form>`;
-
+    
             document.getElementById('publish-form').addEventListener('submit', async function (event) {
                 event.preventDefault();
                 const user = JSON.parse(localStorage.getItem("user"))
@@ -151,7 +203,7 @@
                 const gameDescription = document.getElementById('game-description').value;
                 const gamePrice = document.getElementById('game-price').value;
                 const ageRestricted = document.getElementById('age-restricted').checked;
-
+    
                 const gameData = {
                     developer: user.userName,
                     title: gameTitle,
@@ -163,7 +215,7 @@
                     ageRestricted: ageRestricted,
                     releaseDate: new Date().toISOString()
                 };
-
+    
                 await publishGame(gameData)
                 const gameId = localStorage.getItem("GAME_ID")
                 await addGameId(user, gameId)
@@ -171,7 +223,20 @@
                 window.location.href = "profile.html"
             });
         });
+    
+        document.getElementById('top-up').addEventListener('click', async function () {
+            const user = JSON.parse(localStorage.getItem('user')); // получаем пользователя из localStorage
+    
+            if (user) {
+                const updatedUser = await topUpBalance(user); // пополняем баланс
+                document.querySelector('.balance-text').textContent = `Баланс: ${updatedUser.balance} руб.`;
+                localStorage.setItem('user', JSON.stringify(updatedUser));  // обновляем данные пользователя в localStorage
+            } else {
+                alert("Вы не авторизованы.");
+            }
+        });
     </script>
+    
 </body>
 
 </html>
