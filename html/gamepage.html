@@ -73,7 +73,6 @@
         }
 
         const gameId = getParameterByName('id');
-        console.log(gameId);  // Для отладки, чтобы убедиться, что параметр передается правильно
 
         async function selectMedia(src) {
             const games = await getGames();
@@ -90,74 +89,67 @@
         }
 
         async function loadGameData() {
-    const games = await getGames();
-    const game = games.find(g => g.id == gameId);
-    const user = JSON.parse(localStorage.getItem("user"));
-    const isAuth = user !== null;
-    const buttonCart = document.getElementById("button-cart");
+            const games = await getGames();
+            const game = games.find(g => g.id == gameId);
+            const user = JSON.parse(localStorage.getItem("user"));
+            const isAuth = user !== null;
+            const buttonCart = document.getElementById("button-cart");
 
-    if (isAuth) {
-    // Проверка, если игра уже в библиотеке
-    if (Array.isArray(user.gamesId) && user.gamesId.find(e => e == game.id)) {
-        document.getElementById("review").style.display = "block";
-        buttonCart.innerText = "В библиотеке";  // Изменяем текст кнопки на "В библиотеке"
-        buttonCart.disabled = true;  // Отключаем кнопку
-    } 
-    // Проверка, если игра уже в корзине
-    else if (Array.isArray(user.cartId) && user.cartId.find(e => e == game.id)) {
-        buttonCart.innerText = "В корзине";  // Изменяем текст кнопки на "В корзине"
-        buttonCart.disabled = true;  // Отключаем кнопку
-    } 
-    else {
-        // Если игра не в библиотеке и не в корзине, то добавляем обработчик для добавления в корзину
-        buttonCart.addEventListener("click", async (e) => {
-            e.preventDefault();
-            await addGameInCart(user, game.id);  // Добавляем игру в корзину
-            buttonCart.innerText = "В корзине";  // После добавления меняем текст кнопки
-            buttonCart.disabled = true;  // Отключаем кнопку
-        });
-    }
-    } else {
-        buttonCart.addEventListener("click", (e) => {
-            e.preventDefault();
-            window.location.href = "login.html";  // Перенаправляем на страницу входа, если пользователь не авторизован
-        });
-    }
+            if (isAuth) {
+            if (Array.isArray(user.gamesId) && user.gamesId.find(e => e == game.id)) {
+                document.getElementById("review").style.display = "block";
+                buttonCart.innerText = "В библиотеке";
+                buttonCart.disabled = true; 
+            } 
+            else if (Array.isArray(user.cartId) && user.cartId.find(e => e == game.id)) {
+                buttonCart.innerText = "В корзине";
+                buttonCart.disabled = true;
+            } 
+            else {
+                buttonCart.addEventListener("click", async (e) => {
+                    e.preventDefault();
+                    await addGameInCart(game.id); 
+                    buttonCart.innerText = "В корзине";
+                    buttonCart.disabled = true;  
+                })}
+            } else {
+                buttonCart.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    window.location.href = "login.html";  
+                });
+            }
 
-    try {
-        if (game) {
-            document.getElementById('game-title').innerText = game.title;
-            document.getElementById('game-title-display').innerText = game.title;
-            document.getElementById('game-description').innerText = game.description;
-            document.getElementById('game-info').innerHTML = `
-                <strong>Разработчик:</strong> ${game.developer} <br>
-                <strong>Дата релиза:</strong> ${new Date(game.releaseDate).toLocaleDateString()} <br>
-                <strong>Цена:</strong> ${game.price} руб.<br>
-            `;
+            try {
+                if (game) {
+                    document.getElementById('game-title').innerText = game.title;
+                    document.getElementById('game-title-display').innerText = game.title;
+                    document.getElementById('game-description').innerText = game.description;
+                    document.getElementById('game-info').innerHTML = `
+                        <strong>Разработчик:</strong> ${game.developer} <br>
+                        <strong>Дата релиза:</strong> ${new Date(game.releaseDate).toLocaleDateString()} <br>
+                        <strong>Цена:</strong> ${game.price} руб.<br>
+                    `;
 
-            const mediaCarousel = document.querySelector('.carousel');
-            const selectedMedia = document.querySelector('.selected-media');
+                    const mediaCarousel = document.querySelector('.carousel');
+                    const selectedMedia = document.querySelector('.selected-media');
 
-            selectedMedia.innerHTML = `<video id="selected-video" muted autoplay controls>
-                <source src="../static/games/${game.title}/${game.trailer}" type="video/mp4">
-            </video>`;
+                    selectedMedia.innerHTML = `<video id="selected-video" muted autoplay controls>
+                        <source src="../static/games/${game.title}/${game.trailer}" type="video/mp4">
+                    </video>`;
 
-            mediaCarousel.innerHTML = `<img src="../assets/images/videoPreview.png" alt="${game.trailer}" class="carousel-item" onclick="selectMedia('${game.trailer}')">`;
+                    mediaCarousel.innerHTML = `<img src="../assets/images/videoPreview.png" alt="${game.trailer}" class="carousel-item" onclick="selectMedia('${game.trailer}')">`;
 
-            game.images.forEach(image => {
-                mediaCarousel.innerHTML += `<img src="../static/games/${game.title}/${image}" alt="${image}" class="carousel-item" onclick="selectMedia('${image}')">`;
-            });
-        } else {
-            alert('Игра не найдена.');
+                    game.images.forEach(image => {
+                        mediaCarousel.innerHTML += `<img src="../static/games/${game.title}/${image}" alt="${image}" class="carousel-item" onclick="selectMedia('${image}')">`;
+                    });
+                } else {
+                    alert('Игра не найдена.');
+                }
+            } catch (error) {
+                console.error('Ошибка загрузки данных о игре:', error);
+                alert('Не удалось загрузить данные о игре.');
+            }
         }
-    } catch (error) {
-        console.error('Ошибка загрузки данных о игре:', error);
-        alert('Не удалось загрузить данные о игре.');
-    }
-}
-
-loadGameData();
-
 
         loadGameData();
     </script>

@@ -43,6 +43,19 @@
         <p>&copy; 2024 Heat. Все права защищены.</p>
     </footer>
 
+    <!-- <script>
+        const userAuth = JSON.parse(localStorage.getItem('user'));
+        const isUserAuthA = userAuth !== null;  // Проверка авторизации
+        const addToCart = async (gameId) => {
+            if (!isUserAuthA) {
+                alert('Для добавления игры в корзину необходимо войти в систему.');
+                window.location.href = 'login.html';
+                return;
+            }
+            await addGameInCart(gameId)
+        }
+    </script> -->
+
     <script type="module">
         userIsAuthLink();
         const user = JSON.parse(localStorage.getItem('user'));
@@ -55,7 +68,6 @@
             alert('Не удалось загрузить данные о играх. Попробуйте снова позже.');
         }
 
-        // Функция для отображения игр
         function displayGames(gamesToDisplay) {
             const gamesContainer = document.getElementById("games");
             if (gamesToDisplay.length === 0) {
@@ -65,28 +77,28 @@
 
             gamesContainer.innerHTML = `<div class="game-grid">
                 ${gamesToDisplay.map(e => {
-                    const inLibrary = user?.gamesId.find(i => i == e.id) != undefined;
-                    const inCart = user?.cartId.find(i => i == e.id) != undefined;
-                    const isGameAuthor = e.developer === user?.userName;
-                    return `
-                    <div class="game-item">
+                const inLibrary = user?.gamesId.find(i => i == e.id) != undefined;
+                const inCart = user?.cartId.find(i => i == e.id) != undefined;
+                const isGameAuthor = e.developer === user?.userName;
+                return `
+                    <div class="game-item" onclick="location.href='gamepage.html?id=${encodeURIComponent(e.id)}'">
                         <div class="game-title">${e.title}</div>
                         <img src="../static/games/${e.title}/${e.images[0]}" alt="${e.title}" class="game-image">
                         ${inLibrary
-                            ? '<div class="in-library">В библиотеке</div>'
-                            : `<div class="game-price">${e.price} руб.</div>`}
+                        ? '<div class="in-library">В библиотеке</div>'
+                        : `<div class="game-price">${e.price} руб.</div>`}
                         ${isUserAuth
-                            ? (inLibrary
+                        ? (inLibrary
+                            ? ''
+                            : (isGameAuthor
                                 ? ''
-                                : (isGameAuthor
-                                    ? ''
-                                    : (inCart
-                                        ? '<div class="in-cart">В корзине</div>'
-                                        : `<button class="add-to-cart" onclick="addToCart(${e.id}, this); event.stopPropagation();">Добавить в корзину</button>`)))
-                            : `<button class="add-to-cart" onclick="addToCart(${e.id}, this); event.stopPropagation();">Добавить в корзину</button>`}
+                                : (inCart
+                                    ? '<div class="in-cart">В корзине</div>'
+                                    : `<button class="add-to-cart" onclick="event.stopPropagation();addGameInCart('${e.id}')">Добавить в корзину</button>`)))
+                        : `<button class="add-to-cart" onclick="event.stopPropagation();alert('Для добавления игры в корзину нужно быть авторизованным');window.location.href='login.html'">Добавить в корзину</button>`}
                     </div>
-                    `; 
-                }).join('')}
+                    `;
+            }).join('')}
             </div>`;
         }
 
@@ -106,35 +118,7 @@
             });
         });
 
-        // Функция добавления игры в корзину
-        async function addToCart(gameId, buttonCart) {
-            if (!isUserAuth) {
-                alert('Для добавления игры в корзину необходимо войти в систему.');
-                window.location.href = 'login.html';
-                return;
-            }
-            
-            try {
-                console.log('Добавляем игру в корзину с ID:', gameId);
-                // Добавляем игру в корзину через сервис
-                await addGameInCart(user, gameId);  // Используем правильную переменную gameId
-                
-                console.log('Игра добавлена в корзину');
-                
-                // Обновляем данные пользователя с добавленной игрой в корзину
-                user.cartId.push(gameId);
-                localStorage.setItem('user', JSON.stringify(user));
-                
-                alert(`Игра добавлена в корзину`);
-                
-                // Обновляем UI кнопки: меняем текст на "В корзине" и отключаем кнопку
-                buttonCart.innerText = "В корзине";
-                buttonCart.disabled = true;  // Отключаем кнопку, чтобы предотвратить повторное добавление
-            } catch (error) {
-                console.error('Ошибка добавления в корзину:', error);
-                alert('Не удалось добавить игру в корзину. Попробуйте снова позже.');
-            }
-        }
+
     </script>
 </body>
 
