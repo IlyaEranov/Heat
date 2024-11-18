@@ -22,28 +22,32 @@
         </nav>
     </header>
 
+
     <main>
-        <div class="profile">
-            <div class="profile-info">
-                <img src="../assets/icons/unknownuser.png" alt="Avatar" class="avatar">
-                <div class="username">
-                    <h1>Username</h1>
+        <div class = "container">
+            <div class="profile">
+                <div class="profile-info">
+                    <img src="../assets/icons/unknownuser.png" alt="Avatar" class="avatar">
+                    <div class="username">
+                        <h1>Username</h1>
+                    </div>
+                    <div class="balance-section">
+                        <p class="balance-text">Баланс: 1000 руб.</p>
+                        <button id="top-up">Пополнить</button>
+                    </div>
                 </div>
-                <div class="balance-section">
-                    <p class="balance-text">Баланс: 1000 руб.</p>
-                    <button id="top-up">Пополнить</button>
+    
+                <div class="profile-actions">
+                    <button id="show-library">Библиотека</button>
+                    <button id="show-cart">Корзина</button>
+                    <button id="publish-game">Выпустить игру</button>
+                    <button id="logout-btn">Выйти</button>
                 </div>
+    
+                <div class="content" id="content"></div>
             </div>
-
-            <div class="profile-actions">
-                <button id="show-library">Библиотека</button>
-                <button id="show-cart">Корзина</button>
-                <button id="publish-game">Выпустить игру</button>
-                <button id="logout-btn">Выйти</button>
-            </div>
-
-            <div class="content" id="content"></div>
         </div>
+        
     </main>
 
     <footer>

@@ -23,25 +23,29 @@
     </header>
 
     <main>
-        <section class="hero">
-            <h1>Добро пожаловать в Heat</h1>
-        </section>
+        <div class = "container">
+            <section class="hero">
+                <h1>Добро пожаловать в Heat</h1>
+            </section>
+    
+            <section class="categories">
+                <h2>Категории игр</h2>
+                <div class="category-grid">
+                    <div class="category-item active" data-category="Открытый мир">Открытый мир</div>
+                    <div class="category-item" data-category="Спорт">Спорт</div>
+                    <div class="category-item" data-category="Стратегия">Стратегия</div>
+                    <div class="category-item" data-category="Выживание">Выживание</div>
+                </div>
+            </section>
+            <section id="games"></section>
+        </main>
+    
+        <footer>
+            <p>&copy; 2024 Heat. Все права защищены.</p>
+        </footer>
 
-        <section class="categories">
-            <h2>Категории игр</h2>
-            <div class="category-grid">
-                <div class="category-item active" data-category="Открытый мир">Открытый мир</div>
-                <div class="category-item" data-category="Спорт">Спорт</div>
-                <div class="category-item" data-category="Стратегия">Стратегия</div>
-                <div class="category-item" data-category="Выживание">Выживание</div>
-            </div>
-        </section>
-        <section id="games"></section>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 Heat. Все права защищены.</p>
-    </footer>
+        </div>
+        
 
     <!-- <script>
         const userAuth = JSON.parse(localStorage.getItem('user'));

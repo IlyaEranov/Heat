@@ -26,6 +26,11 @@ header {
     justify-content: space-between;
     align-items: center;
 }
+.container {
+    max-width: 1200px; /* Максимальная ширина, можно регулировать */
+    margin: 0 auto; /* Центрирование по горизонтали */
+    padding: 0 20px; /* Внутренние отступы по бокам */
+}
 
 .logo {
     font-size: 1.5rem;
@@ -86,8 +91,8 @@ footer {
 }
 
 .avatar {
-    width: 100px;
-    height: 100px;
+    width: 120px; /* Увеличиваем размер аватара */
+    height: 120px;
     border-radius: 50%;
 }
 
@@ -101,7 +106,7 @@ footer {
 
 .username h1 {
     margin: 0;
-    font-size: 24px; /* Размер шрифта для никнейма */
+    font-size: 28px; /* Увеличиваем размер шрифта для никнейма */
 }
 
 .balance-section {
@@ -114,7 +119,7 @@ footer {
 }
 
 #top-up {
-    padding: 5px 15px;
+    padding: 5px 20px; /* Увеличиваем padding для кнопки */
     background-color: #f0a500;
     border: none;
     color: #fff;
@@ -129,8 +134,8 @@ footer {
 }
 
 .profile-actions button {
-    padding: 10px 20px;
-    margin-right: 10px;
+    padding: 12px 25px; /* Увеличиваем padding */
+    margin-right: 15px; /* Увеличиваем отступ между кнопками */
     background-color: #333;
     color: #fff;
     border: none;
@@ -140,7 +145,7 @@ footer {
 /* Стили для контента */
 .content {
     margin-top: 20px;
-    width: 60%; /* Оптимальная ширина для центрации */
+    width: 70%; /* Увеличиваем ширину контента */
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -158,20 +163,20 @@ footer {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
-    padding: 10px; /* Отступы для карточек */
-    border: 1px solid #ddd; /* Рамка для карточек */
-    border-radius: 5px; /* Скругленные углы */
-    background-color: #fff; /* Фон карточек */
-    width: 80%; /* Ширина карточек */
-    max-width: 400px; /* Максимальная ширина карточек */
+    padding: 15px; /* Увеличиваем отступы для карточек */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    width: 80%; /* Увеличиваем ширину карточек */
+    max-width: 500px; /* Увеличиваем максимальную ширину карточек */
     margin-left: auto;
     margin-right: auto;
 }
 
 .game img, .cart-item img {
-    width: 60px; /* Уменьшенный размер изображения */
-    height: 60px; /* Уменьшенный размер изображения */
-    margin-right: 15px; /* Уменьшенный отступ между изображением и текстом */
+    width: 80px; /* Увеличиваем размер изображения */
+    height: 80px;
+    margin-right: 20px; /* Увеличиваем отступ между изображением и текстом */
 }
 
 .library p, .cart-item p {
@@ -183,38 +188,44 @@ footer {
     flex-direction: column;
 }
 
-.buy-btn {
-    padding: 10px 20px;
+/* Кнопки для скачивания и покупки */
+.download-btn, .buy-btn {
+    padding: 12px 25px; /* Увеличиваем padding */
     background-color: #f0a500;
     border: none;
     color: white;
     cursor: pointer;
     border-radius: 5px;
     margin-top: 10px;
+    width: 130px; /* Увеличиваем ширину кнопок */
 }
 
-.buy-btn:hover {
+.download-btn:hover, .buy-btn:hover {
     background-color: #e69500;
+}
+
+.download-btn {
+    margin-left: auto;
 }
 
 /* Стили для формы выпуска игры */
 form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 20px; /* Отступ сверху для формы */
-    width: 100%; /* Ширина формы */
+    gap: 15px; /* Увеличиваем отступы между полями */
+    margin-top: 20px;
+    width: 100%;
 }
 
 form input, form textarea {
-    padding: 8px;
+    padding: 10px; /* Увеличиваем padding */
     width: 100%;
     border-radius: 4px;
     border: 1px solid #ddd;
 }
 
 form button {
-    padding: 10px;
+    padding: 12px 25px; /* Увеличиваем padding для кнопки */
     background-color: #333;
     color: white;
     border: none;
