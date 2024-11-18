@@ -70,6 +70,16 @@
                 }
             }
         }
+        function downloadGame(gameTitle) {
+            // Укажите путь к файлу, который должен быть скачан
+            const filePath = `../static/games/${gameTitle}/${gameTitle}.exe`; // Путь к .exe файлу
+
+            // Создайте ссылку и симулируйте клик по ней для скачивания
+            const link = document.createElement('a');
+            link.href = filePath;
+            link.download = `${gameTitle}.exe`;  // Название файла при скачивании
+            link.click();  // Симулируем клик для начала скачивания
+        }
     </script>
     <script type="module">
         userIsAuthLink()
@@ -109,7 +119,7 @@
                     ${games.map(e => `<div class="game">
                         <img src="../static/games/${e.title}/${e.images[0]}">
                         <p>${e.title}</p>
-                        <button class="download-btn">Скачать</button>
+                        <button class="download-btn" onclick="downloadGame('${e.title}')">Скачать</button>
                     </div>`).join("")}`;
         });
 
@@ -124,7 +134,7 @@
                         <div>
                             <p>${game.title}</p>
                             <p>${game.price}</p>
-                            <button class="download-btn" onclick="downloadGame('${e.title}')">Скачать</button>
+                            <button class="buy-btn" onclick="event.preventDefault();buyGame('${game.id}', '${game.price}')">Купить</button>
                         </div>
                         </div>
                     `).join("")}`;
@@ -186,7 +196,7 @@
                     category: gameCategory,
                     trailer: gameTrailer.name,
                     images: Array.from(gameImages).map(file => file.name),
-                    file: gameFile.name,
+                    file: gameFile.name, // Include the game file
                     description: gameDescription,
                     price: gamePrice,
                     ageRestricted: ageRestricted,
@@ -212,16 +222,7 @@
                 alert("Вы не авторизованы.");
             }
         });
-        function downloadGame(gameTitle) {
-            // Укажите путь к файлу, который должен быть скачан
-            const filePath = `../static/games/${gameTitle}/${gameTitle}.exe`; // Путь к .exe файлу
-
-            // Создайте ссылку и симулируйте клик по ней для скачивания
-            const link = document.createElement('a');
-            link.href = filePath;
-            link.download = `${gameTitle}.exe`;  // Название файла при скачивании
-            link.click();  // Симулируем клик для начала скачивания
-        }
+        
     </script>
 
 </body>
