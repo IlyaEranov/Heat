@@ -171,6 +171,7 @@ footer {
     max-width: 500px; /* Увеличиваем максимальную ширину карточек */
     margin-left: auto;
     margin-right: auto;
+    cursor: pointer;
 }
 
 .game img, .cart-item img {

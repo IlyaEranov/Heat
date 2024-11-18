@@ -24,22 +24,11 @@
       "password": "Privet2020/",
       "dob": "2001-12-12",
       "gamesId": [
-        "d7d6",
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        "873f",
-        "0e42",
-        "leI8PqY"
+        "d7d6"
       ],
       "avatar": null,
       "cartId": [],
-      "balance": 9500
+      "balance": 11700
     }
   ],
   "games": [

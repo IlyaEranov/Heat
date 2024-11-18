@@ -23,80 +23,80 @@
     </header>
 
     <main>
-        <div class = "container">
+        <div class="container">
             <h1 class="game-title" id="game-title-display">Название игры</h1>
 
-        <div class="game-container">
-            <div class="media-carousel">
-                <div class="selected-media">
-                    <video id="selected-video" controls="">
-                        <source src="" type="video/mp4">
-                    </video>
+            <div class="game-container">
+                <div class="media-carousel">
+                    <div class="selected-media">
+                        <video id="selected-video" controls="">
+                            <source src="" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="carousel"></div>
                 </div>
-                <div class="carousel"></div>
+
+                <div class="game-details">
+                    <p class="game-description" id="game-description"></p>
+                    <p class="game-info" id="game-info"></p>
+                    <div class="game-rating" id="game-rating"></div> <!-- Новый блок для оценки -->
+                    <button id="button-cart" class="add-to-cart">Добавить в корзину</button>
+                </div>
+
             </div>
 
-            <div class="game-details">
-                <p class="game-description" id="game-description"></p>
-                <p class="game-info" id="game-info"></p>
-                <div class="game-rating" id="game-rating"></div> <!-- Новый блок для оценки -->
-                <button id="button-cart" class="add-to-cart">Добавить в корзину</button>
+            <div id="review" class="review-section" style="display: none;">
+                <h2>Оцените игру</h2>
+
+                <div class="review-category">
+                    <label>Графика:</label>
+                    <div class="review-stars" data-category="graphics">
+                        <span class="star" data-value="1">&#9733;</span>
+                        <span class="star" data-value="2">&#9733;</span>
+                        <span class="star" data-value="3">&#9733;</span>
+                        <span class="star" data-value="4">&#9733;</span>
+                        <span class="star" data-value="5">&#9733;</span>
+                    </div>
+                </div>
+
+                <div class="review-category">
+                    <label>Геймплей:</label>
+                    <div class="review-stars" data-category="gameplay">
+                        <span class="star" data-value="1">&#9733;</span>
+                        <span class="star" data-value="2">&#9733;</span>
+                        <span class="star" data-value="3">&#9733;</span>
+                        <span class="star" data-value="4">&#9733;</span>
+                        <span class="star" data-value="5">&#9733;</span>
+                    </div>
+                </div>
+
+                <div class="review-category">
+                    <label>Сюжет:</label>
+                    <div class="review-stars" data-category="story">
+                        <span class="star" data-value="1">&#9733;</span>
+                        <span class="star" data-value="2">&#9733;</span>
+                        <span class="star" data-value="3">&#9733;</span>
+                        <span class="star" data-value="4">&#9733;</span>
+                        <span class="star" data-value="5">&#9733;</span>
+                    </div>
+                </div>
+
+                <div class="review-category">
+                    <label>Звук:</label>
+                    <div class="review-stars" data-category="sound">
+                        <span class="star" data-value="1">&#9733;</span>
+                        <span class="star" data-value="2">&#9733;</span>
+                        <span class="star" data-value="3">&#9733;</span>
+                        <span class="star" data-value="4">&#9733;</span>
+                        <span class="star" data-value="5">&#9733;</span>
+                    </div>
+                </div>
+
+                <button class="submit-review" disabled>Оставить отзыв</button>
             </div>
-            
+
         </div>
 
-        <div id="review" class="review-section" style="display: none;">
-            <h2>Оцените игру</h2>
-
-            <div class="review-category">
-                <label>Графика:</label>
-                <div class="review-stars" data-category="graphics">
-                    <span class="star" data-value="1">&#9733;</span>
-                    <span class="star" data-value="2">&#9733;</span>
-                    <span class="star" data-value="3">&#9733;</span>
-                    <span class="star" data-value="4">&#9733;</span>
-                    <span class="star" data-value="5">&#9733;</span>
-                </div>
-            </div>
-
-            <div class="review-category">
-                <label>Геймплей:</label>
-                <div class="review-stars" data-category="gameplay">
-                    <span class="star" data-value="1">&#9733;</span>
-                    <span class="star" data-value="2">&#9733;</span>
-                    <span class="star" data-value="3">&#9733;</span>
-                    <span class="star" data-value="4">&#9733;</span>
-                    <span class="star" data-value="5">&#9733;</span>
-                </div>
-            </div>
-
-            <div class="review-category">
-                <label>Сюжет:</label>
-                <div class="review-stars" data-category="story">
-                    <span class="star" data-value="1">&#9733;</span>
-                    <span class="star" data-value="2">&#9733;</span>
-                    <span class="star" data-value="3">&#9733;</span>
-                    <span class="star" data-value="4">&#9733;</span>
-                    <span class="star" data-value="5">&#9733;</span>
-                </div>
-            </div>
-
-            <div class="review-category">
-                <label>Звук:</label>
-                <div class="review-stars" data-category="sound">
-                    <span class="star" data-value="1">&#9733;</span>
-                    <span class="star" data-value="2">&#9733;</span>
-                    <span class="star" data-value="3">&#9733;</span>
-                    <span class="star" data-value="4">&#9733;</span>
-                    <span class="star" data-value="5">&#9733;</span>
-                </div>
-            </div>
-
-            <button class="submit-review" disabled>Оставить отзыв</button>
-        </div>
-
-        </div>
-        
     </main>
 
     <footer>
@@ -133,84 +133,80 @@
         }
 
         async function loadGameData() {
-        const games = await getGames();
-        const game = games.find(g => g.id == gameId);
-        const user = JSON.parse(localStorage.getItem("user"));
-        const isAuth = user !== null;
-        const buttonCart = document.getElementById("button-cart");
+            const games = await getGames();
+            const game = games.find(g => g.id == gameId);
+            const user = JSON.parse(localStorage.getItem("user"));
+            const isAuth = user !== null;
+            const buttonCart = document.getElementById("button-cart");
 
-        if (isAuth) {
-            if (Array.isArray(user.gamesId) && user.gamesId.find(e => e == game.id)) {
-                document.getElementById("review").style.display = "block";
-                buttonCart.innerText = "В библиотеке";
-                buttonCart.disabled = true;
-            } else if (Array.isArray(user.cartId) && user.cartId.find(e => e == game.id)) {
-                buttonCart.innerText = "В корзине";
-                buttonCart.disabled = true;
-            } else {
-                buttonCart.addEventListener("click", async (e) => {
-                    e.preventDefault();
-                    await addGameInCart(game.id);
+            if (isAuth) {
+                if (Array.isArray(user.gamesId) && user.gamesId.find(e => e == game.id)) {
+                    document.getElementById("review").style.display = "block";
+                    buttonCart.innerText = "В библиотеке";
+                    buttonCart.disabled = true;
+                } else if (Array.isArray(user.cartId) && user.cartId.find(e => e == game.id)) {
                     buttonCart.innerText = "В корзине";
                     buttonCart.disabled = true;
+                } else {
+                    buttonCart.addEventListener("click", async (e) => {
+                        e.preventDefault();
+                        await addGameInCart(game.id);
+                        buttonCart.innerText = "В корзине";
+                        buttonCart.disabled = true;
+                    });
+                }
+            } else {
+                buttonCart.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    window.location.href = "login.html";
                 });
             }
-        } else {
-            buttonCart.addEventListener("click", (e) => {
-                e.preventDefault();
-                window.location.href = "login.html";
-            });
-        }
 
-        try {
-            if (game) {
-                document.getElementById('game-title').innerText = game.title;
-                document.getElementById('game-title-display').innerText = game.title;
-                document.getElementById('game-description').innerText = game.description;
-                
-                // Отображение информации о игре
-                document.getElementById('game-info').innerHTML = `
+            try {
+                if (game) {
+                    document.getElementById('game-title').innerText = game.title;
+                    document.getElementById('game-title-display').innerText = game.title;
+                    document.getElementById('game-description').innerText = game.description;
+
+                    // Отображение информации о игре
+                    document.getElementById('game-info').innerHTML = `
                     <strong>Разработчик:</strong> ${game.developer} <br>
                     <strong>Дата релиза:</strong> ${new Date(game.releaseDate).toLocaleDateString()} <br>
                     <strong>Цена:</strong> ${game.price} руб.<br>
                 `;
-                
-                // Отображение среднего рейтинга
-                const gameRating = document.getElementById('game-rating');
-                const averageRating = calculateAverageRating(game.reviews); // Используем функцию ниже
-                gameRating.innerHTML = `
+
+                    const gameRating = document.getElementById('game-rating');
+                    const averageRating = calculateAverageRating(game.reviews);
+                    gameRating.innerHTML = `
                     <strong>Оценка:</strong> <span>${averageRating} / 5</span>
                 `;
 
-                const mediaCarousel = document.querySelector('.carousel');
-                const selectedMedia = document.querySelector('.selected-media');
+                    const mediaCarousel = document.querySelector('.carousel');
+                    const selectedMedia = document.querySelector('.selected-media');
 
-                selectedMedia.innerHTML = `<video id="selected-video" muted autoplay controls>
+                    selectedMedia.innerHTML = `<video id="selected-video" muted autoplay controls>
                     <source src="../static/games/${game.title}/${game.trailer}" type="video/mp4">
                 </video>`;
 
-                mediaCarousel.innerHTML = `<img src="../assets/images/videoPreview.png" alt="${game.trailer}" class="carousel-item" onclick="selectMedia('${game.trailer}')">`;
+                    mediaCarousel.innerHTML = `<img src="../assets/images/videoPreview.png" alt="${game.trailer}" class="carousel-item" onclick="selectMedia('${game.trailer}')">`;
 
-                game.images.forEach(image => {
-                    mediaCarousel.innerHTML += `<img src="../static/games/${game.title}/${image}" alt="${image}" class="carousel-item" onclick="selectMedia('${image}')">`;
-                });
-            } else {
-                alert('Игра не найдена.');
+                    game.images.forEach(image => {
+                        mediaCarousel.innerHTML += `<img src="../static/games/${game.title}/${image}" alt="${image}" class="carousel-item" onclick="selectMedia('${image}')">`;
+                    });
+                } else {
+                    alert('Игра не найдена.');
+                }
+            } catch (error) {
+                console.error('Ошибка загрузки данных о игре:', error);
+                alert('Не удалось загрузить данные о игре.');
             }
-        } catch (error) {
-            console.error('Ошибка загрузки данных о игре:', error);
-            alert('Не удалось загрузить данные о игре.');
         }
-    }
 
-    // Функция для вычисления среднего рейтинга
-    function calculateAverageRating(reviews) {
-        if (!reviews || reviews.length === 0) return 'Нет оценок';
-        const total = reviews.reduce((sum, review) => sum + review.rating, 0);
-        return (total / reviews.length).toFixed(1);
-    }
-
-
+        function calculateAverageRating(reviews) {
+            if (!reviews || reviews.length === 0) return 'Нет оценок';
+            const total = reviews.reduce((sum, review) => sum + review.rating, 0);
+            return (total / reviews.length).toFixed(1);
+        }
 
         loadGameData();
     </script>

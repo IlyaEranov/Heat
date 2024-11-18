@@ -90,6 +90,7 @@ const addGameInCart = async (gameId) => {
             return;
         }
         localStorage.setItem("user", JSON.stringify(await response.json()));
+        localStorage.setItem("content", "cart")
         window.location.href = "profile.html";
     } catch (e) {
         alert(`Ошибка при добавлении игры в корзину: ${e.message}`);
@@ -114,6 +115,8 @@ const removeGameFromCart = async (gameId) => {
             return;
         }
         localStorage.setItem("user", JSON.stringify(await response.json()))
+        localStorage.setItem("content", "cart")
+        window.location.href = "profile.html"
     } catch (e) {
         alert(`Ошибка при удалении игры из корзины. ${e.message}`)
     }
@@ -143,8 +146,8 @@ const topUpBalance = async (user) => {
             },
             body: JSON.stringify(updatedUser)
         });
-        localStorage.setItem('user', JSON.stringify(await response.json())); 
-        return updatedUserData; 
+        localStorage.setItem('user', JSON.stringify(await response.json()));
+        window.location.href = "profile.html"
     } catch (e) {
         alert(`Ошибка при пополнении баланса: ${e.message}`);
     }

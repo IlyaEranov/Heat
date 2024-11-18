@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/profile.css">
     <script src="../js/services/games.js"></script>
     <script src="../js/services/users.js"></script>
+    <script src="../js/utils/openContent.js"></script>
 </head>
 
 <body>
@@ -24,7 +25,7 @@
 
 
     <main>
-        <div class = "container">
+        <div class="container">
             <div class="profile">
                 <div class="profile-info">
                     <img src="../assets/icons/unknownuser.png" alt="Avatar" class="avatar">
@@ -36,18 +37,18 @@
                         <button id="top-up">Пополнить</button>
                     </div>
                 </div>
-    
+
                 <div class="profile-actions">
                     <button id="show-library">Библиотека</button>
                     <button id="show-cart">Корзина</button>
                     <button id="publish-game">Выпустить игру</button>
                     <button id="logout-btn">Выйти</button>
                 </div>
-    
+
                 <div class="content" id="content"></div>
             </div>
         </div>
-        
+
     </main>
 
     <footer>
@@ -61,7 +62,7 @@
                 alert("Недостаточно средств")
             } else {
                 try {
-                    await addGameId({...user, balance: newBalance}, gameId)
+                    await addGameId({ ...user, balance: newBalance }, gameId)
                     await removeGameFromCart(gameId)
                     alert("Игра добавлена в библиотеку")
                     window.location.href = "profile.html"
@@ -71,14 +72,19 @@
             }
         }
         function downloadGame(gameTitle) {
-            // Укажите путь к файлу, который должен быть скачан
-            const filePath = `../static/games/${gameTitle}/${gameTitle}.exe`; // Путь к .exe файлу
-
-            // Создайте ссылку и симулируйте клик по ней для скачивания
+            const filePath = `../static/games/${gameTitle}/${gameTitle}.exe`;
             const link = document.createElement('a');
             link.href = filePath;
-            link.download = `${gameTitle}.exe`;  // Название файла при скачивании
-            link.click();  // Симулируем клик для начала скачивания
+            link.download = `${gameTitle}.exe`;
+            link.click();
+        }
+        function applyDiscount(gameId) {
+            const newPrice = document.getElementById(`new-price-${gameId}`).value;
+            if (newPrice) {
+                alert(`Скидка применена! Новая цена для игры ${gameId}: ${newPrice} руб.`);
+            } else {
+                alert("Пожалуйста, введите новую цену.");
+            }
         }
     </script>
     <script type="module">
@@ -92,7 +98,7 @@
             userAuth.avatar == null
                 ? avatar.src = "../assets/icons/unknownuser.png"
                 : avatar.src = `../static/users/${userAuth.userName}/avatar/${userAuth.avatar}`;
-            document.querySelector('.balance-text').textContent = `Баланс: ${userAuth.balance} руб.`; // добавление отображения баланса
+            document.querySelector('.balance-text').textContent = `Баланс: ${userAuth.balance} руб.`;
         } else {
             window.location.href = "login.html";
         }
@@ -113,40 +119,28 @@
             const games = await getGames(user.gamesId)
 
             if (games.length == 0) {
-                contentDiv.innerHTML = `<h2>Ваша библиотека</h2>
-                                        <p>У вас пока нет игр в библиотеке.</p>`
+                contentDiv.innerHTML = 
+                `<h2>Ваша библиотека</h2>
+                <p>У вас пока нет игр в библиотеке.</p>`
             } else {
-                contentDiv.innerHTML = `<h2>Ваша библиотека</h2>
-                                        ${games.map(game => {
-                                            const isDeveloper = game.developer === user.userName; // Проверяем, является ли пользователь разработчиком этой игры
-                                            return `<div class="game">
-                                                        <img src="../static/games/${game.title}/${game.images[0]}">
-                                                        <p>${game.title}</p>
-                                                        <button class="download-btn" onclick="downloadGame('${game.title}')">Скачать</button>
-                                                        ${isDeveloper ? `
-                                                            <div class="discount-section">
-                                                                <input type="text" id="new-price-${game.id}" placeholder="Введите новую цену" class="new-price">
-                                                                <button class="discount-btn" onclick="applyDiscount('${game.id}')">Сделать скидку</button>
-                                                            </div>
-                                                        ` : ''}
-                                                                                                        </div>`;
-                                                                                            }).join("")}`;
-                                                                }
-                                                            });
-
-    function applyDiscount(gameId) {
-        const newPrice = document.getElementById(`new-price-${gameId}`).value;
-
-        if (newPrice) {
-            // Логика применения скидки (например, обновление данных на сервере)
-            alert(`Скидка применена! Новая цена для игры ${gameId}: ${newPrice} руб.`);
-            // После применения скидки можно обновить отображение цены или вызвать API для обновления данных.
-        } else {
-            alert("Пожалуйста, введите новую цену.");
-        }
-    }
-
-
+                contentDiv.innerHTML = 
+                    `<h2>Ваша библиотека</h2>
+                        ${games.map(game => {
+                        const isDeveloper = game.developer === user.userName;
+                        return `
+                        <div class="game" onclick="location.href='gamepage.html?id=${encodeURIComponent(game.id)}'">
+                            <img src="../static/games/${game.title}/${game.images[0]}">
+                            <p>${game.title}</p>
+                            <button class="download-btn" onclick="downloadGame('${game.title}')">Скачать</button>
+                            ${isDeveloper ? `
+                                <div class="discount-section">
+                                    <input type="text" id="new-price-${game.id}" placeholder="Введите новую цену" class="new-price">
+                                    <button class="discount-btn" onclick="applyDiscount('${game.id}')">Сделать скидку</button>
+                                </div>` : ''}
+                        </div>`;
+                }).join("")}`;
+            }
+        });
 
         cartBtn.addEventListener('click', async function () {
             const user = JSON.parse(localStorage.getItem("user"));
@@ -154,13 +148,13 @@
             games.length == 0
                 ? contentDiv.innerHTML = `<h2>Корзина</h2><p>Вы пока не добавили игру в корзину</p>`
                 : contentDiv.innerHTML = `<h2>Корзина</h2>
-                    ${games.map(game => `<div class="cart-item">
+                    ${games.map(game => `<div class="cart-item" onclick="location.href='gamepage.html?id=${encodeURIComponent(game.id)}'">
                         <img src="../static/games/${game.title}/${game.images[0]}" alt="${game.title}">
                         <div>
                             <p>${game.title}</p>
                             <p>${game.price}</p>
-                            <button class="buy-btn" onclick="event.preventDefault();buyGame('${game.id}', '${game.price}')">Купить</button>
-                            <button class="delete-btn">Удалить</button>
+                            <button class="buy-btn" onclick="event.stopPropagation();buyGame('${game.id}', '${game.price}')">Купить</button>
+                            <button class="delete-btn" onclick="event.stopPropagation();removeGameFromCart('${game.id}')">Удалить</button>
                         </div>
                         </div>
                     `).join("")}`;
@@ -238,17 +232,21 @@
         });
 
         document.getElementById('top-up').addEventListener('click', async function () {
-            const user = JSON.parse(localStorage.getItem('user')); // получаем пользователя из localStorage
+            const user = JSON.parse(localStorage.getItem('user'));
 
             if (user) {
-                const updatedUser = await topUpBalance(user); // пополняем баланс
+                const updatedUser = await topUpBalance(user);
                 document.querySelector('.balance-text').textContent = `Баланс: ${updatedUser.balance} руб.`;
-                localStorage.setItem('user', JSON.stringify(updatedUser));  // обновляем данные пользователя в localStorage
+                localStorage.setItem('user', JSON.stringify(updatedUser));
             } else {
                 alert("Вы не авторизованы.");
             }
         });
-        
+
+        const content = localStorage.getItem("content") == "cart" ? cartBtn : libraryBtn
+
+        openContent(content)
+
     </script>
 
 </body>
