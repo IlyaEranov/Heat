@@ -186,6 +186,7 @@ footer {
 .cart-item div {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
 }
 
 
@@ -267,6 +268,22 @@ footer {
 
 .discount-btn:hover {
     background-color: #e69500;
+}
+
+.delete-btn {
+    padding: 10px 20px; /* Размер кнопки */
+    background-color: #ff4d4d; /* Красный цвет */
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    width: 130px; /* Ширина кнопки */
+    margin-left: 10px; /* Отступ между кнопками */
+}
+
+.delete-btn:hover {
+    background-color: #e63946; /* Темно-красный цвет при наведении */
 }
 
 
