@@ -111,17 +111,42 @@
         libraryBtn.addEventListener('click', async function () {
             const user = JSON.parse(localStorage.getItem("user"))
             const games = await getGames(user.gamesId)
-            games.length == 0
-                ? contentDiv.innerHTML = `<h2>Ваша библиотека</h2>
-                <p>У вас пока нет игр в библиотеке.</p>`
-                : contentDiv.innerHTML =
-                `<h2>Ваша библиотека</h2>
-                    ${games.map(e => `<div class="game">
-                        <img src="../static/games/${e.title}/${e.images[0]}">
-                        <p>${e.title}</p>
-                        <button class="download-btn" onclick="downloadGame('${e.title}')">Скачать</button>
-                    </div>`).join("")}`;
-        });
+
+            if (games.length == 0) {
+                contentDiv.innerHTML = `<h2>Ваша библиотека</h2>
+                                        <p>У вас пока нет игр в библиотеке.</p>`
+            } else {
+                contentDiv.innerHTML = `<h2>Ваша библиотека</h2>
+                                        ${games.map(game => {
+                                            const isDeveloper = game.developer === user.userName; // Проверяем, является ли пользователь разработчиком этой игры
+                                            return `<div class="game">
+                                                        <img src="../static/games/${game.title}/${game.images[0]}">
+                                                        <p>${game.title}</p>
+                                                        <button class="download-btn" onclick="downloadGame('${game.title}')">Скачать</button>
+                                                        ${isDeveloper ? `
+                                                            <div class="discount-section">
+                                                                <input type="text" id="new-price-${game.id}" placeholder="Введите новую цену" class="new-price">
+                                                                <button class="discount-btn" onclick="applyDiscount('${game.id}')">Сделать скидку</button>
+                                                            </div>
+                                                        ` : ''}
+                                                                                                        </div>`;
+                                                                                            }).join("")}`;
+                                                                }
+                                                            });
+
+    function applyDiscount(gameId) {
+        const newPrice = document.getElementById(`new-price-${gameId}`).value;
+
+        if (newPrice) {
+            // Логика применения скидки (например, обновление данных на сервере)
+            alert(`Скидка применена! Новая цена для игры ${gameId}: ${newPrice} руб.`);
+            // После применения скидки можно обновить отображение цены или вызвать API для обновления данных.
+        } else {
+            alert("Пожалуйста, введите новую цену.");
+        }
+    }
+
+
 
         cartBtn.addEventListener('click', async function () {
             const user = JSON.parse(localStorage.getItem("user"));
