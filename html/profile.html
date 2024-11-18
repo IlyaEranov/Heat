@@ -109,6 +109,7 @@
                     ${games.map(e => `<div class="game">
                         <img src="../static/games/${e.title}/${e.images[0]}">
                         <p>${e.title}</p>
+                        <button class="download-btn">Скачать</button>
                     </div>`).join("")}`;
         });
 
@@ -150,6 +151,9 @@
     
                     <label for="game-images">Картинки (до 5)</label>
                     <input type="file" id="game-images" name="game-images" accept="image/*" multiple required>
+
+                    <label for="game-file">Файлы игры</label>
+                    <input type="file" id="game-file" name="game-file" accept=".exe,.apk,.zip,.tar" required> <!-- New field for game file -->
     
                     <label for="game-description">Описание</label>
                     <textarea id="game-description" name="game-description" rows="4" required></textarea>
@@ -171,6 +175,7 @@
                 const gameCategory = document.getElementById('game-category').value;
                 const gameTrailer = document.getElementById('game-trailer').files[0];
                 const gameImages = document.getElementById('game-images').files;
+                const gameFile = document.getElementById('game-file').files[0];
                 const gameDescription = document.getElementById('game-description').value;
                 const gamePrice = document.getElementById('game-price').value;
                 const ageRestricted = document.getElementById('age-restricted').checked;
@@ -181,6 +186,7 @@
                     category: gameCategory,
                     trailer: gameTrailer.name,
                     images: Array.from(gameImages).map(file => file.name),
+                    file: gameFile.name,
                     description: gameDescription,
                     price: gamePrice,
                     ageRestricted: ageRestricted,
