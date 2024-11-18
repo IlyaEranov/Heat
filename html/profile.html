@@ -124,7 +124,7 @@
                         <div>
                             <p>${game.title}</p>
                             <p>${game.price}</p>
-                            <button class="buy-btn" onclick="event.preventDefault();buyGame('${game.id}', '${game.price}')">Купить</button>
+                            <button class="download-btn" onclick="downloadGame('${e.title}')">Скачать</button>
                         </div>
                         </div>
                     `).join("")}`;
@@ -212,6 +212,16 @@
                 alert("Вы не авторизованы.");
             }
         });
+        function downloadGame(gameTitle) {
+            // Укажите путь к файлу, который должен быть скачан
+            const filePath = `../static/games/${gameTitle}/${gameTitle}.exe`; // Путь к .exe файлу
+
+            // Создайте ссылку и симулируйте клик по ней для скачивания
+            const link = document.createElement('a');
+            link.href = filePath;
+            link.download = `${gameTitle}.exe`;  // Название файла при скачивании
+            link.click();  // Симулируем клик для начала скачивания
+        }
     </script>
 
 </body>
