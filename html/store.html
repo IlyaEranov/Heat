@@ -45,25 +45,11 @@
         </footer>
 
         </div>
-        
-
-    <!-- <script>
-        const userAuth = JSON.parse(localStorage.getItem('user'));
-        const isUserAuthA = userAuth !== null;  // Проверка авторизации
-        const addToCart = async (gameId) => {
-            if (!isUserAuthA) {
-                alert('Для добавления игры в корзину необходимо войти в систему.');
-                window.location.href = 'login.html';
-                return;
-            }
-            await addGameInCart(gameId)
-        }
-    </script> -->
 
     <script type="module">
         userIsAuthLink();
         const user = JSON.parse(localStorage.getItem('user'));
-        const isUserAuth = user !== null;  // Проверка авторизации
+        const isUserAuth = user !== null;
         let games = [];
 
         try {

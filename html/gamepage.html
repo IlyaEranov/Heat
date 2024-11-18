@@ -44,6 +44,20 @@
                 </div>
 
             </div>
+            
+            <div id="modal-frame" style="display: none;" 
+                onclick="
+                    document.getElementById('modal-frame').style.display = 'none';
+                    document.getElementById('discount-section').className = ''
+            ">
+                <div id="discount-section" onclick="event.stopPropagation();">
+                    <label>Изменение цены игры</label>
+                    <div style="display: flex;align-items: center;margin-top: 10px; max-width: 400px;">
+                        <input id="new-price" type="text" placeholder="Введите новую цену" class="new-price">
+                        <button id="discount-btn" class="discount-btn">Поменять цену</button>
+                    </div>
+                </div>
+            </div>
 
             <div id="review" class="review-section" style="display: none;">
                 <h2>Оцените игру</h2>
@@ -106,7 +120,6 @@
     <script>
         userIsAuthLink();
 
-        // Функция для получения параметра из URL
         function getParameterByName(name, url = window.location.href) {
             name = name.replace(/[\[\]]/g, "\\$&");
             const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
@@ -117,7 +130,7 @@
         }
 
         const gameId = getParameterByName('id');
-
+        
         async function selectMedia(src) {
             const games = await getGames();
             const game = games.find(g => g.id == gameId);
@@ -139,8 +152,20 @@
             const isAuth = user !== null;
             const buttonCart = document.getElementById("button-cart");
 
+            document.getElementById("discount-btn").addEventListener("click", async () => {
+                const newPrice = document.getElementById("new-price").value
+                const newGame = {...game, price: newPrice}
+                await editGame(newGame)
+            })
+
             if (isAuth) {
-                if (Array.isArray(user.gamesId) && user.gamesId.find(e => e == game.id)) {
+                if (user.userName == game.developer) {
+                    buttonCart.innerText = "Редактировать"
+                    buttonCart.addEventListener("click", () => {
+                        document.getElementById("modal-frame").style.display = "flex"
+                        document.getElementById('discount-section').className = 'modal-active'
+                    })
+                } else if (Array.isArray(user.gamesId) && user.gamesId.find(e => e == game.id)) {
                     document.getElementById("review").style.display = "block";
                     buttonCart.innerText = "В библиотеке";
                     buttonCart.disabled = true;
@@ -167,8 +192,6 @@
                     document.getElementById('game-title').innerText = game.title;
                     document.getElementById('game-title-display').innerText = game.title;
                     document.getElementById('game-description').innerText = game.description;
-
-                    // Отображение информации о игре
                     document.getElementById('game-info').innerHTML = `
                     <strong>Разработчик:</strong> ${game.developer} <br>
                     <strong>Дата релиза:</strong> ${new Date(game.releaseDate).toLocaleDateString()} <br>

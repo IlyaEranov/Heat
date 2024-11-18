@@ -24,11 +24,12 @@
       "password": "Privet2020/",
       "dob": "2001-12-12",
       "gamesId": [
-        "d7d6"
+        "d7d6",
+        "0e42"
       ],
       "avatar": null,
       "cartId": [],
-      "balance": 11700
+      "balance": 15200
     }
   ],
   "games": [
@@ -236,7 +237,7 @@
         "Elden Ring3.jpg"
       ],
       "description": "Elden Ring — компьютерная игра в жанре action/RPG с открытым миром, разработанная японской компанией FromSoftware и изданная компанией Bandai Namco Entertainment для платформ Windows, PlayStation 4, PlayStation 5, Xbox One и Xbox Series X/S. ",
-      "price": "1200",
+      "price": "500",
       "ageRestricted": true,
       "releaseDate": "2024-11-10T09:08:50.918Z"
     }
