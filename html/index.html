@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heat Platform</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <script src="../js/services/users.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">Heat</div>
+        <nav>
+            <ul>
+                <li><a href="store.html" target="content-frame">Магазин</a></li>
+                <li><a href="about.html" target="content-frame">О нас</a></li>
+                <li><a id="auth-link" href="login.html" target="content-frame">Вход</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Область для загрузки контента -->
+    <iframe name="content-frame" src="about.html" style="width: 100%; height: 80vh; border: none;"></iframe>
+
+    <footer>
+        <p>&copy; 2024 Heat. Все права защищены.</p>
+    </footer>
+
+    <script type="module">
+        // Проверка авторизации
+        userIsAuthLink();
+    </script>
+</body>
+</html>
