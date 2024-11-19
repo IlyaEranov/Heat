@@ -12,15 +12,15 @@
         <div class="logo">Heat</div>
         <nav>
             <ul>
-                <li><a href="store.html" target="content-frame">Магазин</a></li>
-                <li><a href="about.html" target="content-frame">О нас</a></li>
-                <li><a id="auth-link" href="login.html" target="content-frame">Вход</a></li>
+                <li><a href="store.html">Магазин</a></li>
+                <li><a href="#" onclick="loadAboutPage()">О нас</a></li>
+                <li><a id="auth-link" href="login.html">Вход</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Область для загрузки контента -->
-    <iframe name="content-frame" src="about.html" style="width: 100%; height: 80vh; border: none;"></iframe>
+    <!-- Область для динамического контента -->
+    <div id="content"></div>
 
     <footer>
         <p>&copy; 2024 Heat. Все права защищены.</p>
@@ -29,6 +29,23 @@
     <script type="module">
         // Проверка авторизации
         userIsAuthLink();
+
+        // Функция для загрузки страницы "О нас"
+        function loadAboutPage() {
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = `<iframe src="about.html" style="width: 100%; height: 80vh; border: none;"></iframe>`;
+        }
+
+        // Проверка параметра URL для автоматической загрузки фрейма
+        function checkURLParam() {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('page') === 'about') {
+                loadAboutPage();
+            }
+        }
+
+        // Вызов проверки при загрузке страницы
+        checkURLParam();
     </script>
 </body>
 </html>
