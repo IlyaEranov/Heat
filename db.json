@@ -6,14 +6,16 @@
       "email": "LudeonStudio@mail.ru",
       "password": "LudeonStudio123_",
       "dob": "1111-11-11",
-      "gamesId": [],
+      "gamesId": [
+        "873f"
+      ],
       "avatar": null,
       "cartId": [
         "8e2e",
         "0e42",
-        "873f"
+        "1a99"
       ],
-      "balance": 0,
+      "balance": 150,
       "id": "1"
     },
     {
@@ -26,13 +28,16 @@
       "gamesId": [
         "d7d6",
         "0e42",
-        "m5X4Ljm"
+        "m5X4Ljm",
+        "leI8PqY"
       ],
       "avatar": null,
       "cartId": [
-        "leI8PqY"
+        "1a99",
+        "b801",
+        "873f"
       ],
-      "balance": 16300
+      "balance": 15800
     }
   ],
   "games": [
@@ -240,7 +245,7 @@
         "Elden Ring3.jpg"
       ],
       "description": "Elden Ring — компьютерная игра в жанре action/RPG с открытым миром, разработанная японской компанией FromSoftware и изданная компанией Bandai Namco Entertainment для платформ Windows, PlayStation 4, PlayStation 5, Xbox One и Xbox Series X/S. ",
-      "price": "555",
+      "price": "1000",
       "ageRestricted": true,
       "releaseDate": "2024-11-10T09:08:50.918Z"
     }
