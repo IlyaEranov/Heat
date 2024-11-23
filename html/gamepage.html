@@ -153,20 +153,30 @@
         }
 
         async function saveReview(userId, gameId, ratings) {
-            const response = await fetch('http://localhost:5000/reviews', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ userId, gameId, ratings })
-            });
-            return response.ok;
+    // Преобразуем значения рейтинга в числа только если они установлены
+    const updatedRatings = {};
+    for (const category in ratings) {
+        if (ratings[category]) {
+            updatedRatings[category] = Number(ratings[category]);
+        } else {
+            updatedRatings[category] = 0; // Если рейтинг не выбран, установить значение по умолчанию
         }
-        
+    }
 
-        function enableReviewSubmission(user, gameId) {
+    const response = await fetch('http://localhost:5000/reviews', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId, gameId, ratings: updatedRatings })
+    });
+    return response.ok;
+}
+
+let ratings = {}; // Глобальный объект для хранения оценок
+
+function enableReviewSubmission(user, gameId) {
     const stars = document.querySelectorAll('.review-stars .star');
     const submitButton = document.querySelector('.submit-review');
 
-    // Подсветка звездочек при клике
     stars.forEach(star => {
         star.addEventListener('click', (event) => {
             const category = event.target.closest('.review-stars').getAttribute('data-category');
@@ -181,8 +191,11 @@
                 categoryStars[i].classList.add('selected');
             }
 
+            // Обновляем объект с рейтингами
+            ratings[category] = ratingValue;  // Обновляем объект рейтингов
+
             // Разблокируем кнопку, если все категории оценены
-            checkAllCategoriesRated() ? submitButton.disabled = false : submitButton.disabled = true;
+            submitButton.disabled = !checkAllCategoriesRated(); // Если все категории оценены, кнопка активна
         });
     });
 
@@ -200,20 +213,21 @@
 
     // Обработка отправки отзыва
     submitButton.addEventListener('click', async () => {
-        const ratings = {};
+        const ratingsToSubmit = {}; // Новый объект для отправки рейтингов
 
+        // Перебираем категории и сохраняем рейтинг, если он выбран
         document.querySelectorAll('.review-stars').forEach(starContainer => {
             const category = starContainer.getAttribute('data-category');
             const selectedStar = starContainer.querySelector('.star.selected');
             if (selectedStar) {
                 const ratingValue = selectedStar.getAttribute('data-value');
-                ratings[category] = ratingValue;
+                ratingsToSubmit[category] = ratingValue;
             }
         });
 
         // Если все категории оценены, сохраняем отзыв
-        if (Object.keys(ratings).length === 4) {
-            const success = await saveReview(user.id, gameId, ratings);
+        if (Object.keys(ratingsToSubmit).length === 4) {
+            const success = await saveReview(user.id, gameId, ratingsToSubmit);
             if (success) {
                 alert('Спасибо за ваш отзыв!');
             } else {
@@ -224,6 +238,7 @@
         }
     });
 }
+
 
 
 
