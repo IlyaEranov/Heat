@@ -29,15 +29,15 @@
         "d7d6",
         "0e42",
         "m5X4Ljm",
-        "leI8PqY"
+        "leI8PqY",
+        "b801"
       ],
       "avatar": null,
       "cartId": [
         "1a99",
-        "b801",
         "873f"
       ],
-      "balance": 15800
+      "balance": 15400
     }
   ],
   "games": [
@@ -248,6 +248,49 @@
       "price": "1000",
       "ageRestricted": true,
       "releaseDate": "2024-11-10T09:08:50.918Z"
+    }
+  ],
+  "reviews": [
+    {
+      "userId": "d597",
+      "gameId": "0e42",
+      "ratings": {
+        "graphics": 4,
+        "gameplay": 5,
+        "story": 4,
+        "sound": 5
+      }
+    },
+    {
+      "userId": "1",
+      "gameId": "0e42",
+      "ratings": {
+        "graphics": 3,
+        "gameplay": 5,
+        "story": 2,
+        "sound": 5
+      }
+    },
+    {
+      "userId": "d597",
+      "gameId": "m5X4Ljm",
+      "ratings": {
+        "graphics": 5,
+        "gameplay": 4,
+        "story": 3,
+        "sound": 4
+      }
+    },
+    {
+      "id": "bfa3",
+      "userId": "d597",
+      "gameId": "b801",
+      "ratings": {
+        "graphics": 3,
+        "gameplay": 4,
+        "story": 2,
+        "sound": 5
+      }
     }
   ]
 }

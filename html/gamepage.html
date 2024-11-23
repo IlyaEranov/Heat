@@ -145,93 +145,226 @@
             }
         }
 
-        async function loadGameData() {
-            const games = await getGames();
-            const game = games.find(g => g.id == gameId);
-            const user = JSON.parse(localStorage.getItem("user"));
-            const isAuth = user !== null;
-            const buttonCart = document.getElementById("button-cart");
+        async function checkIfReviewExists(userId, gameId) {
+            const response = await fetch('http://localhost:5000/reviews');
+            const reviews = await response.json();
+            console.log("User ID:", userId, "Game ID:", gameId);
+            return reviews.some(review => review.userId === userId && review.gameId === gameId);
+        }
 
-            document.getElementById("discount-btn").addEventListener("click", async () => {
-                const newPrice = document.getElementById("new-price").value
-                const newGame = {...game, price: newPrice}
-                await editGame(newGame)
-            })
+        async function saveReview(userId, gameId, ratings) {
+            const response = await fetch('http://localhost:5000/reviews', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userId, gameId, ratings })
+            });
+            return response.ok;
+        }
+        
 
-            if (isAuth) {
-                if (user.userName == game.developer) {
-                    buttonCart.innerText = "Редактировать"
-                    buttonCart.addEventListener("click", () => {
-                        document.getElementById("modal-frame").style.display = "flex"
-                        document.getElementById('discount-section').className = 'modal-active'
-                    })
-                } else if (Array.isArray(user.gamesId) && user.gamesId.find(e => e == game.id)) {
-                    document.getElementById("review").style.display = "block";
-                    buttonCart.innerText = "В библиотеке";
-                    buttonCart.disabled = true;
-                } else if (Array.isArray(user.cartId) && user.cartId.find(e => e == game.id)) {
-                    buttonCart.innerText = "В корзине";
-                    buttonCart.disabled = true;
-                } else {
-                    buttonCart.addEventListener("click", async (e) => {
-                        e.preventDefault();
-                        await addGameInCart(game.id);
-                        buttonCart.innerText = "В корзине";
-                        buttonCart.disabled = true;
-                    });
-                }
+        function enableReviewSubmission(user, gameId) {
+    const stars = document.querySelectorAll('.review-stars .star');
+    const submitButton = document.querySelector('.submit-review');
+
+    // Подсветка звездочек при клике
+    stars.forEach(star => {
+        star.addEventListener('click', (event) => {
+            const category = event.target.closest('.review-stars').getAttribute('data-category');
+            const ratingValue = event.target.getAttribute('data-value');
+
+            // Убираем подсветку с других звезд в этой категории
+            const categoryStars = document.querySelectorAll(`.review-stars[data-category="${category}"] .star`);
+            categoryStars.forEach(s => s.classList.remove('selected'));
+
+            // Подсвечиваем выбранную звезду и все предыдущие
+            for (let i = 0; i < ratingValue; i++) {
+                categoryStars[i].classList.add('selected');
+            }
+
+            // Разблокируем кнопку, если все категории оценены
+            checkAllCategoriesRated() ? submitButton.disabled = false : submitButton.disabled = true;
+        });
+    });
+
+    // Проверка, что все категории оценены
+    function checkAllCategoriesRated() {
+        let allRated = true;
+        document.querySelectorAll('.review-stars').forEach(starContainer => {
+            const selectedStars = starContainer.querySelectorAll('.star.selected');
+            if (selectedStars.length === 0) {
+                allRated = false;
+            }
+        });
+        return allRated;
+    }
+
+    // Обработка отправки отзыва
+    submitButton.addEventListener('click', async () => {
+        const ratings = {};
+
+        document.querySelectorAll('.review-stars').forEach(starContainer => {
+            const category = starContainer.getAttribute('data-category');
+            const selectedStar = starContainer.querySelector('.star.selected');
+            if (selectedStar) {
+                const ratingValue = selectedStar.getAttribute('data-value');
+                ratings[category] = ratingValue;
+            }
+        });
+
+        // Если все категории оценены, сохраняем отзыв
+        if (Object.keys(ratings).length === 4) {
+            const success = await saveReview(user.id, gameId, ratings);
+            if (success) {
+                alert('Спасибо за ваш отзыв!');
             } else {
-                buttonCart.addEventListener("click", (e) => {
-                    e.preventDefault();
-                    window.location.href = "login.html";
+                alert('Не удалось отправить отзыв.');
+            }
+        } else {
+            alert('Пожалуйста, оцените все категории.');
+        }
+    });
+}
+
+
+
+
+
+        async function calculateGameRating(gameId) {
+            const response = await fetch('http://localhost:5000/reviews');
+            const reviews = (await response.json()).filter(review => review.gameId === gameId);
+
+            if (!reviews.length) return 'Нет оценок';
+            const categories = ['graphics', 'gameplay', 'story', 'sound'];
+            const totals = categories.reduce((acc, category) => ({ ...acc, [category]: 0 }), {});
+
+            reviews.forEach(review => {
+                categories.forEach(category => {
+                    totals[category] += review.ratings[category];
                 });
-            }
+            });
 
-            try {
-                if (game) {
-                    document.getElementById('game-title').innerText = game.title;
-                    document.getElementById('game-title-display').innerText = game.title;
-                    document.getElementById('game-description').innerText = game.description;
-                    document.getElementById('game-info').innerHTML = `
-                    <strong>Разработчик:</strong> ${game.developer} <br>
-                    <strong>Дата релиза:</strong> ${new Date(game.releaseDate).toLocaleDateString()} <br>
-                    <strong>Цена:</strong> ${game.price} руб.<br>
-                `;
+            const averages = categories.map(category => ({
+                category: category,
+                average: (totals[category] / reviews.length).toFixed(1)
+            }));
 
-                    const gameRating = document.getElementById('game-rating');
-                    const averageRating = calculateAverageRating(game.reviews);
-                    gameRating.innerHTML = `
-                    <strong>Оценка:</strong> <span>${averageRating} / 5</span>
-                `;
-
-                    const mediaCarousel = document.querySelector('.carousel');
-                    const selectedMedia = document.querySelector('.selected-media');
-
-                    selectedMedia.innerHTML = `<video id="selected-video" muted autoplay controls>
-                    <source src="../static/games/${game.title}/${game.trailer}" type="video/mp4">
-                </video>`;
-
-                    mediaCarousel.innerHTML = `<img src="../assets/images/videoPreview.png" alt="${game.trailer}" class="carousel-item" onclick="selectMedia('${game.trailer}')">`;
-
-                    game.images.forEach(image => {
-                        mediaCarousel.innerHTML += `<img src="../static/games/${game.title}/${image}" alt="${image}" class="carousel-item" onclick="selectMedia('${image}')">`;
-                    });
-                } else {
-                    alert('Игра не найдена.');
-                }
-            } catch (error) {
-                console.error('Ошибка загрузки данных о игре:', error);
-                alert('Не удалось загрузить данные о игре.');
-            }
+            return averages.map(a => `${a.category}: ${a.average}`).join(', ');
         }
 
-        function calculateAverageRating(reviews) {
-            if (!reviews || reviews.length === 0) return 'Нет оценок';
-            const total = reviews.reduce((sum, review) => sum + review.rating, 0);
-            return (total / reviews.length).toFixed(1);
+        async function loadReviewSection(user, gameId) {
+    const reviewSection = document.getElementById("review");
+    const reviewMessage = `
+        <p style="text-align: center; color: gray; font-size: 1.2em; margin-top: 20px;">
+            Вы уже оставили отзыв на эту игру.
+        </p>`;
+
+    if (await checkIfReviewExists(user.id, gameId)) {
+        // Отображаем сообщение, если отзыв уже оставлен
+        reviewSection.innerHTML = reviewMessage;
+        reviewSection.style.display = "block";
+    } else {
+        // Отображаем секцию отзывов для нового отзыва
+        reviewSection.style.display = "block";
+        enableReviewSubmission(user, gameId); // Предполагается, что эта функция активирует форму отзыва
+    }
+}
+
+
+        async function calculateGameRating(gameId) {
+            const response = await fetch('http://localhost:5000/reviews');
+            const reviews = (await response.json()).filter(review => review.gameId === gameId);
+
+            if (!reviews.length) return 'Нет оценок';
+            const categories = ['graphics', 'gameplay', 'story', 'sound'];
+            const totalRating = reviews.reduce((total, review) => {
+                return total + categories.reduce((sum, category) => sum + review.ratings[category], 0) / categories.length;
+            }, 0);
+            const averageRating = (totalRating / reviews.length).toFixed(1);
+            return averageRating; // Верните только средний рейтинг
         }
 
-        loadGameData();
+        async function loadGameData() {
+    const games = await getGames();
+    const game = games.find(g => g.id == gameId);
+    const user = JSON.parse(localStorage.getItem("user"));
+    const isAuth = user !== null;
+    const buttonCart = document.getElementById("button-cart");
+
+    document.getElementById("discount-btn").addEventListener("click", async () => {
+        const newPrice = document.getElementById("new-price").value;
+        const newGame = { ...game, price: newPrice };
+        await editGame(newGame);
+    });
+
+    if (isAuth) {
+        if (user.userName == game.developer) {
+            buttonCart.innerText = "Редактировать";
+            buttonCart.addEventListener("click", () => {
+                document.getElementById("modal-frame").style.display = "flex";
+                document.getElementById("discount-section").className = "modal-active";
+            });
+        } else if (Array.isArray(user.gamesId) && user.gamesId.includes(game.id)) {
+            // Загружаем секцию отзывов
+            await loadReviewSection(user, game.id);
+            buttonCart.innerText = "В библиотеке";
+            buttonCart.disabled = true;
+        } else if (Array.isArray(user.cartId) && user.cartId.includes(game.id)) {
+            buttonCart.innerText = "В корзине";
+            buttonCart.disabled = true;
+        } else {
+            buttonCart.addEventListener("click", async (e) => {
+                e.preventDefault();
+                await addGameInCart(game.id);
+                buttonCart.innerText = "В корзине";
+                buttonCart.disabled = true;
+            });
+        }
+    } else {
+        buttonCart.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.location.href = "login.html";
+        });
+    }
+
+    try {
+        if (game) {
+            document.getElementById("game-title").innerText = game.title;
+            document.getElementById("game-title-display").innerText = game.title;
+            document.getElementById("game-description").innerText = game.description;
+            document.getElementById("game-info").innerHTML = `
+                <strong>Разработчик:</strong> ${game.developer} <br>
+                <strong>Дата релиза:</strong> ${new Date(game.releaseDate).toLocaleDateString()} <br>
+                <strong>Цена:</strong> ${game.price} руб.<br>
+            `;
+
+            const gameRating = document.getElementById("game-rating");
+            const averageRating = await calculateGameRating(game.id);
+            gameRating.innerHTML = `
+                <strong>Оценка:</strong> <span>${averageRating} / 5</span>
+            `;
+
+            const mediaCarousel = document.querySelector(".carousel");
+            const selectedMedia = document.querySelector(".selected-media");
+
+            selectedMedia.innerHTML = `<video id="selected-video" muted autoplay controls>
+                <source src="../static/games/${game.title}/${game.trailer}" type="video/mp4">
+            </video>`;
+
+            mediaCarousel.innerHTML = `<img src="../assets/images/videoPreview.png" alt="${game.trailer}" class="carousel-item" onclick="selectMedia('${game.trailer}')">`;
+
+            game.images.forEach(image => {
+                mediaCarousel.innerHTML += `<img src="../static/games/${game.title}/${image}" alt="${image}" class="carousel-item" onclick="selectMedia('${image}')">`;
+            });
+        } else {
+            alert("Игра не найдена.");
+        }
+    } catch (error) {
+        console.error("Ошибка загрузки данных о игре:", error);
+        alert("Не удалось загрузить данные о игре.");
+    }
+}
+
+loadGameData();
     </script>
 </body>
 
