@@ -220,7 +220,6 @@ footer {
     border-radius: 5px;
     margin-top: 10px;
     width: 130px; /* Ширина кнопки */
-    margin-left: 10px; /* Отступ между кнопками */
 }
 
 .delete-btn:hover {

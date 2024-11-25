@@ -28,16 +28,21 @@
       "gamesId": [
         "d7d6",
         "0e42",
-        "m5X4Ljm",
+        "8e2e",
         "leI8PqY",
+        "873f",
+        "5689",
+        "d543",
+        "e6ae",
+        "YoxCbaQ",
+        "m5X4Ljm",
+        "f53f",
         "b801",
-        "873f"
-      ],
-      "avatar": null,
-      "cartId": [
         "1a99"
       ],
-      "balance": 15750
+      "avatar": null,
+      "cartId": [],
+      "balance": 25850
     }
   ],
   "games": [
@@ -293,6 +298,116 @@
         "gameplay": 1,
         "story": 1,
         "sound": 1
+      }
+    },
+    {
+      "id": "6e3e",
+      "userId": "d597",
+      "gameId": "8e2e",
+      "ratings": {
+        "graphics": 1,
+        "gameplay": 1,
+        "story": 1,
+        "sound": 1
+      }
+    },
+    {
+      "id": "b5d1",
+      "userId": "d597",
+      "gameId": "leI8PqY",
+      "ratings": {
+        "graphics": 1,
+        "gameplay": 1,
+        "story": 1,
+        "sound": 1
+      }
+    },
+    {
+      "id": "0efa",
+      "userId": "d597",
+      "gameId": "873f",
+      "ratings": {
+        "graphics": 1,
+        "gameplay": 1,
+        "story": 1,
+        "sound": 1
+      }
+    },
+    {
+      "id": "b7c5",
+      "userId": "d597",
+      "gameId": "5689",
+      "ratings": {
+        "graphics": 1,
+        "gameplay": 1,
+        "story": 1,
+        "sound": 1
+      }
+    },
+    {
+      "id": "9942",
+      "userId": "d597",
+      "gameId": "d543",
+      "ratings": {
+        "graphics": 1,
+        "gameplay": 1,
+        "story": 1,
+        "sound": 1
+      }
+    },
+    {
+      "id": "5a70",
+      "userId": "d597",
+      "gameId": "e6ae",
+      "ratings": {
+        "graphics": 1,
+        "gameplay": 1,
+        "story": 1,
+        "sound": 1
+      }
+    },
+    {
+      "id": "63db",
+      "userId": "d597",
+      "gameId": "YoxCbaQ",
+      "ratings": {
+        "graphics": 1,
+        "gameplay": 1,
+        "story": 1,
+        "sound": 1
+      }
+    },
+    {
+      "id": "e830",
+      "userId": "d597",
+      "gameId": "f53f",
+      "ratings": {
+        "graphics": 1,
+        "gameplay": 1,
+        "story": 1,
+        "sound": 1
+      }
+    },
+    {
+      "id": "0a07",
+      "userId": "d597",
+      "gameId": "1a99",
+      "ratings": {
+        "graphics": 5,
+        "gameplay": 5,
+        "story": 5,
+        "sound": 5
+      }
+    },
+    {
+      "id": "268b",
+      "userId": "440f",
+      "gameId": "1a99",
+      "ratings": {
+        "graphics": 3,
+        "gameplay": 3,
+        "story": 4,
+        "sound": 2
       }
     }
   ]

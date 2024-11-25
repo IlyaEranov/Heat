@@ -297,17 +297,17 @@ document.getElementById('confirm-top-up').addEventListener('click', async () => 
             });
         });
 
-        document.getElementById('top-up').addEventListener('click', async function () {
-            const user = JSON.parse(localStorage.getItem('user'));
+        // document.getElementById('top-up').addEventListener('click', async function () {
+        //     const user = JSON.parse(localStorage.getItem('user'));
 
-            if (user) {
-                const updatedUser = await topUpBalance(user);
-                document.querySelector('.balance-text').textContent = `Баланс: ${updatedUser.balance} руб.`;
-                localStorage.setItem('user', JSON.stringify(updatedUser));
-            } else {
-                alert("Вы не авторизованы.");
-            }
-        });
+        //     if (user) {
+        //         const updatedUser = await topUpBalance(user);
+        //         document.querySelector('.balance-text').textContent = `Баланс: ${updatedUser.balance} руб.`;
+        //         localStorage.setItem('user', JSON.stringify(updatedUser));
+        //     } else {
+        //         alert("Вы не авторизованы.");
+        //     }
+        // });
 
         const content = localStorage.getItem("content") == "cart" ? cartBtn : libraryBtn
 
