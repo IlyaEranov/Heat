@@ -50,12 +50,90 @@
             </div>
         </div>
 
+        <div id="top-up-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h2>Пополнить баланс</h2>
+                <label for="card-number">Номер карты:</label>
+                <input type="text" id="card-number" maxlength="16" placeholder="Введите номер карты">
+        
+                <label for="expiry-date">Срок действия (MM/YY):</label>
+                <input type="text" id="expiry-date" maxlength="5" placeholder="MM/YY">
+        
+                <label for="cvv">CVV:</label>
+                <input type="password" id="cvv" maxlength="3" placeholder="CVV">
+        
+                <label for="amount">Сумма:</label>
+                <input type="number" id="amount" min="1" placeholder="Введите сумму">
+        
+                <div class="modal-buttons">
+                    <button id="confirm-top-up">Пополнить</button>
+                    <button id="cancel-top-up">Отмена</button>
+                </div>
+            </div>
+        </div>
+        
+
     </main>
 
     <footer>
         <p>&copy; 2024 Heat. Все права защищены.</p>
     </footer>
     <script>
+
+document.getElementById('top-up').addEventListener('click', () => {
+    document.getElementById('top-up-modal').style.display = 'flex';
+});
+
+document.getElementById('cancel-top-up').addEventListener('click', () => {
+    document.getElementById('top-up-modal').style.display = 'none';
+});
+
+document.getElementById('confirm-top-up').addEventListener('click', async () => {
+    const cardNumber = document.getElementById('card-number').value.trim();
+    const expiryDate = document.getElementById('expiry-date').value.trim();
+    const cvv = document.getElementById('cvv').value.trim();
+    const amount = parseFloat(document.getElementById('amount').value.trim());
+
+    // Проверка на заполнение полей
+    if (!cardNumber || !expiryDate || !cvv || isNaN(amount) || amount <= 0) {
+        alert('Пожалуйста, заполните все поля корректно.');
+        return;
+    }
+
+    // Случайный фактор: успех или недостаток средств
+    const isPaymentSuccessful = Math.random() > 0.2; // 80% вероятность успеха
+
+    if (!isPaymentSuccessful) {
+        alert('Ошибка: недостаточно средств на карте.');
+        return;
+    }
+
+    // Обновление баланса
+    const user = JSON.parse(localStorage.getItem('user'));
+    const newBalance = user.balance + amount;
+    const updatedUser = { ...user, balance: newBalance };
+
+    try {
+        const response = await fetch(`${url}${user.id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updatedUser),
+        });
+
+        if (!response.ok) throw new Error('Ошибка при обновлении данных.');
+
+        const updatedUserData = await response.json();
+        localStorage.setItem('user', JSON.stringify(updatedUserData));
+        document.querySelector('.balance-text').textContent = `Баланс: ${updatedUserData.balance} руб.`;
+        alert('Баланс успешно пополнен!');
+        document.getElementById('top-up-modal').style.display = 'none';
+    } catch (e) {
+        alert(`Ошибка при пополнении баланса: ${e.message}`);
+    }
+});
+
+
+
         const buyGame = async (gameId, gamePrice) => {
             const user = JSON.parse(localStorage.getItem("user"))
             const newBalance = user.balance - gamePrice
