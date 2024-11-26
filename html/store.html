@@ -75,18 +75,25 @@
                         <div class="game-title">${e.title}</div>
                         <img src="../static/games/${e.title}/${e.images[0]}" alt="${e.title}" class="game-image">
                         ${inLibrary
-                        ? '<div class="in-library">В библиотеке</div>'
-                        : `<div class="game-price">${e.price} руб.</div>`}
+                            ? '<div class="in-library">В библиотеке</div>'
+                            : `
+                            <div class="game-price">
+                                ${e.discountPrice
+                                    ? `<span class="original-price">${e.price} руб.</span>
+                                    <span class="discount-price">${e.discount} руб.</span>`
+                                    : `${e.price} руб.`}
+                            </div>`}
                         ${isUserAuth
-                        ? (inLibrary
-                            ? ''
-                            : (isGameAuthor
+                            ? (inLibrary
                                 ? ''
-                                : (inCart
-                                    ? '<div class="in-cart">В корзине</div>'
-                                    : `<button class="add-to-cart" onclick="event.stopPropagation();addGameInCart('${e.id}')">Добавить в корзину</button>`)))
-                        : `<button class="add-to-cart" onclick="event.stopPropagation();alert('Для добавления игры в корзину нужно быть авторизованным');window.location.href='login.html'">Добавить в корзину</button>`}
+                                : (isGameAuthor
+                                    ? ''
+                                    : (inCart
+                                        ? '<div class="in-cart">В корзине</div>'
+                                        : `<button class="add-to-cart" onclick="event.stopPropagation();addGameInCart('${e.id}')">Добавить в корзину</button>`)))
+                            : `<button class="add-to-cart" onclick="event.stopPropagation();alert('Для добавления игры в корзину нужно быть авторизованным');window.location.href='login.html'">Добавить в корзину</button>`}
                     </div>
+
                     `;
             }).join('')}
             </div>`;

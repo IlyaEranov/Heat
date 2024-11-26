@@ -31,7 +31,7 @@ const publishGame = async (gameData) => {
         alert("Ошибка выпуска игры")
     }
 };
-
+/*
 const editGame = async (game) => {
     try{
         await fetch(gameUrl + game.id, {
@@ -46,6 +46,7 @@ const editGame = async (game) => {
         alert("Ошибка изменения игры")
     }
 }
+    */
 
 const removeGame = async () => {
     const game = JSON.parse(localStorage.getItem("game"))

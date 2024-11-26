@@ -28,21 +28,19 @@
       "gamesId": [
         "d7d6",
         "0e42",
-        "8e2e",
-        "leI8PqY",
-        "873f",
-        "5689",
-        "d543",
-        "e6ae",
-        "YoxCbaQ",
         "m5X4Ljm",
-        "f53f",
+        "leI8PqY",
         "b801",
-        "1a99"
+        "873f",
+        "YoxCbaQ",
+        "f53f",
+        "e6ae"
       ],
       "avatar": null,
-      "cartId": [],
-      "balance": 25850
+      "cartId": [
+        "1a99"
+      ],
+      "balance": 13650
     }
   ],
   "games": [
@@ -91,6 +89,7 @@
       ],
       "description": "Катайтесь в огромном открытом мире альпийских склонов, где снег всегда свеж, а трассы бесконечны. Покоряйте горы в одиночку или в компании друзей - на лыжах, сноуборде, параплане или в вингсьюте. Поделитесь лучшими трюками в социальных сетях.",
       "price": "500",
+      "discount": "300",
       "ageRestricted": false,
       "releaseDate": "2024-11-03T06:47:14.711Z"
     },
@@ -252,7 +251,8 @@
       "description": "Elden Ring — компьютерная игра в жанре action/RPG с открытым миром, разработанная японской компанией FromSoftware и изданная компанией Bandai Namco Entertainment для платформ Windows, PlayStation 4, PlayStation 5, Xbox One и Xbox Series X/S. ",
       "price": "1000",
       "ageRestricted": true,
-      "releaseDate": "2024-11-10T09:08:50.918Z"
+      "releaseDate": "2024-11-10T09:08:50.918Z",
+      "discount": "25"
     }
   ],
   "reviews": [
@@ -356,17 +356,6 @@
       }
     },
     {
-      "id": "5a70",
-      "userId": "d597",
-      "gameId": "e6ae",
-      "ratings": {
-        "graphics": 1,
-        "gameplay": 1,
-        "story": 1,
-        "sound": 1
-      }
-    },
-    {
       "id": "63db",
       "userId": "d597",
       "gameId": "YoxCbaQ",
@@ -408,6 +397,17 @@
         "gameplay": 3,
         "story": 4,
         "sound": 2
+      }
+    },
+    {
+      "id": "2442",
+      "userId": "d597",
+      "gameId": "e6ae",
+      "ratings": {
+        "graphics": 3,
+        "gameplay": 4,
+        "story": 2,
+        "sound": 5
       }
     }
   ]

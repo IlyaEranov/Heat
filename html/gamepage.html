@@ -130,6 +130,15 @@
         }
 
         const gameId = getParameterByName('id');
+
+        async function editGame(game) {
+            await fetch(`http://localhost:5000/games/${game.id}`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(game),
+            });
+        }
+
         
         async function selectMedia(src) {
             const games = await getGames();
@@ -286,17 +295,33 @@
 
             document.getElementById("discount-btn").addEventListener("click", async () => {
                 const newPrice = document.getElementById("new-price").value;
-                const newGame = { ...game, price: newPrice };
-                await editGame(newGame);
+                if (!isNaN(newPrice) && newPrice > 0) {
+                    game.discount = newPrice; // Устанавливаем новую цену как скидку
+                    await editGame(game);
+                    alert("Цена изменена!");
+                    window.location.reload(); // Обновляем страницу
+                } else {
+                    alert("Введите корректную цену.");
+                }
             });
 
             if (isAuth) {
                 if (user.userName == game.developer) {
-                    buttonCart.innerText = "Редактировать";
-                    buttonCart.addEventListener("click", () => {
-                        document.getElementById("modal-frame").style.display = "flex";
-                        document.getElementById("discount-section").className = "modal-active";
-                    });
+                    if (game.discount) {
+                        buttonCart.innerText = "Закончить скидку";
+                        buttonCart.addEventListener("click", async () => {
+                            game.discount = null; // Убираем скидку
+                            await editGame(game);
+                            alert("Скидка завершена!");
+                            window.location.reload(); // Обновляем страницу
+                        });
+                    } else {
+                        buttonCart.innerText = "Сделать скидку";
+                        buttonCart.addEventListener("click", () => {
+                            document.getElementById("modal-frame").style.display = "flex";
+                            document.getElementById("discount-section").className = "modal-active";
+                        });
+                    }
                 } else if (Array.isArray(user.gamesId) && user.gamesId.includes(game.id)) {
                     // Загружаем секцию отзывов
                     await loadReviewSection(user, game.id);
@@ -328,8 +353,15 @@
                     document.getElementById("game-info").innerHTML = `
                         <strong>Разработчик:</strong> ${game.developer} <br>
                         <strong>Дата релиза:</strong> ${new Date(game.releaseDate).toLocaleDateString()} <br>
-                        <strong>Цена:</strong> ${game.price} руб.<br>
+                        <strong>Цена:</strong> <span id="game-price"></span> руб.
                     `;
+                    const gamePriceElement = document.getElementById("game-price");
+                        if (game.discount) {
+                            gamePriceElement.innerText = game.discount;
+                            gamePriceElement.style.color = "red"; // Для выделения скидки
+                        } else {
+                            gamePriceElement.innerText = game.price || "Не указана";
+                        }
 
                     const gameRating = document.getElementById("game-rating");
                     const averageRating = await calculateGameRating(game.id);
