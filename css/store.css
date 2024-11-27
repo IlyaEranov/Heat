@@ -286,5 +286,11 @@ footer {
     }
 }
 
+.original-price {
+    text-decoration: line-through;
+    color: #888; /* Цвет для старой цены */
+}
+
+
 
 
