@@ -263,3 +263,28 @@ footer {
     color: #fff;
     margin-top: auto;
 }
+
+.marquee {
+    width: 100%; /* Убедитесь, что контейнер имеет ширину */
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.marquee p {
+    display: inline-block;
+    animation: marquee 15s linear infinite;
+    white-space: nowrap;
+}
+
+@keyframes marquee {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+
+
