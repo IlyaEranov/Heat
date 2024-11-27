@@ -353,15 +353,28 @@
                     document.getElementById("game-info").innerHTML = `
                         <strong>Разработчик:</strong> ${game.developer} <br>
                         <strong>Дата релиза:</strong> ${new Date(game.releaseDate).toLocaleDateString()} <br>
-                        <strong>Цена:</strong> <span id="game-price"></span> руб.
+                        <strong>Цена:</strong> 
+                        <span id="game-price-container">
+                            <span id="game-price-original" style="text-decoration: line-through; color: grey;"></span>
+                            <span id="game-price-discounted" style="color: red;"></span>
+                        </span>
+
                     `;
-                    const gamePriceElement = document.getElementById("game-price");
-                        if (game.discount) {
-                            gamePriceElement.innerText = game.discount;
-                            gamePriceElement.style.color = "red"; // Для выделения скидки
-                        } else {
-                            gamePriceElement.innerText = game.price || "Не указана";
-                        }
+                    const gamePriceOriginalElement = document.getElementById("game-price-original");
+const gamePriceDiscountedElement = document.getElementById("game-price-discounted");
+const gamePriceContainer = document.getElementById("game-price-container");
+
+if (game.discount && game.discount > 0) {
+    gamePriceOriginalElement.innerText = `${game.price} руб.`;
+    gamePriceDiscountedElement.innerText = `${game.discount} руб.`;
+    gamePriceOriginalElement.style.display = "inline";
+    gamePriceDiscountedElement.style.display = "inline";
+} else {
+    gamePriceOriginalElement.style.display = "none";
+    gamePriceDiscountedElement.innerText = `${game.price || "Не указана"} руб.`;
+    gamePriceDiscountedElement.style.display = "inline";
+}
+
 
                     const gameRating = document.getElementById("game-rating");
                     const averageRating = await calculateGameRating(game.id);
