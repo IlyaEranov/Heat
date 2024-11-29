@@ -25,8 +25,11 @@
     <main>
 
         <div id="marquee-container" class="marquee" style="display: none;">
-            <p id="marquee-text"></p>
+            <div id="marquee-wrapper">
+                <p id="marquee-text"></p>
+            </div>
         </div>
+        
         <div class = "container">
             <section class="hero">
                 <h1>Добро пожаловать в Heat</h1>
@@ -73,12 +76,13 @@
         .map(game => `<span>${game.title}</span>: Скидка ${game.discount} руб.`);
 
     if (discountedGames.length > 0) {
-        marqueeText.innerHTML = discountedGames.join(' | '); // Используем innerHTML для выделения
+        marqueeText.innerHTML = discountedGames.join(' | ');
         marqueeContainer.style.display = 'block';
     } else {
         marqueeContainer.style.display = 'none';
     }
 }
+
 
 
 

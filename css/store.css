@@ -264,31 +264,34 @@ footer {
     margin-top: auto;
 }
 
-/* Стили для бегущей строки */
-/* Стили для бегущей строки */
-.marquee {
-    width: 100%;
-    background-color: #555; /* Осветлённый цвет фона */
-    color: #f0a500;
-    padding: 1rem 2rem; /* Увеличенный внутренний отступ */
+/* Контейнер для бегущей строки */
+#marquee-container {
+    width: 100%; /* Ширина по содержимому */
+    max-width: 1200px; /* Совпадает с максимальной шириной контейнера */
+    margin: 10px auto; /* Центрирование и отступ сверху */
     overflow: hidden;
-    position: relative;
-    box-sizing: border-box;
-    font-size: 1.2rem; /* Увеличенный размер текста */
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    border-radius: 5px; /* Скругленные углы */
-    margin-top: 1rem; /* Отступ от хедера */
-}
-
-.marquee p {
-    display: inline-block;
-    animation: marquee 15s linear infinite;
     white-space: nowrap;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    box-sizing: border-box;
 }
 
-@keyframes marquee {
+/* Текст внутри бегущей строки */
+#marquee-wrapper {
+    display: inline-flex; /* Используем inline-flex для текста */
+    gap: 50px; /* Промежутки между текстами */
+    animation: scroll 10s linear infinite;
+}
+
+#marquee-text span {
+    margin-right: 20px;
+    display: inline-block;
+}
+
+
+/* Плавная бесконечная анимация */
+@keyframes scroll {
     from {
         transform: translateX(100%);
     }
@@ -297,11 +300,14 @@ footer {
     }
 }
 
-/* Стилизация для выделения элементов внутри строки */
-.marquee span {
-    color: #fff; /* Контрастный цвет для ключевых слов */
-    font-weight: bold;
+/* Основной контейнер */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
+
+
 
 
 
