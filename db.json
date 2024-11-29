@@ -7,7 +7,8 @@
       "password": "LudeonStudio123_",
       "dob": "1111-11-11",
       "gamesId": [
-        "873f"
+        "873f",
+        "2848"
       ],
       "avatar": null,
       "cartId": [
@@ -34,13 +35,14 @@
         "873f",
         "YoxCbaQ",
         "f53f",
-        "e6ae"
+        "e6ae",
+        "1a99"
       ],
       "avatar": null,
       "cartId": [
-        "1a99"
+        "8e2e"
       ],
-      "balance": 13650
+      "balance": 13215
     }
   ],
   "games": [
@@ -58,7 +60,8 @@
       "description": "The only aim in Rust is to survive. Everything wants you to die - the island’s wildlife and other inhabitants, the environment, other survivors. Do whatever it takes to last another night.",
       "price": "1100",
       "ageRestricted": true,
-      "releaseDate": "2024-11-03T06:42:33.196Z"
+      "releaseDate": "2024-11-03T06:42:33.196Z",
+      "discount": "400"
     },
     {
       "id": "873f",
@@ -74,7 +77,8 @@
       "description": "Станьте королем европейских дорог — водителем грузовика, который доставляет важные грузы на немалые расстояния! Вас ждут десятки городов Великобритании, Бельгии, Германии, Италии, Нидерландов, Польши и не только. Испытайте свои умения, выносливость и скорость.",
       "price": "350",
       "ageRestricted": false,
-      "releaseDate": "2024-11-03T06:45:34.237Z"
+      "releaseDate": "2024-11-03T06:45:34.237Z",
+      "discount": "400"
     },
     {
       "id": "5689",
@@ -89,9 +93,9 @@
       ],
       "description": "Катайтесь в огромном открытом мире альпийских склонов, где снег всегда свеж, а трассы бесконечны. Покоряйте горы в одиночку или в компании друзей - на лыжах, сноуборде, параплане или в вингсьюте. Поделитесь лучшими трюками в социальных сетях.",
       "price": "500",
-      "discount": "300",
       "ageRestricted": false,
-      "releaseDate": "2024-11-03T06:47:14.711Z"
+      "releaseDate": "2024-11-03T06:47:14.711Z",
+      "discount": "400"
     },
     {
       "id": "e6ae",
@@ -155,7 +159,8 @@
       "description": "Raft™ throws you and your friends into an epic oceanic adventure! Alone or together, players battle to survive a perilous voyage across a vast sea! Gather debris, scavenge reefs and build your own floating home, but be wary of the man-eating sharks!",
       "price": "400",
       "ageRestricted": false,
-      "releaseDate": "2024-11-03T07:49:13.228Z"
+      "releaseDate": "2024-11-03T07:49:13.228Z",
+      "discount": "1000"
     },
     {
       "id": "8e2e",
@@ -252,7 +257,25 @@
       "price": "1000",
       "ageRestricted": true,
       "releaseDate": "2024-11-10T09:08:50.918Z",
-      "discount": "26"
+      "discount": "1000"
+    },
+    {
+      "id": "2848",
+      "developer": "LudeonStudio",
+      "title": "Factorio",
+      "category": "Стратегия",
+      "trailer": "Factoriovid.webm",
+      "images": [
+        "Factorio1.jpg",
+        "Factorio2.jpg",
+        "Factorio3.jpg"
+      ],
+      "file": "Factorio.exe",
+      "description": "Factorio — компьютерная игра в жанре симулятора строительства и управления.",
+      "price": "350",
+      "ageRestricted": false,
+      "releaseDate": "2024-11-29T06:51:32.716Z",
+      "discount": "280"
     }
   ],
   "reviews": [

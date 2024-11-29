@@ -70,15 +70,17 @@
 
     const discountedGames = games
         .filter(game => game.discount && game.discount < game.price)
-        .map(game => `Игра: ${game.title}, Объявлена скидка: ${game.discount} руб.`);
+        .map(game => `<span>${game.title}</span>: Скидка ${game.discount} руб.`);
 
     if (discountedGames.length > 0) {
-        marqueeText.textContent = discountedGames.join(' | ');
+        marqueeText.innerHTML = discountedGames.join(' | '); // Используем innerHTML для выделения
         marqueeContainer.style.display = 'block';
     } else {
         marqueeContainer.style.display = 'none';
     }
 }
+
+
 
 
         function displayGames(gamesToDisplay) {

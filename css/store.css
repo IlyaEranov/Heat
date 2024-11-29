@@ -264,11 +264,22 @@ footer {
     margin-top: auto;
 }
 
+/* Стили для бегущей строки */
+/* Стили для бегущей строки */
 .marquee {
-    width: 100%; /* Убедитесь, что контейнер имеет ширину */
+    width: 100%;
+    background-color: #555; /* Осветлённый цвет фона */
+    color: #f0a500;
+    padding: 1rem 2rem; /* Увеличенный внутренний отступ */
     overflow: hidden;
     position: relative;
     box-sizing: border-box;
+    font-size: 1.2rem; /* Увеличенный размер текста */
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    border-radius: 5px; /* Скругленные углы */
+    margin-top: 1rem; /* Отступ от хедера */
 }
 
 .marquee p {
@@ -285,6 +296,14 @@ footer {
         transform: translateX(-100%);
     }
 }
+
+/* Стилизация для выделения элементов внутри строки */
+.marquee span {
+    color: #fff; /* Контрастный цвет для ключевых слов */
+    font-weight: bold;
+}
+
+
 
 .original-price {
     text-decoration: line-through;
