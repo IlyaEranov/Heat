@@ -55,9 +55,11 @@
             ">
                 <div id="discount-section" onclick="event.stopPropagation();">
                     <label>Изменение цены игры</label>
-                    <div style="display: flex;align-items: center;margin-top: 10px; max-width: 400px;">
-                        <input id="new-price" type="text" placeholder="Введите новую цену" class="new-price">
+                    <div style="display: flex;align-items: center;gap:10px;margin-top: 10px; max-width: 600px;">
+                        <input type="number" id="new-price" min="1" placeholder="Введите новую цену" class="new-price">
                         <button id="discount-btn" class="discount-btn">Поменять цену</button>
+                        <button class="discount-btn" onclick="document.getElementById('modal-frame').style.display = 'none';
+                        document.getElementById('discount-section').className = ''">Отмена</button>
                     </div>
                 </div>
             </div>
@@ -298,13 +300,14 @@
 
             document.getElementById("discount-btn").addEventListener("click", async () => {
                 const newPrice = document.getElementById("new-price").value;
-                if (!isNaN(newPrice) && newPrice > 0) {
-                    game.discount = newPrice; // Устанавливаем новую цену как скидку
+                
+                if (newPrice < game.price) {
+                    game.discount = newPrice;
                     await editGame(game);
                     alert("Цена изменена!");
-                    window.location.reload(); // Обновляем страницу
+                    window.location.reload();
                 } else {
-                    alert("Введите корректную цену.");
+                    alert("Скидка не может быть больше цены игры");
                 }
             });
 

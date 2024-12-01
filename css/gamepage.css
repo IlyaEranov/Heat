@@ -260,7 +260,7 @@ nav ul li a:hover {
 }
 
 #discount-section {
-    padding: 100px;
+    padding: 30px;
     background-color: #fff;
     border-radius: 10px;
     display: flex;
@@ -274,7 +274,6 @@ nav ul li a:hover {
     width: 200px;
     border-radius: 5px;
     border: 1px solid #ddd;
-    margin-right: 10px;
 }
 
 .discount-btn{

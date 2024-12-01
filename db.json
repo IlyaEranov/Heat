@@ -275,7 +275,7 @@
       "price": "350",
       "ageRestricted": false,
       "releaseDate": "2024-11-29T06:51:32.716Z",
-      "discount": "280"
+      "discount": "300"
     }
   ],
   "reviews": [
@@ -431,6 +431,17 @@
         "gameplay": 4,
         "story": 2,
         "sound": 5
+      }
+    },
+    {
+      "id": "3275",
+      "userId": "1",
+      "gameId": "873f",
+      "ratings": {
+        "graphics": 5,
+        "gameplay": 5,
+        "story": 5,
+        "sound": 3
       }
     }
   ]
