@@ -66,7 +66,6 @@ nav ul li a:hover {
 /* Секции */
 main {
     flex: 1;
-    padding: 2rem;
 }
 
 .hero {
@@ -266,9 +265,8 @@ footer {
 
 /* Контейнер для бегущей строки */
 #marquee-container {
+    margin: 30px 0;
     width: 100%; /* Ширина по содержимому */
-    max-width: 1200px; /* Совпадает с максимальной шириной контейнера */
-    margin: 10px auto; /* Центрирование и отступ сверху */
     overflow: hidden;
     white-space: nowrap;
     background-color: #333;
@@ -279,16 +277,13 @@ footer {
 
 /* Текст внутри бегущей строки */
 #marquee-wrapper {
-    display: inline-flex; /* Используем inline-flex для текста */
-    gap: 50px; /* Промежутки между текстами */
-    animation: scroll 10s linear infinite;
+    display: flex;
+    animation: scroll 20s linear infinite;
 }
 
-#marquee-text span {
-    margin-right: 20px;
-    display: inline-block;
+#marquee-text span{
+    padding: 0 20px;
 }
-
 
 /* Плавная бесконечная анимация */
 @keyframes scroll {

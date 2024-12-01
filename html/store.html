@@ -73,7 +73,7 @@
 
     const discountedGames = games
         .filter(game => game.discount && game.discount < game.price)
-        .map(game => `<span>${game.title}</span>: Скидка ${game.discount} руб.`);
+        .map(game => `<span>${game.title}: Скидка ${game.discount} руб.</span>`);
 
     if (discountedGames.length > 0) {
         marqueeText.innerHTML = discountedGames.join(' | ');

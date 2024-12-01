@@ -310,11 +310,20 @@ form button:hover {
 }
 
 .modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     background: #fff;
     padding: 20px;
     border-radius: 10px;
     width: 300px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content input{
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
 }
 
 .modal-buttons {
