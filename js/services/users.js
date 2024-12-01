@@ -135,20 +135,16 @@ const userIsAuthLink = () => {
     }
 }
 
-const topUpBalance = async (user) => {
-    const newBalance = user.balance + 500;
-    const updatedUser = { ...user, balance: newBalance };
-    try {
-        const response = await fetch(url + user.id, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(updatedUser)
-        });
-        localStorage.setItem('user', JSON.stringify(await response.json()));
-        window.location.href = "profile.html"
-    } catch (e) {
-        alert(`Ошибка при пополнении баланса: ${e.message}`);
-    }
-}
+// const editUser = async (newUser) => {
+//     try{
+//         const response = await fetch(url + user.id, {
+//             method: "PUT",
+//             headers: {
+//                 "Content-Type": "application/json"
+//             }
+//             body: JSON.stringify(newUser)
+//         })
+//     } catch (e) {
+//         alert(`Ошибка при изменении профиля: ${e.message}`)
+//     }
+// }

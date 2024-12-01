@@ -50,8 +50,10 @@
             </div>
         </div>
 
-        <div id="top-up-modal" class="modal" style="display: none;">
-            <div class="modal-content">
+        <div id="top-up-modal" class="modal" style="display: none;" onclick="
+            document.getElementById('top-up-modal').style.display = 'none'
+        ">
+            <div class="modal-content" onclick="event.stopPropagation()">
                 <h2>Пополнить баланс</h2>
                 <label for="card-number">Номер карты:</label>
                 <input type="text" id="card-number" maxlength="16" placeholder="Введите номер карты">
@@ -218,8 +220,8 @@ document.getElementById('confirm-top-up').addEventListener('click', async () => 
                         <img src="../static/games/${game.title}/${game.images[0]}" alt="${game.title}">
                         <div>
                             <p>${game.title}</p>
-                            <p>${game.price}</p>
-                            <button class="buy-btn" onclick="event.stopPropagation();buyGame('${game.id}', '${game.price}')">Купить</button>
+                            <p>${game.discount ? game.discount : game.price}</p>
+                            <button class="buy-btn" onclick="event.stopPropagation();buyGame('${game.id}', '${game.discount ? game.discount : game.price}')">Купить</button>
                             <button class="delete-btn" onclick="event.stopPropagation();removeGameFromCart('${game.id}')">Удалить</button>
                         </div>
                         </div>
@@ -297,17 +299,9 @@ document.getElementById('confirm-top-up').addEventListener('click', async () => 
             });
         });
 
-        // document.getElementById('top-up').addEventListener('click', async function () {
-        //     const user = JSON.parse(localStorage.getItem('user'));
+        document.getElementById("edit_profile").addEventListener("click", () => {
 
-        //     if (user) {
-        //         const updatedUser = await topUpBalance(user);
-        //         document.querySelector('.balance-text').textContent = `Баланс: ${updatedUser.balance} руб.`;
-        //         localStorage.setItem('user', JSON.stringify(updatedUser));
-        //     } else {
-        //         alert("Вы не авторизованы.");
-        //     }
-        // });
+        })
 
         const content = localStorage.getItem("content") == "cart" ? cartBtn : libraryBtn
 

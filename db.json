@@ -1,250 +1,87 @@
 {
   "users": [
     {
-      "name": "LudeonStudio",
-      "userName": "LudeonStudio",
-      "email": "LudeonStudio@mail.ru",
-      "password": "LudeonStudio123_",
-      "dob": "1111-11-11",
+      "id": "7242",
+      "name": "Илья",
+      "userName": "Ilya",
+      "email": "ilya.erannov@mail.ru",
+      "password": "123qweQWE_",
+      "dob": "2004-04-12",
       "gamesId": [
-        "873f",
-        "2848"
+        "9107",
+        "3e41",
+        "1fb8",
+        "a288",
+        "9bbf"
       ],
       "avatar": null,
-      "cartId": [
-        "8e2e",
-        "0e42",
-        "1a99"
-      ],
-      "balance": 150,
-      "id": "1"
+      "cartId": [],
+      "balance": 0
     },
     {
-      "id": "d597",
-      "name": "phone",
-      "userName": "Phone",
-      "email": "ivan@gmail.com",
-      "password": "Privet2020/",
-      "dob": "2001-12-12",
+      "id": "2b60",
+      "name": "emil",
+      "userName": "emil",
+      "email": "emil@mail.ru",
+      "password": "emil123EMIL_",
+      "dob": "2000-12-12",
       "gamesId": [
-        "d7d6",
-        "0e42",
-        "m5X4Ljm",
-        "leI8PqY",
-        "b801",
-        "873f",
-        "YoxCbaQ",
-        "f53f",
-        "e6ae",
-        "1a99"
+        "a288",
+        "5f9b",
+        "b4f6",
+        "b49d",
+        "d7a9",
+        "5b54",
+        "3d7f",
+        "6fe8",
+        "a17b"
       ],
       "avatar": null,
       "cartId": [
-        "8e2e"
+        "3e41",
+        "1fb8"
       ],
-      "balance": 25527
+      "balance": 0
+    },
+    {
+      "id": "4bcd",
+      "name": "linar",
+      "userName": "linar",
+      "email": "linar@mail.ru",
+      "password": "qweZXC123_",
+      "dob": "2004-06-22",
+      "gamesId": [
+        "afb4",
+        "7e27"
+      ],
+      "avatar": null,
+      "cartId": [],
+      "balance": 12000
+    },
+    {
+      "id": "a78f",
+      "name": "Сережа",
+      "userName": "raybarnblitz",
+      "email": "raybarnblitz@mail.ru",
+      "password": "raybarnblitZ123_",
+      "dob": "1212-12-12",
+      "gamesId": [
+        "ae4f",
+        "5615",
+        "e05e",
+        "4249",
+        "9bbf",
+        "43ea"
+      ],
+      "avatar": null,
+      "cartId": [],
+      "balance": 0
     }
   ],
   "games": [
     {
-      "id": "f53f",
-      "developer": "emil",
-      "title": "Rust",
-      "category": "Выживание",
-      "trailer": "rustvid.webm",
-      "images": [
-        "rust3.jpg",
-        "rust2.jpg",
-        "rust1.jpg"
-      ],
-      "description": "The only aim in Rust is to survive. Everything wants you to die - the island’s wildlife and other inhabitants, the environment, other survivors. Do whatever it takes to last another night.",
-      "price": "1100",
-      "ageRestricted": true,
-      "releaseDate": "2024-11-03T06:42:33.196Z",
-      "discount": "400"
-    },
-    {
-      "id": "873f",
-      "developer": "emil",
-      "title": "Euro Truck Simulator 2",
-      "category": "Открытый мир",
-      "trailer": "etsvid.webm",
-      "images": [
-        "ets3.jpg",
-        "ets2.jpg",
-        "ets1.jpg"
-      ],
-      "description": "Станьте королем европейских дорог — водителем грузовика, который доставляет важные грузы на немалые расстояния! Вас ждут десятки городов Великобритании, Бельгии, Германии, Италии, Нидерландов, Польши и не только. Испытайте свои умения, выносливость и скорость.",
-      "price": "350",
-      "ageRestricted": false,
-      "releaseDate": "2024-11-03T06:45:34.237Z",
-      "discount": "400"
-    },
-    {
-      "id": "5689",
-      "developer": "emil",
-      "title": "Steep",
-      "category": "Спорт",
-      "trailer": "steepvid.webm",
-      "images": [
-        "steep3.jpg",
-        "steep2.avif",
-        "steep1.jpg"
-      ],
-      "description": "Катайтесь в огромном открытом мире альпийских склонов, где снег всегда свеж, а трассы бесконечны. Покоряйте горы в одиночку или в компании друзей - на лыжах, сноуборде, параплане или в вингсьюте. Поделитесь лучшими трюками в социальных сетях.",
-      "price": "500",
-      "ageRestricted": false,
-      "releaseDate": "2024-11-03T06:47:14.711Z",
-      "discount": "400"
-    },
-    {
-      "id": "e6ae",
-      "developer": "emil",
-      "title": "Monopoly",
-      "category": "Стратегия",
-      "trailer": "monopolyvid.webm",
-      "images": [
-        "monopoly3.jpg",
-        "monopoly2.jpg",
-        "monopoly1.jpg"
-      ],
-      "description": "MONOPOLY® возвращается с улучшениями и обновленным оформлением. Покупайте, продавайте и обменивайте имущество, увеличивая свою торговую империю, в полностью анимированном трехмерном городе, где сменяются дни и погода.",
-      "price": "500",
-      "ageRestricted": false,
-      "releaseDate": "2024-11-03T06:57:10.997Z"
-    },
-    {
-      "id": "0e42",
-      "developer": "ilya",
-      "title": "Cyberpunk 2077",
-      "category": "Открытый мир",
-      "trailer": "9007033.mp4",
-      "images": [
-        "channels4_profile.jpg",
-        "social-thumbnail-en-ddcf4d23.jpg",
-        "Обложка_компьютерной_игры_Cyberpunk_2077.jpg"
-      ],
-      "description": "Cyberpunk 2077 — приключенческая ролевая игра с открытым миром, действие которой происходит в футуристическом мегаполисе Найт-Сити, где выше всего ценятся власть, роскошь и модификации тела.",
-      "price": "2000",
-      "ageRestricted": true,
-      "releaseDate": "2024-11-03T07:36:22.901Z"
-    },
-    {
-      "id": "d543",
-      "developer": "emil",
-      "title": "eFootball",
-      "category": "Спорт",
-      "trailer": "football1.webm",
-      "images": [
-        "foot3.jpg",
-        "foot2.jpg",
-        "foot1.jpg"
-      ],
-      "description": "Вас ждет захватывающий футбольный симулятор, который уже скачали более чем 750 млн раз по всему миру! Играйте в eFootball™ с другими пользователями по всему миру!",
-      "price": "300",
-      "ageRestricted": false,
-      "releaseDate": "2024-11-03T07:45:29.584Z"
-    },
-    {
-      "id": "b801",
-      "developer": "ilya",
-      "title": "Raft",
-      "category": "Выживание",
-      "trailer": "raftvid.webm",
-      "images": [
-        "raft3.jpg",
-        "raft2.jpg",
-        "raft1.jpg"
-      ],
-      "description": "Raft™ throws you and your friends into an epic oceanic adventure! Alone or together, players battle to survive a perilous voyage across a vast sea! Gather debris, scavenge reefs and build your own floating home, but be wary of the man-eating sharks!",
-      "price": "400",
-      "ageRestricted": false,
-      "releaseDate": "2024-11-03T07:49:13.228Z",
-      "discount": "1000"
-    },
-    {
-      "id": "8e2e",
-      "developer": "Ubisoft",
-      "title": "Star Wars Outlaws",
-      "category": "Открытый мир",
-      "trailer": "starvid.webm",
-      "images": [
-        "star3.jpg",
-        "star2.jpg",
-        "star1.jpg"
-      ],
-      "description": "Встречайте первую в истории Star Wars™ игру с открытым миром! Вас ждет путешествие по планетам – как известным, так и новым, – и знакомство с обаятельной авантюристкой Кей Весс, жаждущей свободы и шанса начать новую жизнь.",
-      "price": "1100",
-      "ageRestricted": false,
-      "releaseDate": "2024-11-03T07:53:58.307Z"
-    },
-    {
-      "id": "1a99",
-      "developer": "IronGate",
-      "title": "Valheim",
-      "category": "Выживание",
-      "trailer": "Valheimvid.webm",
-      "images": [
-        "Valheim1.jpg",
-        "Valheim2.jpg",
-        "Valheim3.jpg"
-      ],
-      "description": "Valheim — компьютерная игра в жанре симулятора выживания с видом от третьего лица в открытом мире. Разрабатывается шведской компанией Iron Gate и издается компанией Coffee Stain.",
-      "price": "435",
-      "ageRestricted": false,
-      "releaseDate": "2024-11-04T11:19:28.156Z"
-    },
-    {
-      "developer": "ilya",
-      "title": "RimWorld",
-      "category": "Стратегия",
-      "trailer": "RimWorldvid.webm",
-      "images": [
-        "RimWorld1.jpg",
-        "RimWorld2.jpg",
-        "RimWorld3.jpg"
-      ],
-      "description": "RimWorld",
-      "price": "500",
-      "ageRestricted": false,
-      "releaseDate": "2024-11-05T04:41:30.247Z",
-      "id": "YoxCbaQ"
-    },
-    {
-      "developer": "ilya",
-      "title": "Frostpunk 2",
-      "category": "Стратегия",
-      "trailer": "Frostpunk 2vid.webm",
-      "images": [
-        "Frostpunk 21.jpg",
-        "Frostpunk 22.jpg",
-        "Frostpunk 23.jpg"
-      ],
-      "description": "frost",
-      "price": "400",
-      "ageRestricted": false,
-      "releaseDate": "2024-11-05T04:51:00.103Z",
-      "id": "m5X4Ljm"
-    },
-    {
-      "developer": "LudeonStudio",
-      "title": "No Man's Sky",
-      "category": "Открытый мир",
-      "trailer": "No Man's Skyvid.webm",
-      "images": [
-        "No Man's Sky1.jpg",
-        "No Man's Sky2.jpg",
-        "No Man's Sky3.jpg"
-      ],
-      "description": "No man sky",
-      "price": "1000",
-      "ageRestricted": false,
-      "releaseDate": "2024-11-05T05:01:35.051Z",
-      "id": "leI8PqY"
-    },
-    {
-      "id": "d7d6",
-      "developer": "Phone",
+      "id": "9107",
+      "developer": "Ilya",
       "title": "Elden Ring",
       "category": "Открытый мир",
       "trailer": "Elden Ringvid.webm",
@@ -253,15 +90,239 @@
         "Elden Ring2.jpg",
         "Elden Ring3.jpg"
       ],
-      "description": "Elden Ring — компьютерная игра в жанре action/RPG с открытым миром, разработанная японской компанией FromSoftware и изданная компанией Bandai Namco Entertainment для платформ Windows, PlayStation 4, PlayStation 5, Xbox One и Xbox Series X/S. ",
-      "price": "1000",
+      "file": "elden ring.exe",
+      "description": "Сюжет происходит в Междуземье — стране «за завесой тумана», которой с давних времён правила королева Марика Вечная. 2 В своё время Марика смогла объединить королевства материка с помощью Кольца Элден — могущественного предмета, который определяет законы мироздания. Но после убийства Годвина Золотого — первенца королевы — она разбила Кольцо Элден и исчезла. Затем началось смутное время, когда полубоги стали сражаться друг с другом за власть над осколками кольца. 1\n\nГлавный герой игры — Погасший. Так называют воинов, утративших благодать Кольца Элден, но вернувшихся по её новому зову. Цель каждого Погасшего — стать новым Повелителем Элдена. Для этого они отправляются в путь через весь континент, чтобы победить владельцев осколков и восстановить Кольцо Элден.",
+      "price": "5300",
       "ageRestricted": true,
-      "releaseDate": "2024-11-10T09:08:50.918Z",
+      "releaseDate": "2024-12-01T14:31:19.787Z"
+    },
+    {
+      "id": "3e41",
+      "developer": "Ilya",
+      "title": "Cyberpunk 2077",
+      "category": "Открытый мир",
+      "trailer": "9007033.mp4",
+      "images": [
+        "channels4_profile.jpg",
+        "social-thumbnail-en-ddcf4d23.jpg",
+        "Обложка_компьютерной_игры_Cyberpunk_2077.jpg"
+      ],
+      "file": "Cyberpunk 2077.exe",
+      "description": "Cyberpunk 2077 — компьютерная игра в жанре Action/RPG в открытом мире, разработанная и изданная польской студией CD Projekt[14]. Действие игры происходит в 2077 году в Найт-Сити, вымышленном североамериканском городе из вселенной Cyberpunk, разработанной Майком Пондсмитом. Игрок управляет настраиваемым протагонистом по имени Ви, который работает наёмником и владеет навыками взлома и боя.",
+      "price": "2200",
+      "ageRestricted": true,
+      "releaseDate": "2024-12-01T14:38:07.041Z",
+      "discount": "2000"
+    },
+    {
+      "id": "1fb8",
+      "developer": "Ilya",
+      "title": "No Man's Sky",
+      "category": "Открытый мир",
+      "trailer": "No Man's Skyvid.webm",
+      "images": [
+        "No Man's Sky1.jpg",
+        "No Man's Sky2.jpg",
+        "No Man's Sky3.jpg"
+      ],
+      "file": "No Man's Sky.exe",
+      "description": "Созданная по мотивам столь любимых нами приключений и идей из классической научной фантастики, игра No Man's Sky познакомит вас с галактикой, полной уникальных планет и форм жизни, а также постоянных угроз и экшена.\n\nВ No Man's Sky каждая звезда является светом далекого солнца, на орбите которого вращаются обитаемые планеты, к которым вы сможете отправиться, если сами того пожелаете. Беспрепятственно перемещайтесь между просторами дальнего космоса и поверхностями планет, без каких-либо экранов загрузки и ограничений. В этой бесконечной, процедурно генерируемой вселенной вы откроете для себя места и создания, которых вы не видели ранее и, вероятно, вряд ли увидите когда-нибудь еще.",
+      "price": "1900",
+      "ageRestricted": false,
+      "releaseDate": "2024-12-01T14:41:59.745Z"
+    },
+    {
+      "id": "a288",
+      "developer": "emil",
+      "title": "Euro Truck Simulator 2",
+      "category": "Открытый мир",
+      "trailer": "etsvid.webm",
+      "images": [
+        "ets1.jpg",
+        "ets2.jpg",
+        "ets3.jpg"
+      ],
+      "file": "Euro Truck Simulator 2.exe",
+      "description": "Станьте королем европейских дорог — водителем грузовика, который доставляет важные грузы на немалые расстояния! Вас ждут десятки городов Великобритании, Бельгии, Германии, Италии, Нидерландов, Польши и не только. Испытайте свои умения, выносливость и скорость.\n\nИгровой процесс: игрок управляет седельным тягачом и перевозит грузы из точки А в точку Б. В интересах игрока доставить груз в срок в целости и сохранности, ведь за это он получает больше всего денег и очков опыта.",
+      "price": "1200",
+      "ageRestricted": false,
+      "releaseDate": "2024-12-01T14:48:47.941Z",
       "discount": "1000"
     },
     {
-      "id": "2848",
-      "developer": "LudeonStudio",
+      "id": "5f9b",
+      "developer": "emil",
+      "title": "Star Wars Outlaws",
+      "category": "Открытый мир",
+      "trailer": "starvid.webm",
+      "images": [
+        "star1.jpg",
+        "star2.jpg",
+        "star3.jpg"
+      ],
+      "file": "star.exe",
+      "description": "В центре сюжета — молодая контрабандистка Кей Весс, стремящаяся совершить величайшее ограбление в истории. Начав свой путь как простая выживальщица, она постепенно втягивается в борьбу за власть в системах Внешнего Кольца, противостоя различным бандитским группировкам.\n\nИгровой процесс отличается огромным открытым миром, системой розыска, разнообразными миссиями и боями, где можно выбирать между скрытностью и активными сражениями. Ключевой особенностью геймплея стал напарник Кей — зубастый зверёк Никс, который может помогать в бою и взаимодействии с окружением.",
+      "price": "5300",
+      "ageRestricted": false,
+      "releaseDate": "2024-12-01T14:51:34.064Z",
+      "discount": "2000"
+    },
+    {
+      "id": "b4f6",
+      "developer": "emil",
+      "title": "Subnautica",
+      "category": "Выживание",
+      "trailer": "Subnauticavid.webm",
+      "images": [
+        "Subnautica1.jpg",
+        "Subnautica2.jpg",
+        "Subnautica3.jpg"
+      ],
+      "file": "Subnautica.exe",
+      "description": "Вы потерпели крушение в чудом океаническом мире, где единственный путь ведёт вниз. Океаны Subnautica разнятся от залитых солнцем коралловых рифов до коварных глубоководных расщелин, лавовых полей и биолюминесцентных подводных рек. Контролируйте свой запас кислорода, пока исследуете заросли водорослей, плато, рифы и извилистые пещерные системы. Воды кишат живностью: некоторые из них полезны, многие — опасны.",
+      "price": "400",
+      "ageRestricted": false,
+      "releaseDate": "2024-12-01T14:54:13.041Z"
+    },
+    {
+      "id": "b49d",
+      "developer": "emil",
+      "title": "RimWorld",
+      "category": "Стратегия",
+      "trailer": "RimWorldvid.webm",
+      "images": [
+        "RimWorld1.jpg",
+        "RimWorld2.jpg",
+        "RimWorld3.jpg"
+      ],
+      "file": "rimworld.exe",
+      "description": "RimWorld управляет тремя людьми, выжившими после крушения космического лайнера, в строительстве колонии в приграничном мире на краю изученного пространства. Источники вдохновения этой игры -это дух космического вестерна Firefly, глубокая проработка Dwarf Fortress и эпические Dune и Warhammer 40 000.\n",
+      "price": "800",
+      "ageRestricted": false,
+      "releaseDate": "2024-12-01T14:57:08.801Z"
+    },
+    {
+      "id": "d7a9",
+      "developer": "emil",
+      "title": "Raft",
+      "category": "Выживание",
+      "trailer": "raftvid.webm",
+      "images": [
+        "raft1.jpg",
+        "raft2.jpg",
+        "raft3.jpg"
+      ],
+      "file": "Raft.exe",
+      "description": "Игровой процесс разворачивается посреди океана на плавающем плоту. В инвентаре игрока есть только крюк, который можно нацелить и бросить в океан, чтобы собирать разные предметы: доски, пластик, листья, бочки и т. д.. Игрок может прыгнуть с плота в воду и собирать вещи, но нужно быть осторожным, так как плот всегда движется из-за непрерывного течения океана. Вокруг плота всегда плывёт акула, которая может напасть на игрока, если он в воде, а также она периодически будет пытаться атаковать крайнюю платформу плота, разрушая его части.",
+      "price": "280",
+      "ageRestricted": false,
+      "releaseDate": "2024-12-01T14:58:41.023Z"
+    },
+    {
+      "id": "5b54",
+      "developer": "emil",
+      "title": "Hearts of Iron IV",
+      "category": "Стратегия",
+      "trailer": "Hearts of Iron IVvid.webm",
+      "images": [
+        "Hearts of Iron IV1.jpg",
+        "Hearts of Iron IV2.jpg",
+        "Hearts of Iron IV3.jpg"
+      ],
+      "file": "Hearts of Iron.exe",
+      "description": "Игровой процесс фокусируется на Второй мировой войне. Игрок может взять под своё правление любое государство на Земле, существовавшее во время одного из сценариев, и привести его к победе или поражению в войне против других государств либо вовсе воздержаться от вступления в войну. Игра охватывает период Второй итало-эфиопской войны, Гражданской войны в Испании, Гражданской войны в Китае, Второй японо-китайской войны, Второй мировой войны.",
+      "price": "2700",
+      "ageRestricted": false,
+      "releaseDate": "2024-12-01T15:00:47.546Z"
+    },
+    {
+      "id": "3d7f",
+      "developer": "emil",
+      "title": "DayZ",
+      "category": "Выживание",
+      "trailer": "dayzvid.webm",
+      "images": [
+        "dayz1.jpg",
+        "dayz2.jpg",
+        "dayz3.jpg"
+      ],
+      "file": "DayZ.exe",
+      "description": "Как долго вы сможете выжить в пост-апокалипсисе? Мир пал под натиском зараженных. Боритесь против других выживших за ограниченные ресурсы. Сможете ли вы работать сообща с незнакомцами? Или станете волком-одиночкой? Это ваша история, это DayZ.",
+      "price": "2790",
+      "ageRestricted": false,
+      "releaseDate": "2024-12-01T15:02:41.819Z"
+    },
+    {
+      "id": "6fe8",
+      "developer": "emil",
+      "title": "EA SPORTS FC 25",
+      "category": "Спорт",
+      "trailer": "EA SPORTS FC 25vid.webm",
+      "images": [
+        "EA SPORTS FC 251.jpg",
+        "EA SPORTS FC 252.jpg",
+        "EA SPORTS FC 253.jpg"
+      ],
+      "file": "EA SPORTS FC.exe",
+      "description": "A SPORTS FC™ 25 — это непревзойденно реалистичный и максимально правдоподобно воссозданный футбол с величайшими турнирами, клубами и звездами: более 19 000 игроков из более чем 700 команд, а также 120 стадионов и более 30 лиг.",
+      "price": "3500",
+      "ageRestricted": false,
+      "releaseDate": "2024-12-01T15:05:11.568Z"
+    },
+    {
+      "id": "a17b",
+      "developer": "emil",
+      "title": "Steep",
+      "category": "Спорт",
+      "trailer": "steepvid.webm",
+      "images": [
+        "steep1.jpg",
+        "steep2.avif",
+        "steep3.jpg"
+      ],
+      "file": "Steep.exe",
+      "description": "Steep — игра с многопользовательским уклоном, действия которой происходит в горах Альп, а центром всех действий является её самая высокая вершина Монблан, которую игроки могут свободно исследовать. В более поздних обновлениях в Steep добавлены Аляскинский хребет, центром которого является самая высокая гора в Северной Америке Денали, японские и корейские хребты. В частности, в игре присутствуют места проведения внутриигровых Зимних Олимпийских игр 2018 года в Пхёнчхане. В игре используется вид от первого и от третьего лица с элементами наблюдения и слежения за персонажами (съемками), подобными GoPro. Игроку предоставляют четыре вида деятельности: катание на лыжах, сноуборде, вингсьют и параплан — переключаться между ними можно прямо в самой игре.",
+      "price": "1210",
+      "ageRestricted": false,
+      "releaseDate": "2024-12-01T15:07:37.296Z"
+    },
+    {
+      "id": "afb4",
+      "developer": "linar",
+      "title": "Valheim",
+      "category": "Выживание",
+      "trailer": "Valheimvid.webm",
+      "images": [
+        "Valheim1.jpg",
+        "Valheim2.jpg",
+        "Valheim3.jpg"
+      ],
+      "file": "Valheim.exe",
+      "description": "Valheim — компьютерная игра в жанре симулятора выживания с видом от третьего лица в открытом мире.\n\nМесто действия игры — «десятый мир» сверх девяти миров, описываемых в скандинавской мифологии. Это загробный мир, куда попадает павший в бою персонаж-викинг. Он должен выжить в Вальхейме и тем самым доказать, что достоин попасть в залы Вальхаллы.\n\nИгровой процесс: игрок должен создавать оружие, строить убежища и сражаться с врагами, чтобы выжить. Мир игры каждый раз создается случайно, он генерируется процедурным образом в каждом новом прохождении.",
+      "price": "500",
+      "ageRestricted": false,
+      "releaseDate": "2024-12-01T15:11:22.059Z"
+    },
+    {
+      "id": "7e27",
+      "developer": "linar",
+      "title": "The Forest",
+      "category": "Выживание",
+      "trailer": "The Forestvid.webm",
+      "images": [
+        "The Forest1.jpg",
+        "The Forest2.jpg",
+        "The Forest3.jpg"
+      ],
+      "file": "The Forest.exe",
+      "description": "Игровой процесс посвящён выживанию на обитаемом полуострове: игровой персонаж, попавший туда в результате авиакатастрофы, должен находить себе пищу и кров, обороняться от туземцев-каннибалов.",
+      "price": "435",
+      "ageRestricted": true,
+      "releaseDate": "2024-12-01T15:17:27.962Z"
+    },
+    {
+      "id": "ae4f",
+      "developer": "raybarnblitz",
       "title": "Factorio",
       "category": "Стратегия",
       "trailer": "Factoriovid.webm",
@@ -271,177 +332,107 @@
         "Factorio3.jpg"
       ],
       "file": "Factorio.exe",
-      "description": "Factorio — компьютерная игра в жанре симулятора строительства и управления.",
-      "price": "350",
+      "description": "Factorio — компьютерная игра в жанре симулятора строительства и управления, разрабатываемая независимой чешской студией Wube Software.\n\nСюжет повествует о пилоте космического корабля, потерпевшем крушение на отдалённой неизвестной планете, полной низших форм жизни и природных богатств. Теперь его основная задача — выжить и при этом постараться собрать ракету, чтобы покинуть планету.\n\nИгровой процесс представляет собой симулятор строительства и управления: игроку предлагается построить обширную фабрику и расширять её, увеличивая и оптимизируя производство. Персонаж может свободно перемещаться по карте — вначале пешком, а затем используя различные транспортные средства. ",
+      "price": "1200",
       "ageRestricted": false,
-      "releaseDate": "2024-11-29T06:51:32.716Z",
-      "discount": "300"
+      "releaseDate": "2024-12-01T15:20:07.912Z"
+    },
+    {
+      "id": "5615",
+      "developer": "raybarnblitz",
+      "title": "Golf It!",
+      "category": "Спорт",
+      "trailer": "Golf It!vid.webm",
+      "images": [
+        "Golf It!1.jpg",
+        "Golf It!2.jpg",
+        "Golf It!3.jpg"
+      ],
+      "file": "Golf It!.exe",
+      "description": "Golf It! — игра от компании Perfuse Entertainment для ПК, объединяющая жанры песочницы и стратегии. 1 Вышла 18 августа 2023 года\n\nИгровой процесс представляет собой спортивный симулятор гольфа в виде ролевого приключения по просторам волшебного мира. Игроки проходят восемь уровней с уникальными механиками и наблюдают смену климатических сезонов. Во всех локациях находятся уникальные поля для гольфа, например, в виде палубы парусного судна или трёхэтажного буддийского храма.",
+      "price": "400",
+      "ageRestricted": false,
+      "releaseDate": "2024-12-01T15:21:58.511Z"
+    },
+    {
+      "id": "e05e",
+      "developer": "raybarnblitz",
+      "title": "Shredders",
+      "category": "Спорт",
+      "trailer": "Shreddersvid.webm",
+      "images": [
+        "Shredders1.jpg",
+        "Shredders2.jpg",
+        "Shredders3.jpg"
+      ],
+      "file": "Shredders.exe",
+      "description": "Сюжет рассказывает о двух сноубордистах-ютуберах, пытающихся развить свой канал с помощью видео с крутыми трюками. Их замечает представитель вымышленной компании 540 Indy, благодаря которому ребята не только набирают аудиторию, но и знакомятся со звёздами. Профессионалы охотно идут на контакт и позволяют героям как выучить новые трюки, так и посоревноваться с ними.",
+      "price": "500",
+      "ageRestricted": false,
+      "releaseDate": "2024-12-01T15:24:08.953Z"
+    },
+    {
+      "id": "4249",
+      "developer": "raybarnblitz",
+      "title": "Frostpunk 2",
+      "category": "Стратегия",
+      "trailer": "Frostpunk 2vid.webm",
+      "images": [
+        "Frostpunk 21.jpg",
+        "Frostpunk 22.jpg",
+        "Frostpunk 23.jpg"
+      ],
+      "file": "frostpunk 2.exe",
+      "description": "Frostpunk – первая игра в жанре \"выживание общества\". Как правитель последнего города на земле вы будете управлять его жителями и инфраструктурой. Какие решения вы примете во имя выживания? Как себя поведете в переломный момент? Кем при этом станете?",
+      "price": "1100",
+      "ageRestricted": false,
+      "releaseDate": "2024-12-01T15:26:02.110Z"
+    },
+    {
+      "id": "9bbf",
+      "developer": "raybarnblitz",
+      "title": "eFootball",
+      "category": "Спорт",
+      "trailer": "football1.webm",
+      "images": [
+        "foot1.jpg",
+        "foot2.jpg",
+        "foot3.jpg"
+      ],
+      "file": "efootball.exe",
+      "description": "Вас ждет захватывающий футбольный симулятор, который уже скачали более чем 750 млн раз по всему миру! Играйте в eFootball™ с другими пользователями по всему миру!",
+      "price": "0",
+      "ageRestricted": false,
+      "releaseDate": "2024-12-01T15:28:12.776Z"
+    },
+    {
+      "id": "43ea",
+      "developer": "raybarnblitz",
+      "title": "Stellaris",
+      "category": "Стратегия",
+      "trailer": "Stellarisvid.webm",
+      "images": [
+        "Stellaris1.jpg",
+        "Stellaris2.jpg",
+        "Stellaris3.jpg"
+      ],
+      "file": "Stellaris.exe",
+      "description": "Встречайте бесчисленное множество инопланетных рас и взаимодействуйте с ними в своих межзвездных путешествиях. Создайте галактическую империю: пусть научные корабли бороздят просторы вселенной, а строительные суда окружают обнаруженные планеты станциями. Находите таинственные сокровища, открывайте для себя чудеса космоса и направляйте свой народ, расширяя или ограничивая возможности исследователей. Будьте готовы ко всему — держитесь союзников и берегитесь врагов.",
+      "price": "2200",
+      "ageRestricted": false,
+      "releaseDate": "2024-12-01T15:30:19.575Z"
     }
   ],
   "reviews": [
     {
-      "userId": "d597",
-      "gameId": "0e42",
-      "ratings": {
-        "graphics": 4,
-        "gameplay": 5,
-        "story": 4,
-        "sound": 5
-      },
-      "id": "3037"
-    },
-    {
-      "userId": "1",
-      "gameId": "0e42",
-      "ratings": {
-        "graphics": 3,
-        "gameplay": 5,
-        "story": 2,
-        "sound": 5
-      },
-      "id": "f835"
-    },
-    {
-      "userId": "d597",
-      "gameId": "m5X4Ljm",
-      "ratings": {
-        "graphics": 5,
-        "gameplay": 4,
-        "story": 3,
-        "sound": 4
-      },
-      "id": "ed95"
-    },
-    {
-      "id": "5192",
-      "userId": "d597",
-      "gameId": "b801",
-      "ratings": {
-        "graphics": 1,
-        "gameplay": 1,
-        "story": 1,
-        "sound": 1
-      }
-    },
-    {
-      "id": "6e3e",
-      "userId": "d597",
-      "gameId": "8e2e",
-      "ratings": {
-        "graphics": 1,
-        "gameplay": 1,
-        "story": 1,
-        "sound": 1
-      }
-    },
-    {
-      "id": "b5d1",
-      "userId": "d597",
-      "gameId": "leI8PqY",
-      "ratings": {
-        "graphics": 1,
-        "gameplay": 1,
-        "story": 1,
-        "sound": 1
-      }
-    },
-    {
-      "id": "0efa",
-      "userId": "d597",
-      "gameId": "873f",
-      "ratings": {
-        "graphics": 1,
-        "gameplay": 1,
-        "story": 1,
-        "sound": 1
-      }
-    },
-    {
-      "id": "b7c5",
-      "userId": "d597",
-      "gameId": "5689",
-      "ratings": {
-        "graphics": 1,
-        "gameplay": 1,
-        "story": 1,
-        "sound": 1
-      }
-    },
-    {
-      "id": "9942",
-      "userId": "d597",
-      "gameId": "d543",
-      "ratings": {
-        "graphics": 1,
-        "gameplay": 1,
-        "story": 1,
-        "sound": 1
-      }
-    },
-    {
-      "id": "63db",
-      "userId": "d597",
-      "gameId": "YoxCbaQ",
-      "ratings": {
-        "graphics": 1,
-        "gameplay": 1,
-        "story": 1,
-        "sound": 1
-      }
-    },
-    {
-      "id": "e830",
-      "userId": "d597",
-      "gameId": "f53f",
-      "ratings": {
-        "graphics": 1,
-        "gameplay": 1,
-        "story": 1,
-        "sound": 1
-      }
-    },
-    {
-      "id": "0a07",
-      "userId": "d597",
-      "gameId": "1a99",
-      "ratings": {
-        "graphics": 5,
-        "gameplay": 5,
-        "story": 5,
-        "sound": 5
-      }
-    },
-    {
-      "id": "268b",
-      "userId": "440f",
-      "gameId": "1a99",
-      "ratings": {
-        "graphics": 3,
-        "gameplay": 3,
-        "story": 4,
-        "sound": 2
-      }
-    },
-    {
-      "id": "2442",
-      "userId": "d597",
-      "gameId": "e6ae",
+      "id": "6dd3",
+      "userId": "7242",
+      "gameId": "a288",
       "ratings": {
         "graphics": 3,
         "gameplay": 4,
         "story": 2,
         "sound": 5
-      }
-    },
-    {
-      "id": "3275",
-      "userId": "1",
-      "gameId": "873f",
-      "ratings": {
-        "graphics": 5,
-        "gameplay": 5,
-        "story": 5,
-        "sound": 3
       }
     }
   ]
