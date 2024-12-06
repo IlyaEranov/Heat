@@ -16,7 +16,7 @@
         <nav>
             <ul>
                 <li><a href="store.html" class="active">Магазин</a></li>
-                <li><a href="about.html">О нас</a></li>
+                <li><a href="index.html?page=about">О нас</a></li>
                 <li><a id="auth-link" href="login.html">Вход</a></li>
             </ul>
         </nav>
@@ -301,7 +301,7 @@
             document.getElementById("discount-btn").addEventListener("click", async () => {
                 const newPrice = document.getElementById("new-price").value;
                 
-                if (newPrice < game.price) {
+                if (Number(newPrice) < Number(game.price)) {
                     game.discount = newPrice;
                     await editGame(game);
                     alert("Цена изменена!");
