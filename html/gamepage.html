@@ -56,7 +56,7 @@
                 <div id="discount-section" onclick="event.stopPropagation();">
                     <label>Изменение цены игры</label>
                     <div style="display: flex;align-items: center;gap:10px;margin-top: 10px; max-width: 600px;">
-                        <input type="number" id="new-price" min="1" placeholder="Введите новую цену" class="new-price">
+                        <input type="number" id="new-price" min="1" placeholder="Введите новую цену" class="new-price" oninput="validity.valid||(value='');">
                         <button id="discount-btn" class="discount-btn">Поменять цену</button>
                         <button class="discount-btn" onclick="document.getElementById('modal-frame').style.display = 'none';
                         document.getElementById('discount-section').className = ''">Отмена</button>

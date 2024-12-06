@@ -180,6 +180,7 @@ main {
     cursor: pointer;
     transition: background-color 0.3s;
     border-radius: 5px;
+    font-size: 16px;
 }
 
 .add-to-cart:hover {
@@ -214,7 +215,7 @@ main {
 /* Сетка игр */
 .game-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Адаптация под ширину экрана */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Адаптация под ширину экрана */
     gap: 1rem;
     margin-top: 2rem;
 }
@@ -226,7 +227,6 @@ main {
     text-align: center;
     transition: transform 0.2s;
     border-radius: 5px;
-    height: 300px; /* Задайте фиксированную высоту карточки */
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* Разделите контент внутри карточки */

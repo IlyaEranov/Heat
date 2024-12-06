@@ -5,8 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heat - О нас</title>
     <link rel="stylesheet" href="../css/about.css">
+    <script src="../js/services/users.js"></script>
 </head>
 <body>
+    <header>
+        <div class="logo">Heat</div>
+        <nav>
+            <ul>
+                <li><a href="store.html">Магазин</a></li>
+                <li><a href="about.html" class="active">О нас</a></li>
+                <li><a id="auth-link" href="login.html">Вход</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
     <section class="about-container">
         <h1>О нас</h1>
         <p>Heat — это инновационная платформа для любителей игр, которая объединяет разработчиков и игроков в одном месте. Мы стремимся создать пространство, где каждый сможет найти что-то для себя — от популярных мировых хитов до уникальных инди-игр.</p>
@@ -22,5 +34,12 @@
 
         <p>Мы стремимся сделать игровой процесс доступным, интересным и безопасным для всех. Присоединяйтесь к нам, чтобы открыть для себя новые горизонты в мире игр.</p>
     </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Heat. Все права защищены.</p>
+    </footer>
+    <script>
+        userIsAuthLink();
+    </script>
 </body>
 </html>

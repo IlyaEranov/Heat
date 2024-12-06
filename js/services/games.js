@@ -31,22 +31,6 @@ const publishGame = async (gameData) => {
         alert("Ошибка выпуска игры")
     }
 };
-/*
-const editGame = async (game) => {
-    try{
-        await fetch(gameUrl + game.id, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(game)
-        })
-        window.location.href = `gamepage.html?id=${encodeURIComponent(game.id)}`
-    } catch(e) {
-        alert("Ошибка изменения игры")
-    }
-}
-    */
 
 const removeGame = async () => {
     const game = JSON.parse(localStorage.getItem("game"))

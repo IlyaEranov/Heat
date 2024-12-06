@@ -16,7 +16,7 @@
         <nav>
             <ul>
                 <li><a href="store.html" class="active">Магазин</a></li>
-                <li><a href="index.html?page=about">О нас</a></li>
+                <li><a href="about.html">О нас</a></li>
                 <li><a id="auth-link" href="login.html">Вход</a></li>
             </ul>
         </nav>
@@ -68,20 +68,20 @@
         }
 
         function updateMarquee(games) {
-    const marqueeContainer = document.getElementById("marquee-container");
-    const marqueeText = document.getElementById("marquee-text");
+            const marqueeContainer = document.getElementById("marquee-container");
+            const marqueeText = document.getElementById("marquee-text");
 
-    const discountedGames = games
-        .filter(game => game.discount && game.discount < game.price)
-        .map(game => `<span>${game.title}: Скидка ${game.discount} руб.</span>`);
+            const discountedGames = games
+            .filter(game => game.discount && game.discount < game.price)
+            .map(game => `<span>${game.title}: Скидка ${game.discount} руб.</span>`);
 
-    if (discountedGames.length > 0) {
-        marqueeText.innerHTML = discountedGames.join(' | ');
-        marqueeContainer.style.display = 'block';
-    } else {
-        marqueeContainer.style.display = 'none';
-    }
-}
+            if (discountedGames.length > 0) {
+                marqueeText.innerHTML = discountedGames.join(' | ');
+                marqueeContainer.style.display = 'block';
+            } else {
+                marqueeContainer.style.display = 'none';
+            }
+        }
 
 
 
@@ -104,29 +104,27 @@
                         <div class="game-title">${e.title}</div>
                         <img src="../static/games/${e.title}/${e.images[0]}" alt="${e.title}" class="game-image">
                         ${inLibrary
-                            ? '<div class="in-library">В библиотеке</div>'
+                            ? `<div class="game-price" style="height: 18px"></div>
+                            <div class="in-library">В библиотеке</div>`
                             : `
                             <div class="game-price">
                                 ${e.discount
-    ? `<span class="original-price">${e.price} руб.</span>
-       <span class="discount-price">${e.discount} руб.</span>`
-    : `${e.price} руб.`}
-
+                                ? `<span class="original-price">${e.price} руб.</span>
+                                    <span class="discount-price">${e.discount} руб.</span>`
+                                : `${e.price} руб.`}
                             </div>`}
-                        ${isUserAuth
-                            ? (inLibrary
-                                ? ''
-                                : (isGameAuthor
+                            ${isUserAuth
+                                ? (inLibrary
                                     ? ''
-                                    : (inCart
-                                        ? '<div class="in-cart">В корзине</div>'
-                                        : `<button class="add-to-cart" onclick="event.stopPropagation();addGameInCart('${e.id}')">Добавить в корзину</button>`)))
-                            : `<button class="add-to-cart" onclick="event.stopPropagation();alert('Для добавления игры в корзину нужно быть авторизованным');window.location.href='login.html'">Добавить в корзину</button>`}
-                    </div>
-
-                    `;
-            }).join('')}
-            </div>`;
+                                    : (isGameAuthor
+                                        ? ''
+                                        : (inCart
+                                            ? '<div class="in-cart">В корзине</div>'
+                                            : `<button class="add-to-cart" onclick="event.stopPropagation();addGameInCart('${e.id}')">Добавить в корзину</button>`)))
+                                : `<button class="add-to-cart" onclick="event.stopPropagation();alert('Для добавления игры в корзину нужно быть авторизованным');window.location.href='login.html'">Добавить в корзину</button>`}
+                    </div>`;
+                }).join('')}
+                </div>`;
         }
 
         const defaultCategory = "Открытый мир";

@@ -23,15 +23,14 @@ body {
     padding: 0 20px; /* Внутренние отступы по бокам */
 }
 
-/* Фиксированные header и footer */
+
 header, footer {
-    position: fixed;
     width: 100%;
     left: 0;
     background-color: #333;
     color: white;
     padding: 1rem;
-    z-index: 1000;
+    
 }
 
 header {
@@ -46,11 +45,8 @@ footer {
     text-align: center;
 }
 
-/* Контент прокручивается, но header и footer остаются видимыми */
-main {
-    flex: 1;
-    padding: 80px 20px 100px; /* Отступы для учета фиксированных header и footer */
-    overflow-y: auto;
+main{
+    padding: 40px 0;
 }
 
 .logo {

@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="../css/profile.css">
     <script src="../js/services/games.js"></script>
     <script src="../js/services/users.js"></script>
-    <script src="../js/utils/openContent.js"></script>
+    <script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://snipp.ru/cdn/maskedinput/jquery.maskedinput.min.js"></script>
 </head>
 
 <body>
@@ -17,8 +18,7 @@
         <nav>
             <ul>
                 <li><a href="store.html">Магазин</a></li>
-                <li><a href="index.html?page=about">О нас</a></li>
-
+                <li><a href="about.html">О нас</a></li>
                 <li><a id="auth-link" href="profile.html" class="active">Профиль</a></li>
             </ul>
         </nav>
@@ -32,6 +32,8 @@
                     <img src="../assets/icons/unknownuser.png" alt="Avatar" class="avatar">
                     <div class="username">
                         <h1>Username</h1>
+                        <p class="edit-user" id="edit-user" onclick="showEditFrame()">редактировать</p>
+                        <div id="frame-content"></div>
                     </div>
                     <div class="balance-section">
                         <p class="balance-text">Баланс: 1000 руб.</p>
@@ -56,13 +58,13 @@
             <div class="modal-content" onclick="event.stopPropagation()">
                 <h2>Пополнить баланс</h2>
                 <label for="card-number">Номер карты:</label>
-                <input type="text" id="card-number" maxlength="16" placeholder="Введите номер карты">
+                <input type="text" class="mask-card-number" id="card-number" maxlength="16" placeholder="Введите номер карты">
         
                 <label for="expiry-date">Срок действия (MM/YY):</label>
-                <input type="text" id="expiry-date" maxlength="5" placeholder="MM/YY">
+                <input type="text" class="mask-card-date" id="expiry-date" maxlength="5" placeholder="MM/YY">
         
                 <label for="cvv">CVV:</label>
-                <input type="password" id="cvv" maxlength="3" placeholder="CVV">
+                <input type="text" class="mask-card-code" id="cvv" maxlength="3" placeholder="CVV">
         
                 <label for="amount">Сумма:</label>
                 <input type="number" id="amount" min="1" placeholder="Введите сумму">
@@ -81,60 +83,66 @@
         <p>&copy; 2024 Heat. Все права защищены.</p>
     </footer>
     <script>
+        $('.mask-card-number').mask('9999 9999 9999 9999');
+        $('.mask-card-date').mask('99/99');
+        $('.mask-card-code').mask('999');
+    </script>
+    <script>
 
-document.getElementById('top-up').addEventListener('click', () => {
-    document.getElementById('top-up-modal').style.display = 'flex';
-});
+        function showEditFrame(){
+            document.getElementById("frame-content").innerHTML = `
+                <iframe style="position: absolute; left: 0; top: 0" width="100%" height="100%" src="edit-profile.html">
+            `
+        }
 
-document.getElementById('cancel-top-up').addEventListener('click', () => {
-    document.getElementById('top-up-modal').style.display = 'none';
-});
-
-document.getElementById('confirm-top-up').addEventListener('click', async () => {
-    const cardNumber = document.getElementById('card-number').value.trim();
-    const expiryDate = document.getElementById('expiry-date').value.trim();
-    const cvv = document.getElementById('cvv').value.trim();
-    const amount = parseFloat(document.getElementById('amount').value.trim());
-
-    // Проверка на заполнение полей
-    if (!cardNumber || !expiryDate || !cvv || isNaN(amount) || amount <= 0) {
-        alert('Пожалуйста, заполните все поля корректно.');
-        return;
-    }
-
-    // Случайный фактор: успех или недостаток средств
-    const isPaymentSuccessful = Math.random() > 0.2; // 80% вероятность успеха
-
-    if (!isPaymentSuccessful) {
-        alert('Ошибка: недостаточно средств на карте.');
-        return;
-    }
-
-    // Обновление баланса
-    const user = JSON.parse(localStorage.getItem('user'));
-    const newBalance = user.balance + amount;
-    const updatedUser = { ...user, balance: newBalance };
-
-    try {
-        const response = await fetch(`${url}${user.id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(updatedUser),
+        document.getElementById('top-up').addEventListener('click', () => {
+            document.getElementById('top-up-modal').style.display = 'flex';
         });
 
-        if (!response.ok) throw new Error('Ошибка при обновлении данных.');
+        document.getElementById('cancel-top-up').addEventListener('click', () => {
+            document.getElementById('top-up-modal').style.display = 'none';
+        });
 
-        const updatedUserData = await response.json();
-        localStorage.setItem('user', JSON.stringify(updatedUserData));
-        document.querySelector('.balance-text').textContent = `Баланс: ${updatedUserData.balance} руб.`;
-        alert('Баланс успешно пополнен!');
-        document.getElementById('top-up-modal').style.display = 'none';
-    } catch (e) {
-        alert(`Ошибка при пополнении баланса: ${e.message}`);
-    }
-});
+        document.getElementById('confirm-top-up').addEventListener('click', async () => {
+            const cardNumber = document.getElementById('card-number').value.trim();
+            const expiryDate = document.getElementById('expiry-date').value.trim();
+            const cvv = document.getElementById('cvv').value.trim();
+            const amount = parseFloat(document.getElementById('amount').value.trim());
 
+            if (!cardNumber || !expiryDate || !cvv || isNaN(amount) || amount <= 0) {
+                alert('Пожалуйста, заполните все поля корректно.');
+                return;
+            }
 
+            const isPaymentSuccessful = Math.random() > 0.2;
+
+            if (!isPaymentSuccessful) {
+                alert('Ошибка: недостаточно средств на карте.');
+                return;
+            }
+
+            const user = JSON.parse(localStorage.getItem('user'));
+            const newBalance = user.balance + amount;
+            const updatedUser = { ...user, balance: newBalance };
+
+            try {
+                const response = await fetch(`${url}${user.id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(updatedUser),
+                });
+
+                if (!response.ok) throw new Error('Ошибка при обновлении данных.');
+
+                const updatedUserData = await response.json();
+                localStorage.setItem('user', JSON.stringify(updatedUserData));
+                document.querySelector('.balance-text').textContent = `Баланс: ${updatedUserData.balance} руб.`;
+                alert('Баланс успешно пополнен!');
+                document.getElementById('top-up-modal').style.display = 'none';
+            } catch (e) {
+                alert(`Ошибка при пополнении баланса: ${e.message}`);
+            }
+        });
 
         const buyGame = async (gameId, gamePrice) => {
             const user = JSON.parse(localStorage.getItem("user"))
@@ -152,6 +160,7 @@ document.getElementById('confirm-top-up').addEventListener('click', async () => 
                 }
             }
         }
+
         function downloadGame(gameTitle) {
             const filePath = `../static/games/${gameTitle}/${gameTitle}.exe`;
             const link = document.createElement('a');
@@ -218,11 +227,15 @@ document.getElementById('confirm-top-up').addEventListener('click', async () => 
                 : contentDiv.innerHTML = `<h2>Корзина</h2>
                     ${games.map(game => `<div class="cart-item" onclick="location.href='gamepage.html?id=${encodeURIComponent(game.id)}'">
                         <img src="../static/games/${game.title}/${game.images[0]}" alt="${game.title}">
-                        <div>
+                        <div class="description">
+                            <div>
                             <p>${game.title}</p>
-                            <p>${game.discount ? game.discount : game.price}</p>
+                            <p>Цена: ${game.discount ? game.discount : game.price}</p>
+                            </div>
+                            <div style="display: flex; gap: 20px">
                             <button class="buy-btn" onclick="event.stopPropagation();buyGame('${game.id}', '${game.discount ? game.discount : game.price}')">Купить</button>
                             <button class="delete-btn" onclick="event.stopPropagation();removeGameFromCart('${game.id}')">Удалить</button>
+                            </div>
                         </div>
                         </div>
                     `).join("")}`;
@@ -299,9 +312,14 @@ document.getElementById('confirm-top-up').addEventListener('click', async () => 
             });
         });
 
-        document.getElementById("edit_profile").addEventListener("click", () => {
+        // document.getElementById("edit_profile").addEventListener("click", () => {
 
-        })
+        // })
+
+        function openContent(content){
+            content.dispatchEvent(new MouseEvent("click"))
+            localStorage.removeItem("content")
+        }
 
         const content = localStorage.getItem("content") == "cart" ? cartBtn : libraryBtn
 

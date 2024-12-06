@@ -135,12 +135,12 @@ footer {
 .profile-actions {
     margin-bottom: 20px;
     display: flex;
-    justify-content: center; /* Центрируем кнопки */
+    justify-content: center; 
+    gap: 15px;
 }
 
 .profile-actions button {
-    padding: 12px 25px; /* Увеличиваем padding */
-    margin-right: 15px; /* Увеличиваем отступ между кнопками */
+    padding: 12px 25px; 
     background-color: #333;
     border-radius: 4px;
     color: #fff;
@@ -152,10 +152,10 @@ footer {
 .profile-actions button:hover{
     background-color: #525252;
 }
-/* Стили для контента */
+
 .content {
     margin-top: 20px;
-    width: 70%; /* Увеличиваем ширину контента */
+    width: 70%; 
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -167,10 +167,12 @@ footer {
 .library, .cart-item {
     margin-top: 20px;
     text-align: left;
+    
 }
 
 .game, .cart-item {
     display: flex;
+    font-weight: bold;
     align-items: center;
     margin-bottom: 15px;
     padding: 15px; /* Увеличиваем отступы для карточек */
@@ -194,11 +196,14 @@ footer {
     margin: 0;
 }
 
-.cart-item div {
+.descriiption{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
+
+
+
 
 
 /* Кнопки для скачивания и покупки */
@@ -222,7 +227,7 @@ footer {
 }
 
 .delete-btn {
-    padding: 10px 20px; /* Размер кнопки */
+    padding: 12px 25px; /* Размер кнопки */
     background-color: #ff4d4d; /* Красный цвет */
     color: white;
     border: none;
@@ -300,6 +305,7 @@ form button {
     color: white;
     border: none;
     cursor: pointer;
+    font-size: 16px;
 }
 
 form button:hover {
@@ -366,4 +372,14 @@ form button:hover {
 
 #edit_profile:hover{
     color: rgb(155, 155, 155);
+}
+
+.edit-user{
+    color: rgb(148, 148, 148);
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.edit-user:hover{
+    color: rgb(174, 174, 174);
 }
