@@ -1,0 +1,106 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;  /* Центрируем по вертикали */
+    justify-content: center;  /* Центрируем по горизонтали */
+    min-height: 100vh;  /* Устанавливаем минимальную высоту 100% от высоты окна */
+    background-color: #f4f4f4;
+    font-family: 'Roboto', sans-serif;
+    overflow: hidden; /* Отключаем прокрутку */
+}
+
+.game-item {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 15px;  /* Снижен отступ для компактности */
+    width: 100%;
+    max-width: 320px;  /* Уменьшена максимальная ширина карточки */
+    text-align: center;
+    color: #2c3e50;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;  /* Разделяем элементы по вертикали */
+}
+
+.game-title {
+    font-size: 20px;  /* Уменьшен размер заголовка */
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #e67e22;
+    overflow: hidden;  /* Обрезаем длинные заголовки */
+    text-overflow: ellipsis;  /* Добавляем троеточие, если текст слишком длинный */
+    white-space: nowrap;  /* Запрещаем перенос строки */
+}
+
+.game-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 4px solid #e67e22;
+    max-height: 200px;  /* Ограничиваем высоту изображения */
+    object-fit: cover;  /* Подгоняем изображение по размеру, сохраняя пропорции */
+}
+
+.game-details {
+    font-size: 14px;  /* Уменьшен размер текста */
+    color: #2c3e50;
+}
+
+.game-details p {
+    margin: 6px 0;
+    line-height: 1.4;
+}
+
+#game-price {
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+#game-release-date {
+    color: #95a5a6;
+}
+
+#game-description {
+    font-size: 12px;  /* Уменьшен размер текста */
+    color: #2c3e50;
+    margin-top: 10px;
+    line-height: 1.6;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 80px;  /* Ограничиваем высоту описания */
+}
+
+.game-tag {
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #27ae60;
+    border-radius: 5px;
+    padding: 6px 12px;
+    display: inline-block;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.game-btn {
+    background-color: #e67e22;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.game-btn:hover {
+    background-color: #d35400;
+}
+

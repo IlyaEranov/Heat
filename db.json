@@ -19,6 +19,7 @@
     },
     {
       "id": "2b60",
+      "name": "emil",
       "userName": "emil",
       "email": "emil@mail.ru",
       "password": "emil123EMIL_",
@@ -33,12 +34,15 @@
         "3d7f",
         "6fe8",
         "a17b",
-        "3e41"
+        "3e41",
+        "7e27",
+        "e180"
       ],
+      "avatar": null,
       "cartId": [
         "1fb8"
       ],
-      "balance": 1000
+      "balance": 1065
     },
     {
       "id": "4bcd",
@@ -415,6 +419,23 @@
       "price": "2200",
       "ageRestricted": false,
       "releaseDate": "2024-12-01T15:30:19.575Z"
+    },
+    {
+      "id": "e180",
+      "developer": "emil",
+      "title": "Slapshot Rebound",
+      "category": "Спорт",
+      "trailer": "Slapshot Reboundvid.webm",
+      "images": [
+        "Slapshot Rebound1.jpg",
+        "Slapshot Rebound2.jpg",
+        "Slapshot Rebound3.jpg"
+      ],
+      "file": "Slapshot Rebound.exe",
+      "description": "Slapshot: Rebound — спортивная инди-игра про хоккей с видом от третьего лица. Вам предстоит отправиться на лед в этой многопользовательской игре, основанной на физике, в которой вы играете в аркадный хоккейный матч. Ни кнопки броска, ни клея для шайб, ни ГСЧ. Вы и ваша команда будете контролировать шайбу, передавать, стрелять, переигрывать своих соперников.",
+      "price": "249",
+      "ageRestricted": false,
+      "releaseDate": "2024-12-07T05:47:55.304Z"
     }
   ],
   "reviews": [
@@ -437,6 +458,17 @@
         "graphics": 3,
         "gameplay": 4,
         "story": 5,
+        "sound": 4
+      }
+    },
+    {
+      "id": "8fa7",
+      "userId": "2b60",
+      "gameId": "7e27",
+      "ratings": {
+        "graphics": 4,
+        "gameplay": 4,
+        "story": 4,
         "sound": 4
       }
     }

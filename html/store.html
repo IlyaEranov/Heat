@@ -24,6 +24,12 @@
 
     <main>
 
+        <div id="promo-frame" class="promo-frame" style="display: none;">
+            <span id="promo-close" class="promo-close">&times;</span>
+            <iframe id="promo-iframe" src="" frameborder="0" class="promo-iframe"></iframe>
+        </div>
+        
+
         <div id="marquee-container" class="marquee" style="display: none;">
             <div id="marquee-wrapper">
                 <p id="marquee-text"></p>
@@ -82,6 +88,43 @@
                 marqueeContainer.style.display = 'none';
             }
         }
+        
+        // Функция для отображения фрейма с промо-игрой
+function displayPromoFrame(games) {
+    const promoFrame = document.getElementById('promo-frame');
+    const promoIframe = document.getElementById('promo-iframe');
+    const promoClose = document.getElementById('promo-close');
+
+    const latestGame = games[games.length - 1];
+    if (!latestGame) return;
+
+    // Формируем URL для страницы с деталями игры
+    const promoUrl = `promo_game.html?id=${encodeURIComponent(latestGame.id)}`;
+
+    // Устанавливаем URL в iframe (можно также просто использовать ссылку)
+    promoIframe.src = promoUrl;
+
+    // Показываем фрейм
+    promoFrame.style.display = 'block';
+
+    // Закрытие фрейма
+    promoClose.addEventListener('click', () => {
+        promoFrame.style.display = 'none';
+        promoIframe.src = ''; // Очищаем iframe для экономии ресурсов
+    });
+}
+
+
+
+
+// Вызываем функцию после загрузки игр
+try {
+    games = await getGames();
+    displayPromoFrame(games);
+} catch (error) {
+    alert('Не удалось загрузить данные о играх. Попробуйте снова позже.');
+}
+
 
 
 
