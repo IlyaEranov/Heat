@@ -30,13 +30,17 @@
             <div class="profile">
                 <div class="profile-info">
                     <div class="username">
-                        <h1>Username</h1>
+                        <h1 id="username-display">Username</h1>
+                        <input type="text" id="username-edit" style="display: none;" />
+                        <button id="edit-username-btn">Изменить</button>
+                        <button id="save-username-btn" style="display: none;">Сохранить</button>
                     </div>
                     <div class="balance-section">
                         <p class="balance-text">Баланс: 1000 руб.</p>
                         <button id="top-up">Пополнить</button>
                     </div>
                 </div>
+                
 
                 <div class="profile-actions">
                     <button id="show-library">Библиотека</button>
@@ -85,6 +89,57 @@
         $('.mask-card-code').mask('999');
     </script>
     <script>
+
+const editUsernameBtn = document.getElementById('edit-username-btn');
+const saveUsernameBtn = document.getElementById('save-username-btn');
+const usernameDisplay = document.getElementById('username-display');
+const usernameEdit = document.getElementById('username-edit');
+
+// Show the username in the editable input field and toggle button visibility
+editUsernameBtn.addEventListener('click', () => {
+    usernameEdit.value = usernameDisplay.textContent;  // Populate input with current username
+    usernameDisplay.style.display = 'none';
+    usernameEdit.style.display = 'block';
+    saveUsernameBtn.style.display = 'inline-block';
+    editUsernameBtn.style.display = 'none';
+});
+
+// Save the new username and update the localStorage
+saveUsernameBtn.addEventListener('click', async () => {
+    const newUsername = usernameEdit.value.trim();
+
+    if (newUsername === '') {
+        alert('Пожалуйста, введите новый никнейм.');
+        return;
+    }
+
+    const user = JSON.parse(localStorage.getItem('user'));
+    user.userName = newUsername;
+
+    try {
+        const response = await fetch(`${url}${user.id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(user),
+        });
+
+        if (!response.ok) throw new Error('Ошибка при обновлении данных.');
+
+        const updatedUser = await response.json();
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+
+        usernameDisplay.textContent = updatedUser.userName;
+        usernameDisplay.style.display = 'block';
+        usernameEdit.style.display = 'none';
+        saveUsernameBtn.style.display = 'none';
+        editUsernameBtn.style.display = 'inline-block';
+
+        alert('Никнейм успешно обновлен!');
+    } catch (e) {
+        alert(`Ошибка при обновлении никнейма: ${e.message}`);
+    }
+});
+
 
         document.getElementById('top-up').addEventListener('click', () => {
             document.getElementById('top-up-modal').style.display = 'flex';

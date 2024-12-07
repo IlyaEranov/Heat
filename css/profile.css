@@ -374,3 +374,56 @@ form button:hover {
 .edit-user:hover{
     color: rgb(174, 174, 174);
 }
+
+/* Button styles for 'Изменить' */
+#edit-username-btn {
+    padding: 8px 16px; /* Smaller padding */
+    font-size: 14px; /* Smaller font size */
+    background-color: #4CAF50; /* Green color */
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100px;
+}
+
+#edit-username-btn:hover {
+    background-color: #45a049; /* Darker green on hover */
+    transform: scale(1.05); /* Slightly increase size on hover */
+}
+
+#edit-username-btn:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Soft focus outline */
+}
+
+/* Button styles for 'Сохранить' */
+#save-username-btn {
+    padding: 8px 16px; /* Smaller padding */
+    font-size: 14px; /* Smaller font size */
+    background-color: #f0a500; /* Orange color */
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100px;
+}
+
+#save-username-btn:hover {
+    background-color: #e69500; /* Darker orange on hover */
+    transform: scale(1.05); /* Slightly increase size on hover */
+}
+
+#save-username-btn:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Soft focus outline */
+}
+
+/* Initially hiding the 'Сохранить' button */
+#save-username-btn {
+    display: none;
+}
