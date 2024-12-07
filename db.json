@@ -2,7 +2,6 @@
   "users": [
     {
       "id": "7242",
-      "name": "Илья",
       "userName": "Ilya",
       "email": "ilya.erannov@mail.ru",
       "password": "123qweQWE_",
@@ -15,13 +14,11 @@
         "9bbf",
         "e05e"
       ],
-      "avatar": null,
       "cartId": [],
       "balance": 12733
     },
     {
       "id": "2b60",
-      "name": "emil",
       "userName": "emil",
       "email": "emil@mail.ru",
       "password": "emil123EMIL_",
@@ -38,7 +35,6 @@
         "a17b",
         "3e41"
       ],
-      "avatar": null,
       "cartId": [
         "1fb8"
       ],
@@ -46,7 +42,6 @@
     },
     {
       "id": "4bcd",
-      "name": "linar",
       "userName": "linar",
       "email": "linar@mail.ru",
       "password": "qweZXC123_",
@@ -55,13 +50,11 @@
         "afb4",
         "7e27"
       ],
-      "avatar": null,
       "cartId": [],
       "balance": 12000
     },
     {
       "id": "a78f",
-      "name": "Сережа",
       "userName": "raybarnblitz",
       "email": "raybarnblitz@mail.ru",
       "password": "raybarnblitZ123_",
@@ -74,7 +67,6 @@
         "9bbf",
         "43ea"
       ],
-      "avatar": null,
       "cartId": [],
       "balance": 0
     }

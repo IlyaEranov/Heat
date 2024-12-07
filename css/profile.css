@@ -27,9 +27,9 @@ header {
     align-items: center;
 }
 .container {
-    max-width: 1200px; /* Максимальная ширина, можно регулировать */
-    margin: 0 auto; /* Центрирование по горизонтали */
-    padding: 0 20px; /* Внутренние отступы по бокам */
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 0 20px; 
 }
 
 .logo {
@@ -53,12 +53,12 @@ nav ul li a {
 }
 
 nav ul li a.active {
-    border-bottom: 2px solid #f0a500; /* Цвет выделения активной ссылки */
+    border-bottom: 2px solid #f0a500; 
     color: #f0a500;
 }
 
 nav ul li a:hover {
-    color: #f0a500; /* Цвет при наведении */
+    color: #f0a500; 
 }
 
 main {
@@ -74,7 +74,6 @@ footer {
     margin-top: auto;
 }
 
-/* Стили профиля */
 .profile {
     background: white;
     padding: 20px;
@@ -86,12 +85,12 @@ footer {
 .profile-info {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start; /* Выровнять по верху */
+    align-items: flex-start;
     margin-bottom: 20px;
 }
 
 .avatar {
-    width: 120px; /* Увеличиваем размер аватара */
+    width: 120px;
     height: 120px;
     border-radius: 50%;
 }
@@ -106,7 +105,7 @@ footer {
 
 .username h1 {
     margin: 0;
-    font-size: 28px; /* Увеличиваем размер шрифта для никнейма */
+    font-size: 28px; 
 }
 
 .balance-section {
@@ -119,7 +118,7 @@ footer {
 }
 
 #top-up {
-    padding: 6px 24px; /* Увеличиваем padding для кнопки */
+    padding: 6px 24px; 
     background-color: #f0a500;
     border: none;
     color: #fff;
@@ -131,7 +130,6 @@ footer {
     background-color: #e69500;
 }
 
-/* Кнопки профиля */
 .profile-actions {
     margin-bottom: 20px;
     display: flex;
@@ -163,7 +161,6 @@ footer {
     align-items: center;
 }
 
-/* Стили для библиотеки и корзины */
 .library, .cart-item {
     margin-top: 20px;
     text-align: left;
@@ -175,21 +172,21 @@ footer {
     font-weight: bold;
     align-items: center;
     margin-bottom: 15px;
-    padding: 15px; /* Увеличиваем отступы для карточек */
+    padding: 15px; 
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #fff;
-    width: 80%; /* Увеличиваем ширину карточек */
-    max-width: 500px; /* Увеличиваем максимальную ширину карточек */
+    width: 80%; 
+    max-width: 500px; 
     margin-left: auto;
     margin-right: auto;
     cursor: pointer;
 }
 
 .game img, .cart-item img {
-    width: 80px; /* Увеличиваем размер изображения */
+    width: 80px; 
     height: 80px;
-    margin-right: 20px; /* Увеличиваем отступ между изображением и текстом */
+    margin-right: 20px; 
 }
 
 .library p, .cart-item p {
@@ -202,20 +199,15 @@ footer {
     align-items: flex-start;
 }
 
-
-
-
-
-/* Кнопки для скачивания и покупки */
 .download-btn, .buy-btn {
-    padding: 12px 25px; /* Увеличиваем padding */
+    padding: 12px 25px; 
     background-color: #f0a500;
     border: none;
     color: white;
     cursor: pointer;
     border-radius: 5px;
     margin-top: 10px;
-    width: 130px; /* Увеличиваем ширину кнопок */
+    width: 130px;
 }
 
 .download-btn:hover, .buy-btn:hover {
@@ -227,18 +219,18 @@ footer {
 }
 
 .delete-btn {
-    padding: 12px 25px; /* Размер кнопки */
-    background-color: #ff4d4d; /* Красный цвет */
+    padding: 12px 25px; 
+    background-color: #ff4d4d; 
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 5px;
     margin-top: 10px;
-    width: 130px; /* Ширина кнопки */
+    width: 130px;
 }
 
 .delete-btn:hover {
-    background-color: #e63946; /* Темно-красный цвет при наведении */
+    background-color: #e63946;
 }
 
 .game {
@@ -278,34 +270,33 @@ footer {
     width: 130px;
 }
 
-/* Кнопка скачивания */
 .download-btn:hover {
     background-color: #e69500;
 }
 
-/* Стили для формы выпуска игры */
 form {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Увеличиваем отступы между полями */
+    gap: 15px; 
     margin-top: 20px;
     width: 100%;
 }
 
-form input, form textarea {
-    padding: 10px; /* Увеличиваем padding */
+form input, form textarea, select {
+    padding: 10px;
     width: 100%;
     border-radius: 4px;
     border: 1px solid #ddd;
 }
 
 form button {
-    padding: 12px 25px; /* Увеличиваем padding для кнопки */
+    padding: 12px 25px; 
     background-color: #333;
     color: white;
     border: none;
     cursor: pointer;
     font-size: 16px;
+    border-radius: 4px;
 }
 
 form button:hover {

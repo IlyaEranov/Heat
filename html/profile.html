@@ -29,11 +29,8 @@
         <div class="container">
             <div class="profile">
                 <div class="profile-info">
-                    <img src="../assets/icons/unknownuser.png" alt="Avatar" class="avatar">
                     <div class="username">
                         <h1>Username</h1>
-                        <p class="edit-user" id="edit-user" onclick="showEditFrame()">редактировать</p>
-                        <div id="frame-content"></div>
                     </div>
                     <div class="balance-section">
                         <p class="balance-text">Баланс: 1000 руб.</p>
@@ -88,12 +85,6 @@
         $('.mask-card-code').mask('999');
     </script>
     <script>
-
-        function showEditFrame(){
-            document.getElementById("frame-content").innerHTML = `
-                <iframe style="position: absolute; left: 0; top: 0" width="100%" height="100%" src="edit-profile.html">
-            `
-        }
 
         document.getElementById('top-up').addEventListener('click', () => {
             document.getElementById('top-up-modal').style.display = 'flex';
@@ -176,10 +167,6 @@
 
         if (userAuth) {
             document.querySelector('.username h1').textContent = userAuth.userName;
-            const avatar = document.querySelector(".avatar")
-            userAuth.avatar == null
-                ? avatar.src = "../assets/icons/unknownuser.png"
-                : avatar.src = `../static/users/${userAuth.userName}/avatar/${userAuth.avatar}`;
             document.querySelector('.balance-text').textContent = `Баланс: ${userAuth.balance} руб.`;
         } else {
             window.location.href = "login.html";
@@ -311,10 +298,6 @@
                 window.location.href = "profile.html"
             });
         });
-
-        // document.getElementById("edit_profile").addEventListener("click", () => {
-
-        // })
 
         function openContent(content){
             content.dispatchEvent(new MouseEvent("click"))

@@ -30,7 +30,7 @@ const registerUser = async (user) => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ ...user, gamesId: [], avatar: null, cartId: [], balance: 0 })
+                body: JSON.stringify({ ...user, gamesId: [], cartId: [], balance: 0 })
             })
             localStorage.setItem('user', JSON.stringify(await response.json()));
             window.location.href = "profile.html";
@@ -134,17 +134,3 @@ const userIsAuthLink = () => {
         authLink.href = "login.html";
     }
 }
-
-// const editUser = async (newUser) => {
-//     try{
-//         const response = await fetch(url + user.id, {
-//             method: "PUT",
-//             headers: {
-//                 "Content-Type": "application/json"
-//             }
-//             body: JSON.stringify(newUser)
-//         })
-//     } catch (e) {
-//         alert(`Ошибка при изменении профиля: ${e.message}`)
-//     }
-// }

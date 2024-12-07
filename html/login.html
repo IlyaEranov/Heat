@@ -24,7 +24,7 @@
 
     <main>
         <section class="auth">
-            <h1>Вход</h1>
+            <h1 id="title">Вход</h1>
             <div class="tabs">
                 <button onclick="showTab('login')">Авторизация</button>
                 <button onclick="showTab('register')">Регистрация</button>
@@ -36,12 +36,11 @@
                     <div class="error" id="login__error__userName"></div>
                     <input type="password" name="password" placeholder="Пароль" required>
                     <div class="error" id="login__error__password"></div>
-                    <button type="submit">Войти</button>
+                    <button class="submit-button" type="submit">Войти</button>
                 </form>
             </div>
 
             <div id="registerForm" style="display: none;">
-                <h2>Регистрация пользователя</h2>
                 <form onsubmit="event.preventDefault();handlerSubmitRegister()">
                     <input type="text" name="name" placeholder="Имя" required>
                     <div class="error" id="register__error__name"></div>
@@ -52,7 +51,7 @@
                     <input type="password" name="password" placeholder="Пароль" required>
                     <div class="error" id="register__error__password"></div>
                     <input type="date" name="dob" placeholder="Дата рождения" required>
-                    <button type="submit">Зарегистрироваться</button>
+                    <button class="submit-button" type="submit">Зарегистрироваться</button>
                 </form>
             </div>
         </section>
@@ -62,7 +61,6 @@
         <p>&copy; 2024 Heat. Все права защищены.</p>
     </footer>
     <script>
-        // Проверка авторизации
         userIsAuthLink()
         const authUser = localStorage.getItem("user")
         if(authUser){
@@ -72,6 +70,7 @@
         function showTab(tabName) {
             document.getElementById('loginForm').style.display = (tabName === 'login') ? 'block' : 'none';
             document.getElementById('registerForm').style.display = (tabName === 'register') ? 'block' : 'none';
+            document.getElementById("title").innerHTML = (tabName === 'register') ? 'Регистрация' : 'Вход';
         }
 
         const getData = (formId) => {
