@@ -61,39 +61,45 @@
 
         </div>
 
-    <script type="module">
-        userIsAuthLink();
-        const user = JSON.parse(localStorage.getItem('user'));
-        const isUserAuth = user !== null;
-        let games = [];
-
-        try {
-            games = await getGames();
-        } catch (error) {
-            alert('Не удалось загрузить данные о играх. Попробуйте снова позже.');
-        }
-
-        function updateMarquee(games) {
-            const marqueeContainer = document.getElementById("marquee-container");
-            const marqueeText = document.getElementById("marquee-text");
-
-            const discountedGames = games
-            .filter(game => game.discount && game.discount < game.price)
-            .map(game => `<span>${game.title}: Скидка ${game.discount} руб.</span>`);
-
-            if (discountedGames.length > 0) {
-                marqueeText.innerHTML = discountedGames.join(' | ');
-                marqueeContainer.style.display = 'block';
-            } else {
-                marqueeContainer.style.display = 'none';
-            }
-        }
+        <script type="module">
+            userIsAuthLink();
+            const user = JSON.parse(localStorage.getItem('user'));
+            const isUserAuth = user !== null;
+            let games = [];
         
-        // Функция для отображения фрейма с промо-игрой
+            try {
+                games = await getGames();
+            } catch (error) {
+                alert('Не удалось загрузить данные о играх. Попробуйте снова позже.');
+            }
+        
+            function updateMarquee(games) {
+                const marqueeContainer = document.getElementById("marquee-container");
+                const marqueeText = document.getElementById("marquee-text");
+        
+                const discountedGames = games
+                    .filter(game => game.discount && game.discount < game.price)
+                    .map(game => `<span>${game.title}: Скидка ${game.discount} руб.</span>`);
+        
+                if (discountedGames.length > 0) {
+                    marqueeText.innerHTML = discountedGames.join(' | ');
+                    marqueeContainer.style.display = 'block';
+                } else {
+                    marqueeContainer.style.display = 'none';
+                }
+            }
+        
+            // Функция для отображения фрейма с промо-игрой
+            // Функция для отображения фрейма с промо-игрой
 function displayPromoFrame(games) {
     const promoFrame = document.getElementById('promo-frame');
     const promoIframe = document.getElementById('promo-iframe');
     const promoClose = document.getElementById('promo-close');
+
+    // Check if promo has been shown in this session
+    if (sessionStorage.getItem('promoShown')) {
+        return; // Skip if already shown
+    }
 
     const latestGame = games[games.length - 1];
     if (!latestGame) return;
@@ -101,7 +107,7 @@ function displayPromoFrame(games) {
     // Формируем URL для страницы с деталями игры
     const promoUrl = `promo_game.html?id=${encodeURIComponent(latestGame.id)}`;
 
-    // Устанавливаем URL в iframe (можно также просто использовать ссылку)
+    // Устанавливаем URL в iframe
     promoIframe.src = promoUrl;
 
     // Показываем фрейм
@@ -111,84 +117,77 @@ function displayPromoFrame(games) {
     promoClose.addEventListener('click', () => {
         promoFrame.style.display = 'none';
         promoIframe.src = ''; // Очищаем iframe для экономии ресурсов
+        sessionStorage.setItem('promoShown', 'true'); // Mark promo as shown for the session
     });
 }
 
-
-
-
-// Вызываем функцию после загрузки игр
-try {
-    games = await getGames();
-    displayPromoFrame(games);
-} catch (error) {
-    alert('Не удалось загрузить данные о играх. Попробуйте снова позже.');
-}
-
-
-
-
-
-
-        function displayGames(gamesToDisplay) {
-            const gamesContainer = document.getElementById("games");
-            if (gamesToDisplay.length === 0) {
-                gamesContainer.innerHTML = `<p>Нет доступных игр в этой категории.</p>`;
-                return;
+        
+            // Вызываем функцию после загрузки игр
+            try {
+                games = await getGames();
+                displayPromoFrame(games);
+            } catch (error) {
+                alert('Не удалось загрузить данные о играх. Попробуйте снова позже.');
             }
-
-            gamesContainer.innerHTML = `<div class="game-grid">
-                ${gamesToDisplay.map(e => {
-                const inLibrary = user?.gamesId.find(i => i == e.id) != undefined;
-                const inCart = user?.cartId.find(i => i == e.id) != undefined;
-                const isGameAuthor = e.developer === user?.userName;
-                return `
-                    <div class="game-item" onclick="location.href='gamepage.html?id=${encodeURIComponent(e.id)}'">
-                        <div class="game-title">${e.title}</div>
-                        <img src="../static/games/${e.title}/${e.images[0]}" alt="${e.title}" class="game-image">
-                        ${inLibrary
-                            ? `<div class="game-price" style="height: 18px"></div>
-                            <div class="in-library">В библиотеке</div>`
-                            : `
-                            <div class="game-price">
-                                ${e.discount
-                                ? `<span class="original-price">${e.price} руб.</span>
-                                    <span class="discount-price">${e.discount} руб.</span>`
-                                : `${e.price} руб.`}
-                            </div>`}
-                            ${isUserAuth
-                                ? (inLibrary
-                                    ? ''
-                                    : (isGameAuthor
+        
+            function displayGames(gamesToDisplay) {
+                const gamesContainer = document.getElementById("games");
+                if (gamesToDisplay.length === 0) {
+                    gamesContainer.innerHTML = `<p>Нет доступных игр в этой категории.</p>`;
+                    return;
+                }
+        
+                gamesContainer.innerHTML = `<div class="game-grid">
+                    ${gamesToDisplay.map(e => {
+                    const inLibrary = user?.gamesId.find(i => i == e.id) != undefined;
+                    const inCart = user?.cartId.find(i => i == e.id) != undefined;
+                    const isGameAuthor = e.developer === user?.userName;
+                    return `
+                        <div class="game-item" onclick="location.href='gamepage.html?id=${encodeURIComponent(e.id)}'">
+                            <div class="game-title">${e.title}</div>
+                            <img src="../static/games/${e.title}/${e.images[0]}" alt="${e.title}" class="game-image">
+                            ${inLibrary
+                                ? `<div class="game-price" style="height: 18px"></div>
+                                <div class="in-library">В библиотеке</div>`
+                                : `
+                                <div class="game-price">
+                                    ${e.discount
+                                    ? `<span class="original-price">${e.price} руб.</span>
+                                        <span class="discount-price">${e.discount} руб.</span>`
+                                    : `${e.price} руб.`}
+                                </div>`}
+                                ${isUserAuth
+                                    ? (inLibrary
                                         ? ''
-                                        : (inCart
-                                            ? '<div class="in-cart">В корзине</div>'
-                                            : `<button class="add-to-cart" onclick="event.stopPropagation();addGameInCart('${e.id}')">Добавить в корзину</button>`)))
-                                : `<button class="add-to-cart" onclick="event.stopPropagation();alert('Для добавления игры в корзину нужно быть авторизованным');window.location.href='login.html'">Добавить в корзину</button>`}
+                                        : (isGameAuthor
+                                            ? ''
+                                            : (inCart
+                                                ? '<div class="in-cart">В корзине</div>'
+                                                : `<button class="add-to-cart" onclick="event.stopPropagation();addGameInCart('${e.id}')">Добавить в корзину</button>`)))
+                                    : `<button class="add-to-cart" onclick="event.stopPropagation();alert('Для добавления игры в корзину нужно быть авторизованным');window.location.href='login.html'">Добавить в корзину</button>`}
+                        </div>`;}).join('')}
                     </div>`;
-                }).join('')}
-                </div>`;
-        }
-
-        const defaultCategory = "Открытый мир";
-        const defaultGames = games.filter(game => game.category === defaultCategory);
-        displayGames(defaultGames);
-        updateMarquee(games);
-
-        const categoryItems = document.querySelectorAll('.category-item');
-        categoryItems.forEach(item => {
-            item.addEventListener('click', function () {
-                categoryItems.forEach(i => i.classList.remove('active'));
-                this.classList.add('active');
-
-                const selectedCategory = this.getAttribute('data-category');
-                const filteredGames = games.filter(game => game.category === selectedCategory);
-                displayGames(filteredGames);
+            }
+        
+            const defaultCategory = "Открытый мир";
+            const defaultGames = games.filter(game => game.category === defaultCategory);
+            displayGames(defaultGames);
+            updateMarquee(games);
+        
+            const categoryItems = document.querySelectorAll('.category-item');
+            categoryItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    categoryItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+        
+                    const selectedCategory = this.getAttribute('data-category');
+                    const filteredGames = games.filter(game => game.category === selectedCategory);
+                    displayGames(filteredGames);
+                });
             });
-        });
-
-
-    </script>
+        </script>
+        
+        
 </body>
 
 </html>
