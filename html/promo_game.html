@@ -11,7 +11,7 @@
 <body>
     <div class="game-item">
         <div id="game-tag" class="game-tag"></div> <!-- Место для метки -->
-        <div class="game-title" id="game-title"></div>        
+        <div class="game-title" id="game-title"></div>
         <img id="game-image" src="" alt="Game Image" class="game-image">
         <div class="game-details">
             <p id="game-price"></p>
@@ -22,34 +22,28 @@
             <button id="go-to-game" class="game-btn">Перейти на страницу игры</button>
         </div>
     </div>
-    
-    <!-- Кнопка для перехода на страницу игры -->
-    
 
     <script>
-        // Получение данных из query-параметров
         const params = new URLSearchParams(window.location.search);
         const gameId = params.get('id');
-    
+
         async function loadGameData() {
             try {
                 const response = await fetch('http://localhost:5000/games');
                 const games = await response.json();
-    
-                // Поиск игры по ID
-                const game = games.find(g => g.id.toString() === gameId); // Преобразуем ID к строке для сравнения
-    
+                const game = games.find(g => g.id.toString() === gameId);
+
                 if (game) {
                     document.getElementById('game-title').textContent = game.title;
                     document.getElementById('game-image').src = '/static/games/' + game.title + '/' + game.images[0];
                     document.getElementById('game-price').textContent = `Цена: ${game.discount ? `${game.discount} руб. (Старая цена: ${game.price} руб.)` : `${game.price} руб.`}`;
                     document.getElementById('game-release-date').textContent = `Дата выхода: ${new Date(game.releaseDate).toLocaleDateString()}`;
-    
+
                     const gameTag = document.getElementById('game-tag');
                     const releaseDate = new Date(game.releaseDate);
                     const today = new Date();
                     const diffDays = (today - releaseDate) / (1000 * 3600 * 24);
-    
+
                     if (diffDays <= 30) {
                         gameTag.textContent = "Новинка!";
                         gameTag.classList.add("new-tag");
@@ -63,17 +57,15 @@
                 console.error('Ошибка загрузки данных:', error);
             }
         }
-    
+
         loadGameData();
-    
-        // При нажатии на кнопку переходим на страницу игры
-        // В promo_game.html
+
         document.getElementById('go-to-game').addEventListener('click', (event) => {
-    // Переход на страницу игры, открытие на основной странице, а не внутри фрейма
-    window.top.location.href = 'gamepage.html?id=' + gameId;  // Открытие на основной странице
-});
-
-
+            window.top.location.href = 'gamepage.html?id=' + gameId;
+        });
 
     </script>
     
+</body>
+
+</html>
