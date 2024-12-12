@@ -24,7 +24,7 @@
 
     <main>
 
-        
+
         <div class="container">
             <h1 class="game-title" id="game-title-display">Название игры</h1>
 
@@ -47,16 +47,16 @@
                 </div>
 
             </div>
-            
-            <div id="modal-frame" style="display: none;" 
-                onclick="
+
+            <div id="modal-frame" style="display: none;" onclick="
                     document.getElementById('modal-frame').style.display = 'none';
                     document.getElementById('discount-section').className = ''
             ">
                 <div id="discount-section" onclick="event.stopPropagation();">
                     <label>Изменение цены игры</label>
                     <div style="display: flex;align-items: center;gap:10px;margin-top: 10px; max-width: 600px;">
-                        <input type="number" id="new-price" min="1" placeholder="Введите новую цену" class="new-price" oninput="validity.valid||(value='');">
+                        <input type="number" id="new-price" min="1" placeholder="Введите новую цену" class="new-price"
+                            oninput="validity.valid||(value='');">
                         <button id="discount-btn" class="discount-btn">Поменять цену</button>
                         <button class="discount-btn" onclick="document.getElementById('modal-frame').style.display = 'none';
                         document.getElementById('discount-section').className = ''">Отмена</button>
@@ -144,18 +144,44 @@
             });
         }
 
-        
-        async function selectMedia(src) {
+        let currentValue = -1
+
+        async function leftArrowHandler() {
+            const games = await getGames();
+            const game = games.find(g => g.id == gameId);
+            if (currentValue == 0) {
+                selectMedia(game.trailer, -1)
+            } else {
+                selectMedia(game.images[currentValue - 1], currentValue - 1)
+            }
+        }
+
+        async function rightArrowHandler() {
+            const games = await getGames();
+            const game = games.find(g => g.id == gameId);
+            selectMedia(game.images[currentValue + 1], currentValue + 1)
+            console.log(currentValue)
+        }
+
+        async function selectMedia(src, i) {
+            currentValue = i
             const games = await getGames();
             const game = games.find(g => g.id == gameId);
             const selectedMedia = document.querySelector('.selected-media');
-            console.log(src);
             if (src.endsWith('.mp4') || src.endsWith('.webm')) {
-                selectedMedia.innerHTML = `<video controls muted autoplay>
+                selectedMedia.innerHTML = `
+                <img class="arrow" id="left-arrow" onclick="leftArrowHandler()" src="../assets/images/arrow.svg"/>
+                <video class="selected-media__element" id="selectedMedia" controls muted autoplay>
                     <source src="../static/games/${game.title}/${src}" type="video/mp4">
-                </video>`;
+                </video>
+                <img class="arrow" id="right-arrow" onclick="rightArrowHandler()" src="../assets/images/arrow.svg"/>
+                `;
             } else {
-                selectedMedia.innerHTML = `<img src="../static/games/${game.title}/${src}" alt="Selected media">`;
+                selectedMedia.innerHTML = `
+                <img class="arrow" id="left-arrow" onclick="leftArrowHandler()" src="../assets/images/arrow.svg"/>
+                <img class="selected-media__element" id="selectedMedia" src="../static/games/${game.title}/${src}" alt="Selected media">
+                <img class="arrow" id="right-arrow" onclick="rightArrowHandler()" src="../assets/images/arrow.svg"/>
+                `;
             }
         }
 
@@ -184,7 +210,7 @@
             return response.ok;
         }
 
-        let ratings = {}; 
+        let ratings = {};
 
         function enableReviewSubmission(user, gameId) {
             const stars = document.querySelectorAll('.review-stars .star');
@@ -277,7 +303,6 @@
             }
         }
 
-
         async function calculateGameRating(gameId) {
             const response = await fetch('http://localhost:5000/reviews');
             const reviews = (await response.json()).filter(review => review.gameId === gameId);
@@ -300,7 +325,7 @@
 
             document.getElementById("discount-btn").addEventListener("click", async () => {
                 const newPrice = document.getElementById("new-price").value;
-                
+
                 if (Number(newPrice) < Number(game.price)) {
                     game.discount = newPrice;
                     await editGame(game);
@@ -316,10 +341,10 @@
                     if (game.discount) {
                         buttonCart.innerText = "Закончить скидку";
                         buttonCart.addEventListener("click", async () => {
-                            game.discount = null; // Убираем скидку
+                            game.discount = null;
                             await editGame(game);
                             alert("Скидка завершена!");
-                            window.location.reload(); // Обновляем страницу
+                            window.location.reload();
                         });
                     } else {
                         buttonCart.innerText = "Сделать скидку";
@@ -329,7 +354,6 @@
                         });
                     }
                 } else if (Array.isArray(user.gamesId) && user.gamesId.includes(game.id)) {
-                    // Загружаем секцию отзывов
                     await loadReviewSection(user, game.id);
                     buttonCart.innerText = "В библиотеке";
                     buttonCart.disabled = true;
@@ -367,20 +391,19 @@
 
                     `;
                     const gamePriceOriginalElement = document.getElementById("game-price-original");
-const gamePriceDiscountedElement = document.getElementById("game-price-discounted");
-const gamePriceContainer = document.getElementById("game-price-container");
+                    const gamePriceDiscountedElement = document.getElementById("game-price-discounted");
+                    const gamePriceContainer = document.getElementById("game-price-container");
 
-if (game.discount && game.discount > 0) {
-    gamePriceOriginalElement.innerText = `${game.price} руб.`;
-    gamePriceDiscountedElement.innerText = `${game.discount} руб.`;
-    gamePriceOriginalElement.style.display = "inline";
-    gamePriceDiscountedElement.style.display = "inline";
-} else {
-    gamePriceOriginalElement.style.display = "none";
-    gamePriceDiscountedElement.innerText = `${game.price || "Не указана"} руб.`;
-    gamePriceDiscountedElement.style.display = "inline";
-}
-
+                    if (game.discount && game.discount > 0) {
+                        gamePriceOriginalElement.innerText = `${game.price} руб.`;
+                        gamePriceDiscountedElement.innerText = `${game.discount} руб.`;
+                        gamePriceOriginalElement.style.display = "inline";
+                        gamePriceDiscountedElement.style.display = "inline";
+                    } else {
+                        gamePriceOriginalElement.style.display = "none";
+                        gamePriceDiscountedElement.innerText = `${game.price || "Не указана"} руб.`;
+                        gamePriceDiscountedElement.style.display = "inline";
+                    }
 
                     const gameRating = document.getElementById("game-rating");
                     const averageRating = await calculateGameRating(game.id);
@@ -391,14 +414,16 @@ if (game.discount && game.discount > 0) {
                     const mediaCarousel = document.querySelector(".carousel");
                     const selectedMedia = document.querySelector(".selected-media");
 
-                    selectedMedia.innerHTML = `<video id="selected-video" muted autoplay controls>
+                    selectedMedia.innerHTML = `<img class="arrow" onclick="leftArrowHandler()" id="left-arrow" src="../assets/images/arrow.svg">
+                    <video class="selected-media__element" id="selectedMedia" muted autoplay controls>
                         <source src="../static/games/${game.title}/${game.trailer}" type="video/mp4">
-                    </video>`;
+                    </video>
+                    <img class="arrow" onclick="rightArrowHandler()" id="right-arrow" src="../assets/images/arrow.svg"/>`;
 
-                    mediaCarousel.innerHTML = `<img src="../assets/images/videoPreview.png" alt="${game.trailer}" class="carousel-item" onclick="selectMedia('${game.trailer}')">`;
+                    mediaCarousel.innerHTML = `<img src="../assets/images/videoPreview.png" alt="${game.trailer}" class="carousel-item" onclick="selectMedia('${game.trailer}', -1)">`;
 
-                    game.images.forEach(image => {
-                        mediaCarousel.innerHTML += `<img src="../static/games/${game.title}/${image}" alt="${image}" class="carousel-item" onclick="selectMedia('${image}')">`;
+                    game.images.forEach((image, index) => {
+                        mediaCarousel.innerHTML += `<img src="../static/games/${game.title}/${image}" alt="${image}" class="carousel-item" onclick="selectMedia('${image}', ${index})">`;
                     });
                 } else {
                     alert("Игра не найдена.");
@@ -410,6 +435,33 @@ if (game.discount && game.discount > 0) {
         }
 
         loadGameData();
+    </script>
+    <script type="module">
+
+        const games = await getGames()
+        const game = games.find(e => e.id == gameId)
+
+        const selectedMedia = document.querySelector(".selected-media");
+
+        selectedMedia.addEventListener("mouseover", () => {
+            if (currentValue == -1) {
+                document.getElementById("left-arrow").style.opacity = 0
+                document.getElementById("left-arrow").style.pointerEvents = "none"
+                document.getElementById("right-arrow").style.opacity = 1
+            } else if (currentValue == game.images.length - 1) {
+                document.getElementById("left-arrow").style.opacity = 1
+                document.getElementById("right-arrow").style.pointerEvents = "none"
+                document.getElementById("right-arrow").style.opacity = 0
+            } else {
+                document.getElementById("left-arrow").style.opacity = 1
+                document.getElementById("right-arrow").style.opacity = 1
+            }
+        })
+
+        selectedMedia.addEventListener("mouseout", () => {
+            document.getElementById("left-arrow").style.opacity = 0
+            document.getElementById("right-arrow").style.opacity = 0
+        })
     </script>
 </body>
 
