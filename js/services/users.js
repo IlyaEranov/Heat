@@ -9,7 +9,7 @@ const loginUser = async (user) => {
             localStorage.setItem('user', JSON.stringify(state));
             window.location.href = "profile.html";
         } else {
-            return "Пользователь с таким логином или паролем не найден"
+            alert("Пользователь с таким логином или паролем не найден")
         }
     } catch (e) {
         alert(`Server Error. ${e.message}`)
@@ -21,9 +21,9 @@ const registerUser = async (user) => {
         const response = await fetch(url)
         const data = await response.json()
         if (data.find(e => user.userName == e.userName)) {
-            return "Пользователь с таким логином уже зарегестрирован"
+            alert("Пользователь с таким логином уже зарегестрирован")
         } else if (data.find(e => user.email == e.email)) {
-            return "Пользователь с такой почтой уже зарегестрирован"
+            alert("Пользователь с такой почтой уже зарегестрирован")
         } else {
             const response = await fetch(url, {
                 method: "POST",

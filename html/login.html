@@ -48,7 +48,7 @@
                     <div class="error" id="register__error__email"></div>
                     <input type="password" name="password" placeholder="Пароль" required>
                     <div class="error" id="register__error__password"></div>
-                    <input type="date" name="dob" placeholder="Дата рождения" required>
+                    <input type="date" name="dob" placeholder="Дата рождения" min="1900-01-01" max="2024-01-01" required>
                     <button class="submit-button" type="submit">Зарегистрироваться</button>
                 </form>
             </div>
@@ -89,7 +89,7 @@
             } else {
                 for (let key in stateValidate) {
                     switch (key) {
-                        case "userName":Link
+                        case "userName":
                             document.getElementById("login__error__userName").innerHTML = stateValidate[key];
                             break;
                         case "password":

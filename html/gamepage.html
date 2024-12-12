@@ -125,8 +125,6 @@
     <script>
         userIsAuthLink();
 
-        
-
         function getParameterByName(name, url = window.location.href) {
             name = name.replace(/[\[\]]/g, "\\$&");
             const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
@@ -138,13 +136,24 @@
 
         const gameId = getParameterByName('id');
 
-        async function ageRestrictedVerify(){
+        function getAge(dateString) {
+            var today = new Date();
+            var birthDate = new Date(dateString);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
+        async function ageRestrictedVerify() {
             const games = await getGames();
             const game = games.find(g => g.id == gameId);
             const user = JSON.parse(localStorage.getItem("user"))
-            console.log()
-            if(game.ageRestricted){
-                document.body.style.filter = "blur(10px)"
+            console.log(user)
+            if (game.ageRestricted && (user == undefined || getAge(user.dob) < 18)) {
+                document.body.style.filter = "blur(20px)"
                 setTimeout(() => {
                     alert("Приносим свои извенения - доступ к просмотру этих материалов для вас закрыт")
                     window.location.href = "store.html"
@@ -449,10 +458,10 @@
                 alert("Не удалось загрузить данные о игре.");
             }
         }
-        
+
         loadGameData();
         ageRestrictedVerify()
-        
+
     </script>
     <script type="module">
 

@@ -75,6 +75,16 @@
       ],
       "cartId": [],
       "balance": 0
+    },
+    {
+      "id": "48ee",
+      "userName": "IronGate",
+      "email": "IronGate@mail.ru",
+      "password": "123qweQWE-",
+      "dob": "2010-12-12",
+      "gamesId": [],
+      "cartId": [],
+      "balance": 0
     }
   ],
   "games": [
