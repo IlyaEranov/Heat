@@ -42,8 +42,6 @@
 
             <div id="registerForm" style="display: none;">
                 <form onsubmit="event.preventDefault();handlerSubmitRegister()">
-                    <input type="text" name="name" placeholder="Имя" required>
-                    <div class="error" id="register__error__name"></div>
                     <input type="text" name="userName" placeholder="Логин" required>
                     <div class="error" id="register__error__userName"></div>
                     <input type="email" name="email" placeholder="Email" required>
@@ -114,9 +112,6 @@
             } else {
                 for (let key in stateValidate) {
                     switch (key) {
-                        case "name":
-                            document.getElementById("register__error__name").innerHTML = stateValidate[key];
-                            break;
                         case "userName":
                             document.getElementById("register__error__userName").innerHTML = stateValidate[key];
                             break;

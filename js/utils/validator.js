@@ -19,14 +19,6 @@ const validate = (key, value) => {
             } else {
                 return ValidateErrors.isEmail
             }
-        case "name":
-            if(value.trim().length < 3){
-                return ValidateErrors.isShortName
-            } else if (value.trim().length > 12) {
-                return ValidateErrors.isLongName
-            } else {
-                return null
-            }
         case "userName":
             const userNameRegExp = /^[a-zA-Z][\sa-zA-Z]{3,12}$/g
             if(userNameRegExp.test(value)){
