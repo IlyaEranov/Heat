@@ -131,7 +131,7 @@
                             <img src="../static/games/${e.title}/${e.images[0]}" alt="${e.title}" class="game-image">
                             ${inLibrary
                         ? `<div class="game-price" style="height: 18px"></div>
-                                <div class="in-library">В библиотеке</div>`
+                                <div class="in-library" onclick="event.stopPropagation();window.location.href = 'profile.html'">В библиотеке</div>`
                         : `
                                 <div class="game-price">
                                     ${e.discount
@@ -145,7 +145,7 @@
                             : (isGameAuthor
                                 ? ''
                                 : (inCart
-                                    ? '<div class="in-cart">В корзине</div>'
+                                    ? '<div onclick="event.stopPropagation();localStorage.setItem(`content`, `cart`);window.location.href = `profile.html`" class="in-cart">В корзине</div>'
                                     : `<button class="add-to-cart" onclick="event.stopPropagation();addGameInCart('${e.id}')">Добавить в корзину</button>`)))
                         : `<button class="add-to-cart" onclick="event.stopPropagation();alert('Для добавления игры в корзину нужно быть авторизованным');window.location.href='login.html'">Добавить в корзину</button>`}
                         </div>`;
@@ -169,6 +169,7 @@
                 displayGames(filteredGames);
             });
         });
+
     </script>
 
 

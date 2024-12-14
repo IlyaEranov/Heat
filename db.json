@@ -82,9 +82,18 @@
       "email": "IronGate@mail.ru",
       "password": "123qweQWE-",
       "dob": "2010-12-12",
-      "gamesId": [],
-      "cartId": [],
-      "balance": 492492
+      "gamesId": [
+        "3e41",
+        "a288"
+      ],
+      "cartId": [
+        "1fb8",
+        "5f9b",
+        "5b54",
+        "ae4f",
+        "4249"
+      ],
+      "balance": 489492
     }
   ],
   "games": [

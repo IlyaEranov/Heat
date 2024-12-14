@@ -151,7 +151,6 @@
             const games = await getGames();
             const game = games.find(g => g.id == gameId);
             const user = JSON.parse(localStorage.getItem("user"))
-            console.log(user)
             if (game.ageRestricted && (user == undefined || getAge(user.dob) < 18)) {
                 document.body.style.filter = "blur(20px)"
                 setTimeout(() => {
@@ -381,16 +380,20 @@
                 } else if (Array.isArray(user.gamesId) && user.gamesId.includes(game.id)) {
                     await loadReviewSection(user, game.id);
                     buttonCart.innerText = "В библиотеке";
-                    buttonCart.disabled = true;
+                    buttonCart.addEventListener("click", () => {
+                        window.location.href = "profile.html"
+                    })
                 } else if (Array.isArray(user.cartId) && user.cartId.includes(game.id)) {
                     buttonCart.innerText = "В корзине";
-                    buttonCart.disabled = true;
+                    buttonCart.addEventListener("click", () => {
+                        localStorage.setItem("content", "cart")
+                        window.location.href = "profile.html"
+                    })
                 } else {
                     buttonCart.addEventListener("click", async (e) => {
                         e.preventDefault();
                         await addGameInCart(game.id);
                         buttonCart.innerText = "В корзине";
-                        buttonCart.disabled = true;
                     });
                 }
             } else {
