@@ -14,7 +14,10 @@
         "9bbf",
         "e05e"
       ],
-      "cartId": [],
+      "cartId": [
+        "5f9b",
+        "5615"
+      ],
       "balance": 12733
     },
     {
@@ -33,18 +36,17 @@
         "5b54",
         "3d7f",
         "6fe8",
-        "a17b",
-        "3e41",
-        "7e27",
-        "e180"
+        "a17b"
       ],
       "avatar": null,
       "cartId": [
+        "3e41",
         "1fb8",
         "9107",
-        "5615"
+        "5615",
+        "9bbf"
       ],
-      "balance": 1165
+      "balance": 0
     },
     {
       "id": "4bcd",
@@ -84,17 +86,23 @@
       "dob": "2010-12-12",
       "gamesId": [
         "3e41",
-        "a288"
+        "a288",
+        "9107"
       ],
+      "cartId": [],
+      "balance": 484192
+    },
+    {
+      "id": "bad9",
+      "userName": "John",
+      "email": "John@mail.ru",
+      "password": "qwZXC_123",
+      "dob": "2010-04-12",
+      "gamesId": [],
       "cartId": [
-        "1fb8",
-        "5f9b",
-        "5b54",
-        "ae4f",
-        "4249",
-        "e180"
+        "1fb8"
       ],
-      "balance": 489492
+      "balance": 0
     }
   ],
   "games": [

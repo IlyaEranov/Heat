@@ -1,5 +1,16 @@
 const url = "http://localhost:5000/users/"
 
+function getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+}
+
 const loginUser = async (user) => {
     try {
         const response = await fetch(url)
@@ -70,30 +81,36 @@ const addGameId = async (user, gameId) => {
 
 const addGameInCart = async (gameId) => {
     const user = JSON.parse(localStorage.getItem("user"))
-    try {
-        if (user.cartId.includes(gameId)) {
-            alert("Игра уже добавлена в корзину");
-            return;
-        }
-        const updatedUser = { ...user, cartId: [...user.cartId, gameId] };
-        const response = await fetch(url + user.id, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(updatedUser)
-        });
+    const games = await getGames()
+    const game = games.find(e => e.id == gameId)
+    if(game?.ageRestricted && (user == undefined || getAge(user.dob) < 18)){
+        alert("Приносим свои извенения - доступ к просмотру этих материалов для вас закрыт")
+    } else {
+        try {
+            if (user.cartId.includes(gameId)) {
+                alert("Игра уже добавлена в корзину");
+                return;
+            }
+            const updatedUser = { ...user, cartId: [...user.cartId, gameId] };
+            const response = await fetch(url + user.id, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(updatedUser)
+            });
 
-        if (!response.ok) {
-            alert("Ошибка при обновлении данных пользователя");
-            console.error(`Ошибка при обновлении пользователя: ${response.statusText}`);
-            return;
+            if (!response.ok) {
+                alert("Ошибка при обновлении данных пользователя");
+                console.error(`Ошибка при обновлении пользователя: ${response.statusText}`);
+                return;
+            }
+            localStorage.setItem("user", JSON.stringify(await response.json()));
+            localStorage.setItem("content", "cart")
+            window.location.href = "profile.html";
+        } catch (e) {
+            alert(`Ошибка при добавлении игры в корзину: ${e.message}`);
         }
-        localStorage.setItem("user", JSON.stringify(await response.json()));
-        localStorage.setItem("content", "cart")
-        window.location.href = "profile.html";
-    } catch (e) {
-        alert(`Ошибка при добавлении игры в корзину: ${e.message}`);
     }
 }
 

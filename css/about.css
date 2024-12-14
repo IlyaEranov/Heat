@@ -34,6 +34,12 @@ header {
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
+    cursor: pointer;
+    transition: 0.4s
+}
+
+.logo:hover{
+    color: #f0a500;
 }
 
 nav ul {
