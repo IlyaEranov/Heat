@@ -21,7 +21,7 @@ body {
 header {
     background-color: #333;
     color: #fff;
-    padding: 1rem;
+    padding: 1rem 2rem; 
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -40,11 +40,9 @@ header {
 nav ul {
     list-style: none;
     display: flex;
+    gap: 2rem;
 }
 
-nav ul li {
-    margin: 0 1rem;
-}
 
 nav ul li a {
     padding: 0.5rem;
