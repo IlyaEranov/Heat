@@ -32,9 +32,9 @@
 
             <div id="loginForm" style="display: block;">
                 <form onsubmit="event.preventDefault();handlerSubmitLogin()">
-                    <input type="text" name="userName" placeholder="Логин" required>
+                    <input type="text" name="userName" placeholder="Логин">
                     <div class="error" id="login__error__userName"></div>
-                    <input type="password" name="password" placeholder="Пароль" required>
+                    <input type="password" name="password" placeholder="Пароль">
                     <div class="error" id="login__error__password"></div>
                     <button class="submit-button" type="submit">Войти</button>
                 </form>
@@ -42,11 +42,11 @@
 
             <div id="registerForm" style="display: none;">
                 <form onsubmit="event.preventDefault();handlerSubmitRegister()">
-                    <input type="text" name="userName" placeholder="Логин" required>
+                    <input type="text" name="userName" placeholder="Логин">
                     <div class="error" id="register__error__userName"></div>
-                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="email" name="email" placeholder="Email">
                     <div class="error" id="register__error__email"></div>
-                    <input type="password" name="password" placeholder="Пароль" required>
+                    <input type="password" name="password" placeholder="Пароль">
                     <div class="error" id="register__error__password"></div>
                     <input type="date" name="dob" placeholder="Дата рождения" min="1900-01-01" max="2024-01-01" required>
                     <button class="submit-button" type="submit">Зарегистрироваться</button>
