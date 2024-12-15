@@ -20,14 +20,14 @@ const validate = (key, value) => {
                 return ValidateErrors.isEmail
             }
         case "userName":
-            const userNameRegExp = /^[a-zA-Z][\sa-zA-Z]{3,12}$/g
+            const userNameRegExp = /^[a-zA-Z][\sa-zA-Z]{2,12}$/g
             if(userNameRegExp.test(value)){
                 return null
             } else {
                 return ValidateErrors.isUserName
             }
         case "password":
-            const passwordRegExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,}$/g
+            const passwordRegExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{7,}$/g
             if(passwordRegExp.test(value)){
                 return null
             } else {

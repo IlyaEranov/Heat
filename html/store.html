@@ -91,6 +91,10 @@
             const promoIframe = document.getElementById('promo-iframe');
             const promoClose = document.getElementById('promo-close');
 
+            if (sessionStorage.getItem('promoShown')) {
+                return;
+            }
+
             const latestGame = games[games.length - 1];
             if (!latestGame) return;
 
@@ -103,6 +107,7 @@
             promoClose.addEventListener('click', () => {
                 promoFrame.style.display = 'none';
                 promoIframe.src = '';
+                sessionStorage.setItem('promoShown', 'true');
             });
         }
 
