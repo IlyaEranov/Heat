@@ -44,7 +44,7 @@
                 <form onsubmit="event.preventDefault();handlerSubmitRegister()">
                     <input type="text" name="userName" placeholder="Логин">
                     <div class="error" id="register__error__userName"></div>
-                    <input type="email" name="email" placeholder="Email">
+                    <input type="text" name="email" placeholder="Email">
                     <div class="error" id="register__error__email"></div>
                     <input type="password" name="password" placeholder="Пароль">
                     <div class="error" id="register__error__password"></div>
@@ -81,7 +81,7 @@
             return data
         }
 
-        const handlerSubmitLogin = async (e) => {
+        const handlerSubmitLogin = async () => {
             const data = getData("loginForm");
             const stateValidate = validateForm(data);
             if (Object.keys(stateValidate).length == 0) {
@@ -107,7 +107,6 @@
             const data = getData("registerForm");
             const stateValidate = validateForm(data);
             if (Object.keys(stateValidate).length == 0) {
-                console.log(data)
                 await registerUser(data);
             } else {
                 for (let key in stateValidate) {
