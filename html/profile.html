@@ -260,7 +260,7 @@
                     <textarea id="game-description" name="game-description" rows="4" required></textarea>
     
                     <label for="game-price">Цена</label>
-                    <input type="text" id="game-price" name="game-price" required>
+                    <input type="number" id="game-price" min="1" name="game-price" oninput="validity.valid||(value='');" required>
                     <div class="age-restrictions">
                         <label for="age-restricted">Имеет возрастные ограничения:</label>
                         <input type="checkbox" id="age-restricted" name="age-restricted">
